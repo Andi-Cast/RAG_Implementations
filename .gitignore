@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+
+# Virtual environment
+.venv/
+
+# Test / cache artifacts
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Environment secrets
+.env
+
+# Data (regenerable / large — track only curated gold set + processed corpus explicitly if needed)
+data/raw/
+
+# OS
+.DS_Store
+
+# Claude Code project config (local only)
+.claude/

@@ -1,0 +1,19 @@
+[project]
+name = "rag-implementations"
+version = "0.1.0"
+description = "Secure multi-technique RAG over an access-controlled medical corpus"
+requires-python = ">=3.12"
+dependencies = [
+    "numpy>=2.1",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3",
+]
+
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
