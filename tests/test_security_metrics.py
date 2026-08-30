@@ -1,7 +1,8 @@
 import pytest
 from rag.eval.security_metrics import access_control_leakage, injection_defense_success_rate, pii_redaction_recall
+from rag.models import CLEARANCE_TIERS
 
-tier_rank = {"public": 0, "internal": 1, "confidential": 2, "restricted": 3}
+tier_rank = CLEARANCE_TIERS
 
 
 def test_access_control_leakage_leak_case():

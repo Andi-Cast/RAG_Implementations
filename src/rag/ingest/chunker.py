@@ -1,13 +1,6 @@
 import re
-from dataclasses import dataclass
 from pathlib import Path
-
-@dataclass
-class Chunk:
-    text: str
-    section: str
-    patient_id: str
-    source_file: str
+from rag.models import Chunk
 
 SECTION_SEPARATOR = re.compile(r'^-{10,}$', re.MULTILINE)
 SUBSECTION_HEADER = re.compile(r'^\s*([A-Z][A-Z ]+):\s*$', re.MULTILINE)

@@ -11,7 +11,8 @@ Tracking against the build order from the project brief. Checked off as we compl
 - [x] Synthea generated locally (200 patients, `exporter.text.per_encounter_export`) — 16,343 per-encounter notes
 - [x] Chunker (`src/rag/ingest/chunker.py`) — `split_top_level_sections`, `split_encounter_subsections`, `chunk_encounter_file`
 - [x] `tests/test_chunker.py` (+ `tests/fixtures/sample_encounter.txt`)
-- [ ] Clearance-tier tagging (per-chunk, section/keyword-based heuristic)
+- [x] Clearance-tier tagging (`src/rag/ingest/clearance_tagger.py`) — section default + fail-closed fallback + keyword escalation, + tests
+- [x] Shared `src/rag/models.py` (`Chunk`, `CLEARANCE_TIERS`)
 - [ ] PII span labeling (ground-truth spans for redaction scoring)
 
 ## 3. Eval harness + gold set (built first, ahead of any retrieval code)
