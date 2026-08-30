@@ -1,0 +1,216 @@
+Leon728 Hayes766
+================
+Race:                White
+Ethnicity:           Non-Hispanic
+Gender:              M
+Age:                 DECEASED
+Birth Date:          1948-04-11
+Marital Status:      M
+--------------------------------------------------------------------------------
+ALLERGIES:
+No Known Allergies
+--------------------------------------------------------------------------------
+ENCOUNTER
+2007-07-08 : Encounter at BETH ISRAEL DEACONESS HOSPITAL PLYMOUTH INC
+Type: outpatient
+   
+   MEDICATIONS:
+  2007-07-08 : amLODIPine 2.5 MG Oral Tablet for Essential hypertension (disorder)
+  2007-07-08 : lisinopril 10 MG Oral Tablet for Essential hypertension (disorder)
+  2007-07-08 : 24 HR Metformin hydrochloride 500 MG Extended Release Oral Tablet for Diabetes mellitus type 2 (disorder)
+  2007-07-08 : Hydrochlorothiazide 25 MG Oral Tablet for Essential hypertension (disorder)
+  2007-07-08 : insulin isophane, human 70 UNT/ML / insulin, regular, human 30 UNT/ML Injectable Suspension [Humulin] for Diabetes mellitus type 2 (disorder)
+   
+   CONDITIONS:
+  2007-07-08 : Victim of intimate partner abuse (finding)
+  2007-07-08 : Stress (finding)
+  2007-07-08 : Medication review due (situation)
+   
+   CARE PLANS:
+   
+   REPORTS:
+  2007-07-08 : Basic metabolic 2000 panel - Serum or Plasma
+           - Glucose [Mass/volume] in Serum or Plasma 77.7 mg/dL
+           - Urea nitrogen [Mass/volume] in Serum or Plasma 8.8 mg/dL
+           - Creatinine [Mass/volume] in Serum or Plasma 2.1 mg/dL
+           - Calcium [Mass/volume] in Serum or Plasma 10.0 mg/dL
+           - Sodium [Moles/volume] in Serum or Plasma 141.6 mmol/L
+           - Potassium [Moles/volume] in Serum or Plasma 4.9 mmol/L
+           - Chloride [Moles/volume] in Serum or Plasma 101.8 mmol/L
+           - Carbon dioxide, total [Moles/volume] in Serum or Plasma 26.9 mmol/L
+           - Glomerular filtration rate [Volume Rate/Area] in Serum or Plasma by Creatinine-based formula (MDRD)/1.73 sq M 45.1 mL/min/{1.73_m2}
+  2007-07-08 : Urinalysis macro (dipstick) panel - Urine
+           - Appearance of Urine                      Cloudy urine (finding) {nominal}
+           - Odor of Urine                            Urine smell ammoniacal (finding) {nominal}
+           - Clarity of Urine                         Translucent (qualifier value) {nominal}
+           - Color of Urine                           Brown color (qualifier value) {nominal}
+           - Glucose [Mass/volume] in Urine by Test strip 0.8 mg/dL
+           - Glucose [Presence] in Urine by Test strip Urine glucose test = ++ (finding) {nominal}
+           - Bilirubin.total [Mass/volume] in Urine by Test strip 1.2 mg/dL
+           - Bilirubin.total [Presence] in Urine by Test strip Finding of bilirubin in urine (finding) {nominal}
+           - Ketones [Mass/volume] in Urine by Test strip 9.8 mg/dL
+           - Ketones [Presence] in Urine by Test strip Urine ketone test = ++ (finding) {nominal}
+           - Specific gravity of Urine by Test strip  1.0 {nominal}
+           - pH of Urine by Test strip                5.5 pH
+           - Protein [Mass/volume] in Urine by Test strip 363.2 mg/dL
+           - Protein [Presence] in Urine by Test strip Urine protein test = ++ (finding) {nominal}
+           - Nitrite [Presence] in Urine by Test strip Nitrite not detected in urine (finding) {nominal}
+           - Hemoglobin [Presence] in Urine by Test strip Blood not detected in urine (finding) {nominal}
+           - Leukocyte esterase [Presence] in Urine by Test strip Urine leukocytes not detected (finding) {nominal}
+  2007-07-08 : Basic metabolic panel - Blood
+           - Glucose [Mass/volume] in Blood           77.7 mg/dL
+           - Urea nitrogen [Mass/volume] in Blood     8.8 mg/dL
+           - Creatinine [Mass/volume] in Blood        4.9 mg/dL
+           - Calcium [Mass/volume] in Blood           10.0 mg/dL
+           - Sodium [Moles/volume] in Blood           141.6 mmol/L
+           - Potassium [Moles/volume] in Blood        4.9 mmol/L
+           - Chloride [Moles/volume] in Blood         101.8 mmol/L
+           - Carbon dioxide, total [Moles/volume] in Blood 26.9 mmol/L
+  2007-07-08 : Lipid panel with direct LDL - Serum or Plasma
+           - Cholesterol [Mass/volume] in Serum or Plasma 178.4 mg/dL
+           - Triglyceride [Mass/volume] in Serum or Plasma 113.7 mg/dL
+           - Cholesterol in LDL [Mass/volume] in Serum or Plasma by Direct assay 125.8 mg/dL
+           - Cholesterol in HDL [Mass/volume] in Serum or Plasma 29.8 mg/dL
+  2007-07-08 : Patient Health Questionnaire 2 item (PHQ-2) [Reported]
+           - Patient Health Questionnaire 2 item (PHQ-2) total score [Reported] 3.0 {score}
+  2007-07-08 : PHQ-9 quick depression assessment panel [Reported.PHQ]
+           - Patient Health Questionnaire 9 item (PHQ-9) total score [Reported] 19.0 {score}
+  2007-07-08 : Alcohol Use Disorder Identification Test - Consumption [AUDIT-C]
+           - Total score [AUDIT-C]                    2.0 {score}
+   
+   OBSERVATIONS:
+  2007-07-08 : Total score [AUDIT-C]                    2.0 {score}
+  2007-07-08 : Patient Health Questionnaire 9 item (PHQ-9) total score [Reported] 19.0 {score}
+  2007-07-08 : Patient Health Questionnaire 2 item (PHQ-2) total score [Reported] 3.0 {score}
+  2007-07-08 : Protocol for Responding to and Assessing Patients' Assets, Risks, and Experiences [PRAPARE]
+           - Within the last year, have you been afraid of your partner or ex-partner Yes 
+           - Do you feel physically and emotionally safe where you currently live [PRAPARE] Yes 
+           - Are you a refugee                        No 
+           - Have you spent more than 2 nights in a row in a jail, prison, detention center, or juvenile correctional facility in past 1 year [PRAPARE] Yes 
+           - Stress level                             A little bit 
+           - How often do you see or talk to people that you care about and feel close to [PRAPARE] 3 to 5 times a week 
+           - Has lack of transportation kept you from medical appointments, meetings, work, or from getting things needed for daily living No 
+           - Have you or any family members you live with been unable to get any of the following when it was really needed in past 1 year [PRAPARE] Food 
+           - What was your best estimate of the total income of all family members from all sources, before taxes, in last year [PhenX] 84136 /a
+           - Primary insurance                        Private insurance 
+           - Employment status - current              Full-time work 
+           - Highest level of education               More than high school 
+           - Address                                  123 Dickinson Branch 
+           - Are you worried about losing your housing [PRAPARE] No 
+           - Housing status                           I have housing 
+           - How many people are living or staying at this address [#] 1.0 {#}
+           - Preferred language                       English 
+           - Discharged from the U.S. Armed Forces    No 
+           - Has season or migrant farm work been your or your family's main source of income at any point in past 2 years [PRAPARE] No 
+           - Race                                     White 
+           - Hispanic or Latino                       No 
+  2007-07-08 : Tobacco smoking status                   Never smoked tobacco (finding) 
+  2007-07-08 : Glomerular filtration rate [Volume Rate/Area] in Serum or Plasma by Creatinine-based formula (MDRD)/1.73 sq M 21.0 mL/min/{1.73_m2}
+  2007-07-08 : Microalbumin/Creatinine [Mass Ratio] in Urine 189.2 mg/g
+  2007-07-08 : Cholesterol in HDL [Mass/volume] in Serum or Plasma 29.8 mg/dL
+  2007-07-08 : Cholesterol in LDL [Mass/volume] in Serum or Plasma by Direct assay 125.8 mg/dL
+  2007-07-08 : Triglyceride [Mass/volume] in Serum or Plasma 113.7 mg/dL
+  2007-07-08 : Cholesterol [Mass/volume] in Serum or Plasma 178.4 mg/dL
+  2007-07-08 : Carbon dioxide, total [Moles/volume] in Blood 26.9 mmol/L
+  2007-07-08 : Chloride [Moles/volume] in Blood         101.8 mmol/L
+  2007-07-08 : Potassium [Moles/volume] in Blood        4.9 mmol/L
+  2007-07-08 : Sodium [Moles/volume] in Blood           141.6 mmol/L
+  2007-07-08 : Calcium [Mass/volume] in Blood           10.0 mg/dL
+  2007-07-08 : Creatinine [Mass/volume] in Blood        4.9 mg/dL
+  2007-07-08 : Urea nitrogen [Mass/volume] in Blood     8.8 mg/dL
+  2007-07-08 : Glucose [Mass/volume] in Blood           77.7 mg/dL
+  2007-07-08 : Respiratory rate                         12.0 /min
+  2007-07-08 : Heart rate                               61.0 /min
+  2007-07-08 : Blood pressure panel with all children optional
+           - Diastolic Blood Pressure                 57.0 mm[Hg]
+           - Systolic Blood Pressure                  105.0 mm[Hg]
+  2007-07-08 : Body mass index (BMI) [Ratio]            30.0 kg/m2
+  2007-07-08 : Body Weight                              91.4 kg
+  2007-07-08 : Pain severity - 0-10 verbal numeric rating [Score] - Reported 3.0 {score}
+  2007-07-08 : Body Height                              174.5 cm
+  2007-07-08 : Hemoglobin A1c/Hemoglobin.total in Blood 3.0 %
+  2007-07-08 : Leukocyte esterase [Presence] in Urine by Test strip Urine leukocytes not detected (finding) {nominal}
+  2007-07-08 : Hemoglobin [Presence] in Urine by Test strip Blood not detected in urine (finding) {nominal}
+  2007-07-08 : Nitrite [Presence] in Urine by Test strip Nitrite not detected in urine (finding) {nominal}
+  2007-07-08 : Protein [Presence] in Urine by Test strip Urine protein test = ++ (finding) {nominal}
+  2007-07-08 : Protein [Mass/volume] in Urine by Test strip 363.2 mg/dL
+  2007-07-08 : pH of Urine by Test strip                5.5 pH
+  2007-07-08 : Specific gravity of Urine by Test strip  1.0 {nominal}
+  2007-07-08 : Ketones [Presence] in Urine by Test strip Urine ketone test = ++ (finding) {nominal}
+  2007-07-08 : Ketones [Mass/volume] in Urine by Test strip 9.8 mg/dL
+  2007-07-08 : Bilirubin.total [Presence] in Urine by Test strip Finding of bilirubin in urine (finding) {nominal}
+  2007-07-08 : Bilirubin.total [Mass/volume] in Urine by Test strip 1.2 mg/dL
+  2007-07-08 : Glucose [Presence] in Urine by Test strip Urine glucose test = ++ (finding) {nominal}
+  2007-07-08 : Glucose [Mass/volume] in Urine by Test strip 0.8 mg/dL
+  2007-07-08 : Color of Urine                           Brown color (qualifier value) {nominal}
+  2007-07-08 : Clarity of Urine                         Translucent (qualifier value) {nominal}
+  2007-07-08 : Odor of Urine                            Urine smell ammoniacal (finding) {nominal}
+  2007-07-08 : Appearance of Urine                      Cloudy urine (finding) {nominal}
+  2007-07-08 : Glomerular filtration rate [Volume Rate/Area] in Serum or Plasma by Creatinine-based formula (MDRD)/1.73 sq M 45.1 mL/min/{1.73_m2}
+  2007-07-08 : Carbon dioxide, total [Moles/volume] in Serum or Plasma 26.9 mmol/L
+  2007-07-08 : Chloride [Moles/volume] in Serum or Plasma 101.8 mmol/L
+  2007-07-08 : Potassium [Moles/volume] in Serum or Plasma 4.9 mmol/L
+  2007-07-08 : Sodium [Moles/volume] in Serum or Plasma 141.6 mmol/L
+  2007-07-08 : Calcium [Mass/volume] in Serum or Plasma 10.0 mg/dL
+  2007-07-08 : Creatinine [Mass/volume] in Serum or Plasma 2.1 mg/dL
+  2007-07-08 : Urea nitrogen [Mass/volume] in Serum or Plasma 8.8 mg/dL
+  2007-07-08 : Glucose [Mass/volume] in Serum or Plasma 77.7 mg/dL
+   
+   PROCEDURES:
+  2007-07-08 : Assessment using Alcohol Use Disorders Identification Test - Consumption (procedure)
+  2007-07-08 : Assessment of substance use (procedure)
+  2007-07-08 : Depression screening using Patient Health Questionnaire Nine Item score (procedure)
+  2007-07-08 : Depression screening (procedure)
+  2007-07-08 : Depression screening (procedure)
+  2007-07-08 : Assessment of health and social care needs (procedure)
+  2007-07-08 : Medication reconciliation (procedure)
+   
+   IMMUNIZATIONS:
+   
+   IMAGING STUDIES:
+   
+--------------------------------------------------------------------------------
+CONTINUING
+   
+   CONDITIONS:
+  1966-06-05 : Received higher education (finding)
+  1967-06-11 : Has a criminal record (finding)
+  1988-04-17 : Body mass index 30+ - obesity (finding)
+  1988-04-17 : Anemia (disorder)
+  1988-04-17 : Diabetes mellitus type 2 (disorder)
+  1988-04-17 : Essential hypertension (disorder)
+  1989-04-23 : Neuropathy due to type 2 diabetes mellitus (disorder)
+  1989-04-23 : Metabolic syndrome X (disorder)
+  1989-04-23 : Hypertriglyceridemia (disorder)
+  1989-04-23 : Hyperglycemia (disorder)
+  1999-03-28 : Microalbuminuria due to type 2 diabetes mellitus (disorder)
+  1999-03-28 : Disorder of kidney due to diabetes mellitus (disorder)
+  1999-03-28 : Chronic kidney disease stage 2 (disorder)
+  2002-06-02 : Proteinuria due to type 2 diabetes mellitus (disorder)
+  2002-06-02 : Chronic kidney disease stage 3 (disorder)
+  2005-04-24 : Ischemic heart disease (disorder)
+  2005-05-15 : Abnormal findings diagnostic imaging heart+coronary circulat (finding)
+  2006-07-30 : Loss of teeth (disorder)
+  2007-01-07 : Social isolation (finding)
+  2007-01-21 : Limited social contact (finding)
+  2007-04-15 : Full-time employment (finding)
+   
+   MEDICATIONS:
+  2005-05-01 : Nitroglycerin 0.4 MG/ACTUAT Mucosal Spray
+  2005-05-01 : 24 HR metoprolol succinate 100 MG Extended Release Oral Tablet
+  2005-05-01 : Simvastatin 20 MG Oral Tablet
+  2005-05-01 : Clopidogrel 75 MG Oral Tablet
+   
+   CAREPLANS:
+  1988-04-17 : Diabetes self management plan (record artifact)
+                         Reason: Diabetes mellitus type 2 (disorder)
+                         Activity: Diabetic diet (finding)
+                         Activity: Exercise therapy (regime/therapy)
+  1988-04-17 : Lifestyle education regarding hypertension (procedure)
+                         Reason: Essential hypertension (disorder)
+                         Activity: Prescribed activity/exercise education (procedure)
+                         Activity: Counseling about alcohol consumption (procedure)
+                         Activity: Dietary Approaches to Stop Hypertension diet (regime/therapy)
+                         Activity: Smoking cessation education (procedure)
+   
+--------------------------------------------------------------------------------

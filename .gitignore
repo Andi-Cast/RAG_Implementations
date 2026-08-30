@@ -16,6 +16,9 @@ __pycache__/
 # Data (regenerable / large — track only curated gold set + processed corpus explicitly if needed)
 data/raw/
 
+# Synthea: cloned generator tool + its generated output (2GB+, fully regenerable via ./run_synthea)
+synthea/
+
 # OS
 .DS_Store
 
