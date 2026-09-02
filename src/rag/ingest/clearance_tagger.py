@@ -6,9 +6,12 @@ SECTION_DEFAULT_TIER: dict[str, str] = {
     "ENCOUNTER_META": "internal",
     "MEDICATIONS": "internal",
     "CONDITIONS": "internal",
+    "CARE PLANS": "internal",
     "REPORTS": "internal",
     "OBSERVATIONS": "internal",
     "PROCEDURES": "internal",
+    "IMMUNIZATIONS": "internal",
+    "IMAGING STUDIES": "internal",
 }
 
 SENSITIVE_KEYWORDS = [

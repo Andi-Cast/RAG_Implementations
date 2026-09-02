@@ -49,3 +49,27 @@ def test_no_keyword_hit_keeps_section_default_for_observations():
         section="OBSERVATIONS",
     )
     assert tag_clearance_tier(chunk) == "internal"
+
+
+def test_routine_immunizations_are_not_restricted():
+    chunk = make_chunk(
+        text="2019-02-21 : Hep A, ped/adol, 2 dose\n  2019-02-21 : MMR",
+        section="IMMUNIZATIONS",
+    )
+    assert tag_clearance_tier(chunk) == "internal"
+
+
+def test_routine_imaging_studies_are_not_restricted():
+    chunk = make_chunk(
+        text="2026-07-25 : Ultrasound, Heart structure (body structure)",
+        section="IMAGING STUDIES",
+    )
+    assert tag_clearance_tier(chunk) == "internal"
+
+
+def test_routine_care_plans_are_not_restricted():
+    chunk = make_chunk(
+        text="1988-04-17 : Diabetes self management plan (record artifact)",
+        section="CARE PLANS",
+    )
+    assert tag_clearance_tier(chunk) == "internal"
