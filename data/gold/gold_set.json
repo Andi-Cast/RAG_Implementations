@@ -1,0 +1,91 @@
+{
+  "queries": [
+    {
+      "query_id": "q01",
+      "query": "What condition was diagnosed for this patient on 2024-04-20?",
+      "relevant_chunk_ids": ["Evelyne208_Mueller846_2d9ff736-5ecc-c132-f64b-035a524e94cf34::CONDITIONS"],
+      "reference_answer": "Acute viral pharyngitis"
+    },
+    {
+      "query_id": "q02",
+      "query": "What procedure was performed to diagnose this patient's pharyngitis on 2024-04-20?",
+      "relevant_chunk_ids": ["Evelyne208_Mueller846_2d9ff736-5ecc-c132-f64b-035a524e94cf34::PROCEDURES"],
+      "reference_answer": "Throat culture"
+    },
+    {
+      "query_id": "q03",
+      "query": "What medication is this patient taking for hyperlipidemia, prescribed on 2010-12-16?",
+      "relevant_chunk_ids": ["Kory651_Sauer652_8d39224c-6070-b185-81ac-51986e9a07fc38::MEDICATIONS"],
+      "reference_answer": "Simvastatin 10 MG Oral Tablet"
+    },
+    {
+      "query_id": "q04",
+      "query": "What heart-related condition does this patient have, recorded on 2015-07-20?",
+      "relevant_chunk_ids": ["Charley358_Schinner682_285cf115-cea6-5819-5364-5c7152d26c4f33::CONDITIONS"],
+      "reference_answer": "Ischemic heart disease"
+    },
+    {
+      "query_id": "q05",
+      "query": "What medication is this patient prescribed for type 2 diabetes, as of 2025-10-11?",
+      "relevant_chunk_ids": ["Eduardo902_Jaramillo133_8a580843-bc88-88af-ffc2-976488a4a38949::MEDICATIONS"],
+      "reference_answer": "24 HR Metformin hydrochloride 500 MG Extended Release Oral Tablet"
+    },
+    {
+      "query_id": "q06",
+      "query": "What medication is used to treat this patient's chronic congestive heart failure, prescribed on 2026-07-25?",
+      "relevant_chunk_ids": ["Nicholas495_Boehm581_9018f445-501b-c6ba-d6d9-cbee6095e8e631::MEDICATIONS"],
+      "reference_answer": "Furosemide 40 MG Oral Tablet"
+    },
+    {
+      "query_id": "q07",
+      "query": "What diagnostic imaging procedure was performed as part of this patient's heart failure evaluation on 2026-07-25?",
+      "relevant_chunk_ids": ["Nicholas495_Boehm581_9018f445-501b-c6ba-d6d9-cbee6095e8e631::PROCEDURES"],
+      "reference_answer": "Echocardiography"
+    },
+    {
+      "query_id": "q08",
+      "query": "What procedure is this patient receiving for chronic kidney disease stage 4, as of 2010-07-27?",
+      "relevant_chunk_ids": ["Minh326_Erdman779_80b0c69f-01f8-d9ac-f678-49b19ab0dac7106::PROCEDURES"],
+      "reference_answer": "Renal dialysis"
+    },
+    {
+      "query_id": "q09",
+      "query": "What medication is prescribed for this patient's anemia, as of 2019-04-06?",
+      "relevant_chunk_ids": ["Deandre599_Schaefer657_da4b4fc8-dfaf-8f6b-185d-09de4773d66e563::MEDICATIONS"],
+      "reference_answer": "Epoetin Alfa 4000 UNT/ML Injection [Epogen]"
+    },
+    {
+      "query_id": "q10",
+      "query": "What behavioral health and substance use screenings were performed for this patient on 2015-07-20?",
+      "relevant_chunk_ids": ["Charley358_Schinner682_285cf115-cea6-5819-5364-5c7152d26c4f33::PROCEDURES"],
+      "reference_answer": "Alcohol Use Disorders Identification Test - Consumption, assessment of substance use, depression screening (performed twice), and assessment of anxiety"
+    },
+    {
+      "query_id": "q11",
+      "query": "What was the reason for this patient's encounter at Western Massachusetts Hospital on 2026-06-28, and what treatment did they receive?",
+      "relevant_chunk_ids": [
+        "Serina556_Iesha760_Borer986_2b1b5e71-7279-bcc2-fb9b-7d747b840a6f70::ENCOUNTER_META",
+        "Serina556_Iesha760_Borer986_2b1b5e71-7279-bcc2-fb9b-7d747b840a6f70::PROCEDURES"
+      ],
+      "reference_answer": "The encounter was for dependent drug abuse; the patient received rehabilitation therapy."
+    },
+    {
+      "query_id": "q12",
+      "query": "What opioid pain medications is this patient prescribed as of 2024-04-24?",
+      "relevant_chunk_ids": ["Alphonse92_Auer97_23b0cffb-97f2-a3a6-e87d-9ce2387bcdcb31::MEDICATIONS"],
+      "reference_answer": "Hydrocodone Bitartrate extended release, Fentanyl transdermal patch, abuse-deterrent Oxycodone (Oxycontin), and Acetaminophen/Oxycodone (Percocet)"
+    },
+    {
+      "query_id": "q13",
+      "query": "What depression and drug abuse screening scores were recorded for this patient on 2024-04-24?",
+      "relevant_chunk_ids": ["Alphonse92_Auer97_23b0cffb-97f2-a3a6-e87d-9ce2387bcdcb31::REPORTS"],
+      "reference_answer": "PHQ-2 score of 2.0 and DAST-10 score of 1.0"
+    },
+    {
+      "query_id": "q14",
+      "query": "What safety-related finding was recorded for this patient on 2024-01-17?",
+      "relevant_chunk_ids": ["Elidia194_Freeda113_Towne435_1797a545-527e-cd94-fb72-9974beb54c0f54::CONDITIONS"],
+      "reference_answer": "Victim of intimate partner abuse"
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 CLEARANCE_TIERS: dict[str, int] = {
     "public" : 0,
@@ -14,3 +14,7 @@ class Chunk:
     patient_id: str
     source_file: str
     clearance_tier: str = ""
+    chunk_id: str = field(init=False, default="")
+
+    def __post_init__(self):
+        self.chunk_id = f"{self.patient_id}::{self.section}"
