@@ -13,7 +13,7 @@ Tracking against the build order from the project brief. Checked off as we compl
 - [x] `tests/test_chunker.py` (+ `tests/fixtures/sample_encounter.txt`)
 - [x] Clearance-tier tagging (`src/rag/ingest/clearance_tagger.py`) — section default + fail-closed fallback + keyword escalation, + tests
 - [x] Shared `src/rag/models.py` (`Chunk`, `CLEARANCE_TIERS`)
-- [ ] PII span labeling (ground-truth spans for redaction scoring)
+- [x] PII span labeling (`src/rag/ingest/pii_labeler.py`) — ground-truth spans (name, birth_date) + tests
 
 ## 3. Eval harness + gold set (built first, ahead of any retrieval code)
 - [x] Retrieval metrics (`src/rag/eval/retrieval_metrics.py`) — `recall_at_k`, `reciprocal_rank`, `ndcg_at_k` + tests
@@ -31,7 +31,8 @@ Tracking against the build order from the project brief. Checked off as we compl
 ## 5. Security layer + evals
 - [ ] RBAC pre-filter (metadata filter *inside* the ANN query, never post-filter)
 - [ ] Prompt-injection defense (hand-rolled)
-- [ ] PII redaction on output (hand-rolled)
+- [x] PII detection (hand-rolled) — `src/rag/security/pii_redaction.py` (regex structured PII + naive name heuristic, known false-neg/false-pos documented in tests) + tests
+- [ ] Actual redaction/masking step (currently only detects spans, doesn't mask text yet)
 
 ## 6. Bedrock integration
 - [ ] Generation-model comparison axis
