@@ -45,3 +45,10 @@ Tracking against the build order from the project brief. Checked off as we compl
 ## 8. Writeup
 - [ ] README with benchmark tables (retrieval × generation model × managed-vs-custom security)
 - [ ] "Techniques deliberately not used, and why" section
+
+## Known limitations / improvement ideas (revisit once v1 works end-to-end)
+- `naive_dense_retrieve` opens and closes a brand-new DB connection on every call — fine for today's 14-query pilot, wasteful once benchmarking runs many queries in a row. Should accept a reusable connection instead.
+- The embedding model name (`"BAAI/bge-small-en-v1.5"`) is a duplicated magic string in both `scripts/load_corpus.py` and `src/rag/retrieval/dense.py`. Same class of bug we already hit once with `Chunk`/`CLEARANCE_TIERS` — if the model ever changes, both places need updating in sync or the corpus and query embeddings stop being comparable. Should become one shared constant.
+- Clearance tagger's keyword escalation has a known false-positive: "Abuse-Deterrent" (a real opioid formulation term) triggers the "abuse" keyword and gets tagged `restricted` for the wrong reason — outcome is arguably still fine here (opioid chunks are genuinely sensitive) but it's the wrong reason, and could misfire elsewhere.
+- Naive dense retrieval observation: patients with many repeat encounters produce several near-duplicate chunks (e.g. the same medication mentioned across multiple visits) that compete for top-k slots — a query can retrieve the *right patient's* correct-content chunk from the *wrong encounter* rather than the exact `chunk_id` labeled in the gold set. Worth watching once real Recall@k/nDCG numbers come in — may indicate the gold set needs less ambiguous single-answer queries, or that this is a genuine, expected retrieval limitation worth discussing in the writeup.
+- PII detector's known false-negative (digit-suffixed Synthea names) and false-positive (all-caps facility names) are already documented as tests in `test_pii_redaction.py`, not just narrative — flagging here too for visibility when writing the final report.
