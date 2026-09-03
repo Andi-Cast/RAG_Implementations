@@ -19,11 +19,11 @@ Tracking against the build order from the project brief. Checked off as we compl
 - [x] Retrieval metrics (`src/rag/eval/retrieval_metrics.py`) — `recall_at_k`, `reciprocal_rank`, `ndcg_at_k` + tests
 - [x] Security metrics (`src/rag/eval/security_metrics.py`) — `access_control_leakage`, `injection_defense_success_rate`, `pii_redaction_recall` + tests
 - [ ] Generation metrics (RAGAS/DeepEval — faithfulness, answer relevance)
-- [ ] Frozen gold set (50-100 hand-verified queries + relevant chunks + reference answers)
-- [ ] Harness orchestration (run a pipeline config against the gold set, produce the benchmark table)
+- [~] Gold set (`data/gold/gold_set.json`) — 14-query pilot set drafted, spot-checked but not yet hand-verified as fully frozen; expand toward 50-100 later
+- [x] Harness orchestration (`src/rag/eval/harness.py`) — `load_gold_set`, `run_retrieval_eval` (pluggable `retrieve_fn`)
 
 ## 4. Retrieval ladder (each rung benchmarked against the frozen gold set)
-- [ ] Naive dense top-k (baseline)
+- [~] Naive dense top-k (baseline) — corpus loaded (`src/rag/db/schema.sql`, `src/rag/db/client.py`, `scripts/load_corpus.py`; 91,969 chunks embedded with `bge-small-en-v1.5` and stored in pgvector), retrieval query function itself not yet written
 - [ ] + Hybrid (BM25 + RRF fusion)
 - [ ] + Cross-encoder reranking
 - [ ] + Contextual compression
