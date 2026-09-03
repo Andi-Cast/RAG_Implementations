@@ -27,12 +27,24 @@ The corpus is synthetic medical records (generated with [Synthea](https://github
 
 **Gold set** (`data/gold/gold_set.json`) — 14 hand-drafted queries against real corpus chunks, spanning both routine clinical facts and `restricted`-tier content (substance-use screening, an intimate-partner-abuse finding), including one multi-chunk query. This is a *pilot* set for getting the pipeline working end-to-end; the plan is to expand toward 50-100 verified queries before final benchmark numbers are reported.
 
-**Infrastructure**: Postgres + pgvector (metadata filtering inside the ANN query is the whole reason this vector store was chosen over alternatives that don't support it well), `uv`-managed environment, `pytest` suite covering every module above.
+**Retrieval** (`src/rag/retrieval/`)
+- Naive dense retrieval — the first rung of the ladder: embeds the query with the same model used to embed the corpus (`BAAI/bge-small-en-v1.5`), then ranks chunks by cosine distance via pgvector's `<=>` operator directly in SQL (`dense.py`)
+
+**Infrastructure**: Postgres + pgvector (metadata filtering inside the ANN query is the whole reason this vector store was chosen over alternatives that don't support it well), the full corpus embedded and loaded (91,969 chunks across 200 synthetic patients), `uv`-managed environment, `pytest` suite covering every module above.
+
+## Preliminary results
+
+Naive dense retrieval scored against the 14-query pilot gold set:
+
+| Technique | Recall@10 | MRR | nDCG@10 |
+|---|---|---|---|
+| Naive dense (baseline) | 0.536 | 0.381 | 0.413 |
+
+**Read these as early signal, not final numbers** — the gold set is a 14-query pilot (target is 50-100 hand-verified queries before this table is treated as authoritative), and this is only the first of four ladder rungs. One concrete, expected failure mode already observed: patients with many repeat encounters produce several near-duplicate chunks (the same medication mentioned across multiple visits), so a query can retrieve the *right patient's* correct content from the *wrong specific encounter* rather than the exact chunk labeled in the gold set — a plausible source of some of the recall misses here, and something the hybrid/reranking rungs may or may not improve on.
 
 ## What's next
 
-- Naive dense retrieval (embedding model + pgvector similarity search) — the first rung of the retrieval ladder
-- Hybrid (BM25 + RRF fusion), cross-encoder reranking, contextual compression
+- Hybrid (BM25 + RRF fusion), cross-encoder reranking, contextual compression — rungs 2-4 of the retrieval ladder
 - The RBAC pre-filter, wired into the retrieval query itself
 - Prompt-injection defense
 - AWS Bedrock integration: a generation-model comparison axis, Guardrails benchmarked against the hand-rolled security layer, and a Bedrock Knowledge Base as one managed-RAG baseline row
