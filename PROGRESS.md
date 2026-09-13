@@ -23,8 +23,8 @@ Tracking against the build order from the project brief. Checked off as we compl
 - [x] Harness orchestration (`src/rag/eval/harness.py`) — `load_gold_set`, `run_retrieval_eval` (pluggable `retrieve_fn`)
 
 ## 4. Retrieval ladder (each rung benchmarked against the frozen gold set)
-- [~] Naive dense top-k (baseline) — corpus loaded (`src/rag/db/schema.sql`, `src/rag/db/client.py`, `scripts/load_corpus.py`; 91,969 chunks embedded with `bge-small-en-v1.5` and stored in pgvector), retrieval query function itself not yet written
-- [ ] + Hybrid (BM25 + RRF fusion)
+- [x] Naive dense top-k (baseline) — `src/rag/retrieval/dense.py`; corpus loaded (91,969 chunks, `bge-small-en-v1.5`, pgvector); benchmarked: recall@10=0.536, MRR=0.381, nDCG@10=0.413
+- [x] + Hybrid (BM25-style + RRF fusion) — `sparse_bm25.py` (Postgres full-text search, AND→OR converted), `fusion_rrf.py`, `hybrid.py` (candidate_k=50 widened pool before fusion); benchmarked: recall@10=0.607, MRR=0.534, nDCG@10=0.532
 - [ ] + Cross-encoder reranking
 - [ ] + Contextual compression
 
@@ -52,3 +52,5 @@ Tracking against the build order from the project brief. Checked off as we compl
 - Clearance tagger's keyword escalation has a known false-positive: "Abuse-Deterrent" (a real opioid formulation term) triggers the "abuse" keyword and gets tagged `restricted` for the wrong reason — outcome is arguably still fine here (opioid chunks are genuinely sensitive) but it's the wrong reason, and could misfire elsewhere.
 - Naive dense retrieval observation: patients with many repeat encounters produce several near-duplicate chunks (e.g. the same medication mentioned across multiple visits) that compete for top-k slots — a query can retrieve the *right patient's* correct-content chunk from the *wrong encounter* rather than the exact `chunk_id` labeled in the gold set. Worth watching once real Recall@k/nDCG numbers come in — may indicate the gold set needs less ambiguous single-answer queries, or that this is a genuine, expected retrieval limitation worth discussing in the writeup.
 - PII detector's known false-negative (digit-suffixed Synthea names) and false-positive (all-caps facility names) are already documented as tests in `test_pii_redaction.py`, not just narrative — flagging here too for visibility when writing the final report.
+- `sparse_retrieve` builds the same OR-converted tsquery twice in one SQL statement (once for `WHERE`, once for `ORDER BY`) — redundant computation, not incorrect. Could be computed once in a CTE/subquery instead.
+- `sparse_retrieve` required converting `plainto_tsquery`'s default AND-joined terms into an OR-joined query (via `regexp_replace`) — Postgres full-text search's default AND semantics are a hard filter (a chunk missing even one query term is excluded entirely), unlike real BM25's soft/weighted scoring where partial term matches still rank, just lower. Worth naming explicitly in the writeup as a deliberate deviation from "true" BM25, consistent with the project's earlier honesty about `ts_rank` not being the literal BM25 formula.
