@@ -27,7 +27,7 @@ def run_retrieval_eval(
 
     for entry in gold_set:
         relevant = set(entry["relevant_chunk_ids"])
-        retrieved = retrieve_fn(entry["query"])
+        retrieved = retrieve_fn(entry["query"], k=k)
 
         relevance = {chunk_id: 1.0 for chunk_id in relevant}
 
