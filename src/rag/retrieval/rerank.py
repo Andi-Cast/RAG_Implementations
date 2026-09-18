@@ -15,7 +15,7 @@ def _get_reranker() -> CrossEncoder:
     return _reranker
 
 
-def _get_chunk_texts(chunk_ids: list[str]) -> dict[str, str]:
+def get_chunk_texts(chunk_ids: list[str]) -> dict[str, str]:
     """Fetch the text for a list of chunk_ids, returned as
     {chunk_id: text}."""
     conn = get_connection()
@@ -35,7 +35,7 @@ def cross_encoder_rerank(query: str, k: int = 10, candidate_k: int = 50) -> list
     Matches the retrieve_fn signature run_retrieval_eval expects.
     """
     candidate_ids = hybrid_retrieve(query, k=candidate_k)
-    texts = _get_chunk_texts(candidate_ids)
+    texts = get_chunk_texts(candidate_ids)
 
     model = _get_reranker()
     pairs = [(query, texts[chunk_id]) for chunk_id in candidate_ids]

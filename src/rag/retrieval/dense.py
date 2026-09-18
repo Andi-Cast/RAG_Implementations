@@ -3,14 +3,14 @@ from rag.db.client import get_connection
 
 _model = None
 
-def _get_model():
+def get_model():
     global _model
     if _model is None: 
         _model = SentenceTransformer("BAAI/bge-small-en-v1.5")
     return _model
 
 def naive_dense_retrieve(query: str, k: int = 10) -> list[str]:
-    model = _get_model()
+    model = get_model()
     query_embedding = model.encode(query)
 
     conn = get_connection()
