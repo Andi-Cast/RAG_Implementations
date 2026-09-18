@@ -26,7 +26,7 @@ Tracking against the build order from the project brief. Checked off as we compl
 - [x] Naive dense top-k (baseline) — `src/rag/retrieval/dense.py`; corpus loaded (91,969 chunks, `bge-small-en-v1.5`, pgvector); benchmarked: recall@10=0.536, MRR=0.381, nDCG@10=0.413
 - [x] + Hybrid (BM25-style + RRF fusion) — `sparse_bm25.py` (Postgres full-text search, AND→OR converted), `fusion_rrf.py`, `hybrid.py` (candidate_k=50 widened pool before fusion); benchmarked: recall@10=0.607, MRR=0.534, nDCG@10=0.532
 - [x] + Cross-encoder reranking — `rerank.py` (`cross-encoder/ms-marco-MiniLM-L-6-v2`, reranks hybrid's top-50 pool); benchmarked: recall@10=0.607 (unchanged, as expected), MRR=0.607, nDCG@10=0.589
-- [ ] + Contextual compression
+- [x] + Contextual compression — `compression.py` (`compress_chunk`, `compress_chunks`): line-level extraction (not summarization/generation) against an already-retrieved chunk, keeping only the top-n query-relevant lines verbatim. Doesn't produce a new retrieval-metrics row (it doesn't change which chunks or order — only content within them), so no Recall/MRR/nDCG entry; its actual benefit (shorter context → cheaper/faster generation, less hallucination surface, less PII/injection surface) is measurable once generation metrics exist
 
 ## 5. Security layer + evals
 - [ ] RBAC pre-filter (metadata filter *inside* the ANN query, never post-filter)
