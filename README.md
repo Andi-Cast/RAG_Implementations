@@ -30,6 +30,7 @@ The corpus is synthetic medical records (generated with [Synthea](https://github
 **Retrieval** (`src/rag/retrieval/`)
 - Naive dense retrieval — rung 1: embeds the query with the same model used to embed the corpus (`BAAI/bge-small-en-v1.5`), then ranks chunks by cosine distance via pgvector's `<=>` operator directly in SQL (`dense.py`)
 - Hybrid retrieval — rung 2: combines dense retrieval with keyword-based search via Postgres full-text search (`sparse_bm25.py`), merged with Reciprocal Rank Fusion (`fusion_rrf.py`). Each sub-retriever pulls a wider candidate pool (50) before fusion narrows to the final top-k, so a chunk ranked outside one method's top-10 can still surface if the other method ranks it highly (`hybrid.py`)
+- Cross-encoder reranking — rung 3: takes hybrid's top-50 candidate pool and scores each `(query, chunk_text)` pair directly with `cross-encoder/ms-marco-MiniLM-L-6-v2`, a slower but more accurate model than the bi-encoder used for dense retrieval, since it reasons about the query and candidate jointly rather than comparing precomputed vectors (`rerank.py`)
 
 **Infrastructure**: Postgres + pgvector (metadata filtering inside the ANN query is the whole reason this vector store was chosen over alternatives that don't support it well), the full corpus embedded and loaded (91,969 chunks across 200 synthetic patients), `uv`-managed environment, `pytest` suite covering every module above.
 
@@ -40,17 +41,20 @@ Scored against the 14-query pilot gold set:
 | Technique | Recall@10 | MRR | nDCG@10 |
 |---|---|---|---|
 | Naive dense (baseline) | 0.536 | 0.381 | 0.413 |
-| Hybrid (dense + keyword, RRF) | **0.607** | **0.534** | **0.532** |
+| Hybrid (dense + keyword, RRF) | 0.607 | 0.534 | 0.532 |
+| + Cross-encoder rerank | **0.607** | **0.607** | **0.589** |
 
-Hybrid improves on every metric — MRR jumps the most (+40% relative), consistent with RRF's design: a chunk that ranks well in *either* method gets rewarded, which most directly helps "does the right answer land near the top" rather than just "does it appear somewhere in the top 10."
+Hybrid improves on every metric over naive dense — MRR jumps the most (+40% relative), consistent with RRF's design: a chunk that ranks well in *either* method gets rewarded, which most directly helps "does the right answer land near the top" rather than just "does it appear somewhere in the top 10."
 
-**Read these as early signal, not final numbers** — the gold set is a 14-query pilot (target is 50-100 hand-verified queries before this table is treated as authoritative), and this is only rungs 1-2 of four. One concrete, expected failure mode already observed: patients with many repeat encounters produce several near-duplicate chunks (the same medication mentioned across multiple visits), so a query can retrieve the *right patient's* correct content from the *wrong specific encounter* rather than the exact chunk labeled in the gold set — a plausible source of some of the recall misses here.
+Reranking's result is a clean, structurally-expected one: **Recall@10 doesn't move at all** between hybrid and reranking, because reranking only *reorders* the same 50-candidate pool hybrid already found — it can't surface a chunk hybrid missed entirely. What it *does* improve is MRR (+14% relative) and nDCG@10 (+11% relative), because it pushes already-found correct chunks higher within that pool. That's exactly the marginal effect reranking is supposed to have, and the benchmark table shows it directly rather than just asserting it.
+
+**Read these as early signal, not final numbers** — the gold set is a 14-query pilot (target is 50-100 hand-verified queries before this table is treated as authoritative), and this is only rungs 1-3 of four. One concrete, expected failure mode already observed: patients with many repeat encounters produce several near-duplicate chunks (the same medication mentioned across multiple visits), so a query can retrieve the *right patient's* correct content from the *wrong specific encounter* rather than the exact chunk labeled in the gold set — a plausible source of some of the recall misses here.
 
 Also worth naming honestly: "hybrid" here uses Postgres full-text search (`ts_rank`) rather than the literal BM25 formula, and required converting its default AND-matching into OR-matching to behave like a real ranked retriever rather than an all-or-nothing filter — a deliberate, documented deviation, not an oversight (see `PROGRESS.md`'s improvement log for details).
 
 ## What's next
 
-- Cross-encoder reranking, contextual compression — rungs 3-4 of the retrieval ladder
+- Contextual compression — rung 4 of the retrieval ladder
 - The RBAC pre-filter, wired into the retrieval query itself
 - Prompt-injection defense
 - AWS Bedrock integration: a generation-model comparison axis, Guardrails benchmarked against the hand-rolled security layer, and a Bedrock Knowledge Base as one managed-RAG baseline row

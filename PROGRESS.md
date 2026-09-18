@@ -25,7 +25,7 @@ Tracking against the build order from the project brief. Checked off as we compl
 ## 4. Retrieval ladder (each rung benchmarked against the frozen gold set)
 - [x] Naive dense top-k (baseline) — `src/rag/retrieval/dense.py`; corpus loaded (91,969 chunks, `bge-small-en-v1.5`, pgvector); benchmarked: recall@10=0.536, MRR=0.381, nDCG@10=0.413
 - [x] + Hybrid (BM25-style + RRF fusion) — `sparse_bm25.py` (Postgres full-text search, AND→OR converted), `fusion_rrf.py`, `hybrid.py` (candidate_k=50 widened pool before fusion); benchmarked: recall@10=0.607, MRR=0.534, nDCG@10=0.532
-- [ ] + Cross-encoder reranking
+- [x] + Cross-encoder reranking — `rerank.py` (`cross-encoder/ms-marco-MiniLM-L-6-v2`, reranks hybrid's top-50 pool); benchmarked: recall@10=0.607 (unchanged, as expected), MRR=0.607, nDCG@10=0.589
 - [ ] + Contextual compression
 
 ## 5. Security layer + evals
