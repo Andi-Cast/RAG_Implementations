@@ -15,6 +15,7 @@ def load_gold_set(path: str) -> list[dict]:
 def run_retrieval_eval(
     gold_set: list[dict],
     retrieve_fn: Callable[[str], list[str]],
+    user_clearance: str,
     k: int = 10,
 ) -> dict[str, float]:
     """Run retrieve_fn against every query in the gold set, score each
@@ -27,7 +28,7 @@ def run_retrieval_eval(
 
     for entry in gold_set:
         relevant = set(entry["relevant_chunk_ids"])
-        retrieved = retrieve_fn(entry["query"], k=k)
+        retrieved = retrieve_fn(entry["query"], user_clearance=user_clearance, k=k)
 
         relevance = {chunk_id: 1.0 for chunk_id in relevant}
 

@@ -28,13 +28,13 @@ def get_chunk_texts(chunk_ids: list[str]) -> dict[str, str]:
     return result
 
 
-def cross_encoder_rerank(query: str, k: int = 10, candidate_k: int = 50) -> list[str]:
+def cross_encoder_rerank(query: str, user_clearance: str, k: int = 10, candidate_k: int = 50) -> list[str]:
     """Rung 3 of the retrieval ladder: pull a candidate_k-sized pool from
     hybrid_retrieve, score each (query, chunk_text) pair with the
     cross-encoder, and return the top-k chunk_ids by that score.
     Matches the retrieve_fn signature run_retrieval_eval expects.
     """
-    candidate_ids = hybrid_retrieve(query, k=candidate_k)
+    candidate_ids = hybrid_retrieve(query, user_clearance=user_clearance, k=candidate_k)
     texts = get_chunk_texts(candidate_ids)
 
     model = _get_reranker()
