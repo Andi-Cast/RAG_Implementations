@@ -32,7 +32,7 @@ Tracking against the build order from the project brief. Checked off as we compl
 - [x] RBAC pre-filter (`src/rag/security/access_filter.py` — `allowed_tiers()`) wired into every retrieval function's SQL as a required `user_clearance` param, no default (fail-loud, not fail-open); benchmarked: naive dense at `restricted`=0.536/0.381/0.413 (matches unfiltered baseline), at `internal`=0.429/0.310/0.340 (correctly can't answer restricted-tier gold queries)
 - [x] Prompt-injection defense (hand-rolled) — `src/rag/security/injection_defense.py` (`detect_injection_patterns`, `sanitize_retrieved_context`): regex/keyword patterns for instruction-override phrasing, role-play override attempts, and fake system/assistant turn markers, same naive/inspectable tradeoff as the PII detector; tests document a known bypass (rephrasing without the literal keywords evades detection)
 - [x] PII detection (hand-rolled) — `src/rag/security/pii_redaction.py` (regex structured PII + naive name heuristic, known false-neg/false-pos documented in tests) + tests
-- [ ] Actual redaction/masking step (currently only detects spans, doesn't mask text yet)
+- [x] PII redaction/masking (`redact_pii`) — replaces every `detect_pii` span with a mask string; sorts spans by start index descending and replaces right-to-left so masking one span never shifts the indices of spans still waiting, avoiding an index-corruption bug. Inherits `detect_pii`'s known false-negatives/positives (digit-suffixed names still leak through unmasked, documented as a test) + tests
 
 ## 6. Bedrock integration
 - [ ] Generation-model comparison axis
