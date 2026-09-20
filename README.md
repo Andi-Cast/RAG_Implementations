@@ -19,6 +19,7 @@ The corpus is synthetic medical records (generated with [Synthea](https://github
 
 **Security** (`src/rag/security/`)
 - A hand-rolled PII detector combining regex for structured PII (dates, SSNs, phone numbers) with a naive Title-Case heuristic for names — deliberately kept naive to demonstrate *why* regex-only PII detection fails on unstructured text: it misses Synthea's own digit-suffixed synthetic names entirely, while false-positively flagging facility names. Both failure modes are captured as explicit regression tests, not swept under the rug (`pii_redaction.py`)
+- RBAC pre-filter: `allowed_tiers()` computes every clearance tier at or below a user's own rank, which every retrieval function's SQL query then filters on directly (`WHERE clearance_tier = ANY(%s)`) *before* ranking happens — never a post-filter. `user_clearance` is a required parameter with no default on every retrieval function, deliberately: a security-critical parameter defaulting to "see everything" would be a fail-*open* bug waiting to happen (`access_filter.py`)
 
 **Evaluation harness** (`src/rag/eval/`) — built *before* any retrieval technique, so every technique that follows is measured on identical ground:
 - Retrieval metrics: Recall@k, MRR, nDCG@k, implemented from the formulas rather than a library, each with edge cases (empty ground truth, `k` beyond the result count) explicitly handled
@@ -57,9 +58,19 @@ Contextual compression (rung 4) is built and verified but deliberately doesn't a
 
 All four retrieval ladder rungs are now built.
 
+### RBAC pre-filter results
+
+Naive dense retrieval, same 14-query gold set, scored per role:
+
+| Clearance | Recall@10 | MRR | nDCG@10 |
+|---|---|---|---|
+| `restricted` (sees everything) | 0.536 | 0.381 | 0.413 |
+| `internal` (can't see `restricted`-tier chunks) | **0.429** | **0.310** | **0.340** |
+
+`restricted`'s numbers are identical to the very first unfiltered benchmark this project ever produced — expected, since filtering to "everything at or below the top tier" is filtering to nothing at all. `internal`'s numbers are meaningfully lower, because the 5 gold-set queries targeting `restricted`-tier content (substance-use screening, an intimate-partner-abuse finding) become unanswerable for that role — not because retrieval got worse, but because those chunks are now correctly invisible before ranking ever happens. That's the pre-filter design working exactly as intended, measured rather than just asserted.
+
 ## What's next
 
-- The RBAC pre-filter, wired into the retrieval query itself
 - Prompt-injection defense
 - AWS Bedrock integration: a generation-model comparison axis, Guardrails benchmarked against the hand-rolled security layer, and a Bedrock Knowledge Base as one managed-RAG baseline row
 - FastAPI serving with role derived from authenticated identity, never from client input
