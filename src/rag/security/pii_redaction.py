@@ -37,3 +37,15 @@ def detect_name_candidates(text: str) -> list[tuple[int, int, str]]:
 def detect_pii(text: str) -> list[tuple[int, int, str]]:
     """Combined structured-pattern + heuristic-name detection."""
     return detect_structured_pii(text) + detect_name_candidates(text)
+
+
+def redact_pii(text: str, mask: str = "[REDACTED]") -> str:
+    """Detect PII spans via detect_pii(text), then return a copy of text
+    with each detected span replaced by `mask`. Sort spans by start index
+    descending and replace right-to-left, so replacing one span doesn't
+    shift the character indices of spans still waiting to be replaced."""
+    spans = detect_pii(text)
+    spans.sort(key=lambda span: span[0], reverse=True)
+    for start, end, _ in spans:
+        text = text[:start] + mask + text[end:]
+    return text

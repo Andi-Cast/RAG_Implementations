@@ -2,6 +2,7 @@ from rag.security.pii_redaction import (
     detect_name_candidates,
     detect_pii,
     detect_structured_pii,
+    redact_pii,
 )
 
 
@@ -68,3 +69,42 @@ def test_detect_pii_combines_structured_and_name_candidates():
     pii_types = {pii_type for _, _, pii_type in spans}
     assert "date" in pii_types
     assert "name_candidate" in pii_types
+
+
+def test_redact_pii_masks_ssn():
+    text = "SSN on file: 123-45-6789"
+    redacted_text = redact_pii(text)
+    assert "123-45-6789" not in redacted_text
+    assert "[REDACTED]" in redacted_text
+
+
+def test_redact_pii_masks_multiple_spans_left_to_right_order_preserved():
+    text = "2007-07-08 : Beth Israel Deaconess"
+    redacted_text = redact_pii(text)
+    assert "2007-07-08" not in redacted_text
+    assert "Beth Israel Deaconess" not in redacted_text
+    assert "[REDACTED]" in redacted_text
+
+
+def test_redact_pii_no_pii_returns_text_unchanged():
+    text = "no identifiers in this text at all"
+    redacted_text = redact_pii(text)
+    assert redacted_text == text
+
+
+def test_redact_pii_custom_mask_string():
+    text = "SSN on file: 123-45-6789"
+    redacted_text = redact_pii(text, mask="***")
+    assert "123-45-6789" not in redacted_text
+    assert "***" in redacted_text
+
+
+def test_redact_pii_known_limitation_misses_digit_suffixed_names():
+    # Known limitation (mirrors test_detect_name_candidates_misses_..._names
+    # above): since redact_pii relies on detect_pii/detect_name_candidates,
+    # a digit-suffixed Synthea name like "Leon728 Hayes766" won't be caught
+    # or masked either -- assert it's still present, unredacted, in the
+    # output. Documents the limitation, doesn't fix it here.
+    text = "Patient Leon728 Hayes766 was seen today"
+    redacted_text = redact_pii(text)
+    assert "Leon728 Hayes766" in redacted_text
