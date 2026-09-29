@@ -4,9 +4,11 @@ version = "0.1.0"
 description = "Secure multi-technique RAG over an access-controlled medical corpus"
 requires-python = ">=3.12"
 dependencies = [
+    "boto3>=1.43.98",
     "numpy>=2.1",
     "pgvector>=0.5.0",
     "psycopg[binary]>=3.3.5",
+    "python-dotenv>=1.2.3",
     "sentence-transformers>=6.0.1",
 ]
 
