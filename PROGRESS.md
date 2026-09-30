@@ -18,7 +18,7 @@ Tracking against the build order from the project brief. Checked off as we compl
 ## 3. Eval harness + gold set (built first, ahead of any retrieval code)
 - [x] Retrieval metrics (`src/rag/eval/retrieval_metrics.py`) — `recall_at_k`, `reciprocal_rank`, `ndcg_at_k` + tests
 - [x] Security metrics (`src/rag/eval/security_metrics.py`) — `access_control_leakage`, `injection_defense_success_rate`, `pii_redaction_recall` + tests
-- [ ] Generation metrics (RAGAS/DeepEval — faithfulness, answer relevance)
+- [x] Generation metrics (`src/rag/eval/generation_metrics.py`) — `faithfulness`, `answer_relevance`: hand-rolled LLM-as-judge scoring (a Bedrock model judges the generated answer) rather than RAGAS/DeepEval, consistent with this project's "implement from the concept, no library" approach for retrieval metrics; verified against clear-cut cases (grounded vs. contradicting-context answer, on-topic vs. off-topic answer)
 - [~] Gold set (`data/gold/gold_set.json`) — 14-query pilot set drafted, spot-checked but not yet hand-verified as fully frozen; expand toward 50-100 later
 - [x] Harness orchestration (`src/rag/eval/harness.py`) — `load_gold_set`, `run_retrieval_eval` (pluggable `retrieve_fn`)
 
@@ -35,7 +35,7 @@ Tracking against the build order from the project brief. Checked off as we compl
 - [x] PII redaction/masking (`redact_pii`) — replaces every `detect_pii` span with a mask string; sorts spans by start index descending and replaces right-to-left so masking one span never shifts the indices of spans still waiting, avoiding an index-corruption bug. Inherits `detect_pii`'s known false-negatives/positives (digit-suffixed names still leak through unmasked, documented as a test) + tests
 
 ## 6. Bedrock integration
-- [ ] Generation-model comparison axis
+- [~] Generation-model comparison axis — `src/rag/generation/bedrock_client.py` (`generate_answer`, Converse API, Claude Haiku 4.5 + gpt-oss-120b) and `src/rag/eval/generation_metrics.py` (LLM-as-judge `faithfulness`/`answer_relevance`) both built and verified individually; not yet wired into the harness to produce an actual per-model benchmark table against the gold set
 - [ ] Guardrails (PII + injection) benchmarked vs. hand-rolled
 - [ ] Knowledge Bases — one managed-RAG baseline row
 
