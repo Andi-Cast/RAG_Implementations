@@ -50,6 +50,28 @@ def faithfulness(context: str, answer: str, judge_model_id: str) -> float:
     return _parse_score(judge_response)
 
 
+def answer_correctness(reference_answer: str, answer: str, judge_model_id: str) -> float:
+    """LLM-as-judge metric: ask judge_model_id whether `answer` conveys
+    the same actual information as `reference_answer` (the gold set's
+    hand-written correct answer), and return a 0-1 correctness score.
+    Unlike faithfulness/answer_relevance, this is NOT reference-free --
+    it directly checks the generated answer against ground truth, which
+    is what catches a retrieval failure that faithfulness/relevance alone
+    would miss (a model can be fully faithful to the wrong retrieved
+    context and still be flatly incorrect)."""
+    prompt = (
+        "You are evaluating whether an answer conveys the same information "
+        "as a reference answer.\n\n"
+        f"Reference Answer:\n{reference_answer}\n\n"
+        f"Answer:\n{answer}\n\n"
+        "On a scale from 0.0 to 1.0, how well does the answer convey the "
+        "same information as the reference answer? Respond with only a "
+        "decimal number between 0.0 and 1.0."
+    )
+    judge_response = _ask_judge(prompt, judge_model_id)
+    return _parse_score(judge_response)
+
+
 def answer_relevance(query: str, answer: str, judge_model_id: str) -> float:
     """LLM-as-judge metric: ask judge_model_id how directly `answer`
     addresses `query`, and return a 0-1 relevance score. Distinct from
