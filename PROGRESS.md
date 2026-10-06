@@ -35,7 +35,7 @@ Tracking against the build order from the project brief. Checked off as we compl
 - [x] PII redaction/masking (`redact_pii`) — replaces every `detect_pii` span with a mask string; sorts spans by start index descending and replaces right-to-left so masking one span never shifts the indices of spans still waiting, avoiding an index-corruption bug. Inherits `detect_pii`'s known false-negatives/positives (digit-suffixed names still leak through unmasked, documented as a test) + tests
 
 ## 6. Bedrock integration
-- [~] Generation-model comparison axis — `src/rag/generation/bedrock_client.py` (`generate_answer`, Converse API, Claude Haiku 4.5 + gpt-oss-120b) and `src/rag/eval/generation_metrics.py` (LLM-as-judge `faithfulness`/`answer_relevance`) both built and verified individually; not yet wired into the harness to produce an actual per-model benchmark table against the gold set
+- [x] Generation-model comparison axis — `src/rag/generation/bedrock_client.py` (`generate_answer`, Converse API, Claude Haiku 4.5 + gpt-oss-120b) scored via `run_generation_eval` against the full 14-query gold set (`naive_dense_retrieve`, Haiku as judge): Haiku 4.5 faithfulness=0.95/relevance=0.85/correctness=0.50; gpt-oss-120b faithfulness=0.91/relevance=0.91/correctness=0.59. `answer_correctness` (checks against gold-set `reference_answer`, unlike the other two reference-free metrics) exposes that both models' low ~0.5-0.6 correctness is a retrieval bottleneck (naive dense baseline), not a generation problem — faithfulness/relevance alone looked near-perfect and would have hidden this
 - [ ] Guardrails (PII + injection) benchmarked vs. hand-rolled
 - [ ] Knowledge Bases — one managed-RAG baseline row
 

@@ -71,11 +71,26 @@ Naive dense retrieval, same 14-query gold set, scored per role:
 
 `restricted`'s numbers are identical to the very first unfiltered benchmark this project ever produced — expected, since filtering to "everything at or below the top tier" is filtering to nothing at all. `internal`'s numbers are meaningfully lower, because the 5 gold-set queries targeting `restricted`-tier content (substance-use screening, an intimate-partner-abuse finding) become unanswerable for that role — not because retrieval got worse, but because those chunks are now correctly invisible before ranking ever happens. That's the pre-filter design working exactly as intended, measured rather than just asserted.
 
+### Generation-model comparison
+
+Two Bedrock models (`generate_answer()`, Converse API) scored against the full 14-query gold set via hand-rolled LLM-as-judge metrics (`src/rag/eval/generation_metrics.py`) — no RAGAS/DeepEval dependency, same "implement from the concept" approach as the retrieval metrics. Retrieval context for this run came from `naive_dense_retrieve` (the baseline rung); Claude Haiku 4.5 acted as judge for both models.
+
+| Model | Faithfulness | Answer Relevance | Answer Correctness |
+|---|---|---|---|
+| Claude Haiku 4.5 | 0.95 | 0.85 | 0.50 |
+| gpt-oss-120b | 0.91 | 0.91 | 0.59 |
+
+Three distinct metrics, deliberately: **faithfulness** (is the answer grounded in the context it was actually given, i.e. no hallucination) and **answer relevance** (does the answer address the question asked) are both *reference-free* — they never look at the gold set's hand-written `reference_answer`. **Answer correctness** is the one metric that does, checking whether the generated answer actually conveys the same information as the known-correct answer.
+
+That distinction is the whole story in this table: faithfulness and relevance both look strong for both models (~0.85-0.95), which on its own would read as "the system works well." Answer correctness tells a different, more honest story — both models land around 0.5-0.6, because `naive_dense_retrieve` itself fails to surface the right chunk on a meaningful fraction of queries (see the retrieval ladder's own recall numbers above). A model can be perfectly faithful to the *wrong* retrieved context and still be flatly incorrect — faithfulness/relevance alone would have hidden that failure completely; answer correctness is what surfaces it. Re-running this same generation benchmark against the better retrieval rungs (hybrid, cross-encoder rerank) rather than the naive baseline is the natural next measurement, since the retrieval ladder's own numbers suggest those rungs should close much of this gap.
+
+One limitation worth naming directly: Haiku judges both models' answers, including its own — a single fixed judge keeps the comparison internally consistent, but a model judging its own output is a known potential source of self-favoring bias.
+
 ## What's next
 
-- Generation metrics (RAGAS/DeepEval — faithfulness, answer relevance) so contextual compression's actual payoff becomes measurable
-- AWS Bedrock integration: a generation-model comparison axis, Guardrails benchmarked against the hand-rolled security layer, and a Bedrock Knowledge Base as one managed-RAG baseline row
+- AWS Bedrock integration: Guardrails benchmarked against the hand-rolled security layer, and a Bedrock Knowledge Base as one managed-RAG baseline row
 - FastAPI serving with role derived from authenticated identity, never from client input
+- Expand the gold set from 14 to 50-100 hand-verified queries for more statistically meaningful benchmark numbers
 
 ## Deliberately not used (and why this matters for evaluating the project)
 
