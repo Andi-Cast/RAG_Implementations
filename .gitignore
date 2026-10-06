@@ -24,3 +24,6 @@ synthea/
 
 # Claude Code project config (local only)
 .claude/
+
+# Local device-handoff notes (not part of the project deliverable)
+HANDOFF.md
