@@ -105,21 +105,21 @@ def main() -> None:
     grouped_bar_chart(
         metrics=["Recall@10", "MRR", "nDCG@10"],
         series={
-            "Naive dense": [0.536, 0.381, 0.413],
-            "Hybrid": [0.607, 0.534, 0.532],
-            "+ Cross-encoder rerank": [0.607, 0.607, 0.589],
+            "Naive dense": [0.102, 0.068, 0.076],
+            "Hybrid": [0.330, 0.177, 0.213],
+            "+ Cross-encoder rerank": [0.306, 0.193, 0.219],
         },
-        title="Retrieval ladder",
+        title="Retrieval ladder (250-query gold set)",
         output_filename="retrieval_ladder.png",
     )
 
     grouped_bar_chart(
         metrics=["Recall@10", "MRR", "nDCG@10"],
         series={
-            "restricted (sees everything)": [0.536, 0.381, 0.413],
-            "internal (RBAC-filtered)": [0.429, 0.310, 0.340],
+            "restricted (sees everything)": [0.102, 0.068, 0.076],
+            "internal (RBAC-filtered)": [0.072, 0.056, 0.060],
         },
-        title="RBAC pre-filter results",
+        title="RBAC pre-filter results (250-query gold set)",
         output_filename="rbac_results.png",
     )
 

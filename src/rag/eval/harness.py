@@ -5,6 +5,7 @@ from typing import Callable
 from rag.eval.generation_metrics import answer_correctness, answer_relevance, faithfulness
 from rag.eval.retrieval_metrics import ndcg_at_k, reciprocal_rank, recall_at_k
 from rag.retrieval.rerank import get_chunk_texts
+from rag.security.injection_defense import sanitize_retrieved_context
 
 
 def load_gold_set(path: str) -> list[dict]:
@@ -56,8 +57,10 @@ def run_generation_eval(
     k: int = 10,
 ) -> dict[str, float]:
     """For each gold-set query: retrieve context chunks via retrieve_fn,
-    join their text into a single context string, generate an answer via
-    generate_fn(query, context, model_id), score the answer with
+    sanitize each chunk's text via sanitize_retrieved_context (strips
+    prompt-injection patterns before anything reaches the model), join
+    the sanitized text into a single context string, generate an answer
+    via generate_fn(query, context, model_id), score the answer with
     faithfulness(context, answer, judge_model_id),
     answer_relevance(query, answer, judge_model_id), and
     answer_correctness(entry["reference_answer"], answer, judge_model_id),
@@ -77,7 +80,9 @@ def run_generation_eval(
         query = entry["query"]
         retrieved_ids = retrieve_fn(query, user_clearance=user_clearance, k=k)
         texts = get_chunk_texts(retrieved_ids)
-        context = "\n\n".join(texts[chunk_id] for chunk_id in retrieved_ids)
+        chunk_texts = [texts[chunk_id] for chunk_id in retrieved_ids]
+        sanitized_texts = sanitize_retrieved_context(chunk_texts)
+        context = "\n\n".join(sanitized_texts)
 
         answer = generate_fn(query, context, model_id)
 

@@ -3,61 +3,81 @@
     {
       "query_id": "q01",
       "query": "What condition was diagnosed for this patient on 2024-04-20?",
-      "relevant_chunk_ids": ["Evelyne208_Mueller846_2d9ff736-5ecc-c132-f64b-035a524e94cf34::CONDITIONS"],
+      "relevant_chunk_ids": [
+        "Evelyne208_Mueller846_2d9ff736-5ecc-c132-f64b-035a524e94cf34::CONDITIONS"
+      ],
       "reference_answer": "Acute viral pharyngitis"
     },
     {
       "query_id": "q02",
       "query": "What procedure was performed to diagnose this patient's pharyngitis on 2024-04-20?",
-      "relevant_chunk_ids": ["Evelyne208_Mueller846_2d9ff736-5ecc-c132-f64b-035a524e94cf34::PROCEDURES"],
+      "relevant_chunk_ids": [
+        "Evelyne208_Mueller846_2d9ff736-5ecc-c132-f64b-035a524e94cf34::PROCEDURES"
+      ],
       "reference_answer": "Throat culture"
     },
     {
       "query_id": "q03",
       "query": "What medication is this patient taking for hyperlipidemia, prescribed on 2010-12-16?",
-      "relevant_chunk_ids": ["Kory651_Sauer652_8d39224c-6070-b185-81ac-51986e9a07fc38::MEDICATIONS"],
+      "relevant_chunk_ids": [
+        "Kory651_Sauer652_8d39224c-6070-b185-81ac-51986e9a07fc38::MEDICATIONS"
+      ],
       "reference_answer": "Simvastatin 10 MG Oral Tablet"
     },
     {
       "query_id": "q04",
       "query": "What heart-related condition does this patient have, recorded on 2015-07-20?",
-      "relevant_chunk_ids": ["Charley358_Schinner682_285cf115-cea6-5819-5364-5c7152d26c4f33::CONDITIONS"],
+      "relevant_chunk_ids": [
+        "Charley358_Schinner682_285cf115-cea6-5819-5364-5c7152d26c4f33::CONDITIONS"
+      ],
       "reference_answer": "Ischemic heart disease"
     },
     {
       "query_id": "q05",
       "query": "What medication is this patient prescribed for type 2 diabetes, as of 2025-10-11?",
-      "relevant_chunk_ids": ["Eduardo902_Jaramillo133_8a580843-bc88-88af-ffc2-976488a4a38949::MEDICATIONS"],
+      "relevant_chunk_ids": [
+        "Eduardo902_Jaramillo133_8a580843-bc88-88af-ffc2-976488a4a38949::MEDICATIONS"
+      ],
       "reference_answer": "24 HR Metformin hydrochloride 500 MG Extended Release Oral Tablet"
     },
     {
       "query_id": "q06",
       "query": "What medication is used to treat this patient's chronic congestive heart failure, prescribed on 2026-07-25?",
-      "relevant_chunk_ids": ["Nicholas495_Boehm581_9018f445-501b-c6ba-d6d9-cbee6095e8e631::MEDICATIONS"],
+      "relevant_chunk_ids": [
+        "Nicholas495_Boehm581_9018f445-501b-c6ba-d6d9-cbee6095e8e631::MEDICATIONS"
+      ],
       "reference_answer": "Furosemide 40 MG Oral Tablet"
     },
     {
       "query_id": "q07",
       "query": "What diagnostic imaging procedure was performed as part of this patient's heart failure evaluation on 2026-07-25?",
-      "relevant_chunk_ids": ["Nicholas495_Boehm581_9018f445-501b-c6ba-d6d9-cbee6095e8e631::PROCEDURES"],
+      "relevant_chunk_ids": [
+        "Nicholas495_Boehm581_9018f445-501b-c6ba-d6d9-cbee6095e8e631::PROCEDURES"
+      ],
       "reference_answer": "Echocardiography"
     },
     {
       "query_id": "q08",
       "query": "What procedure is this patient receiving for chronic kidney disease stage 4, as of 2010-07-27?",
-      "relevant_chunk_ids": ["Minh326_Erdman779_80b0c69f-01f8-d9ac-f678-49b19ab0dac7106::PROCEDURES"],
+      "relevant_chunk_ids": [
+        "Minh326_Erdman779_80b0c69f-01f8-d9ac-f678-49b19ab0dac7106::PROCEDURES"
+      ],
       "reference_answer": "Renal dialysis"
     },
     {
       "query_id": "q09",
       "query": "What medication is prescribed for this patient's anemia, as of 2019-04-06?",
-      "relevant_chunk_ids": ["Deandre599_Schaefer657_da4b4fc8-dfaf-8f6b-185d-09de4773d66e563::MEDICATIONS"],
+      "relevant_chunk_ids": [
+        "Deandre599_Schaefer657_da4b4fc8-dfaf-8f6b-185d-09de4773d66e563::MEDICATIONS"
+      ],
       "reference_answer": "Epoetin Alfa 4000 UNT/ML Injection [Epogen]"
     },
     {
       "query_id": "q10",
       "query": "What behavioral health and substance use screenings were performed for this patient on 2015-07-20?",
-      "relevant_chunk_ids": ["Charley358_Schinner682_285cf115-cea6-5819-5364-5c7152d26c4f33::PROCEDURES"],
+      "relevant_chunk_ids": [
+        "Charley358_Schinner682_285cf115-cea6-5819-5364-5c7152d26c4f33::PROCEDURES"
+      ],
       "reference_answer": "Alcohol Use Disorders Identification Test - Consumption, assessment of substance use, depression screening (performed twice), and assessment of anxiety"
     },
     {
@@ -72,20 +92,1914 @@
     {
       "query_id": "q12",
       "query": "What opioid pain medications is this patient prescribed as of 2024-04-24?",
-      "relevant_chunk_ids": ["Alphonse92_Auer97_23b0cffb-97f2-a3a6-e87d-9ce2387bcdcb31::MEDICATIONS"],
+      "relevant_chunk_ids": [
+        "Alphonse92_Auer97_23b0cffb-97f2-a3a6-e87d-9ce2387bcdcb31::MEDICATIONS"
+      ],
       "reference_answer": "Hydrocodone Bitartrate extended release, Fentanyl transdermal patch, abuse-deterrent Oxycodone (Oxycontin), and Acetaminophen/Oxycodone (Percocet)"
     },
     {
       "query_id": "q13",
       "query": "What depression and drug abuse screening scores were recorded for this patient on 2024-04-24?",
-      "relevant_chunk_ids": ["Alphonse92_Auer97_23b0cffb-97f2-a3a6-e87d-9ce2387bcdcb31::REPORTS"],
+      "relevant_chunk_ids": [
+        "Alphonse92_Auer97_23b0cffb-97f2-a3a6-e87d-9ce2387bcdcb31::REPORTS"
+      ],
       "reference_answer": "PHQ-2 score of 2.0 and DAST-10 score of 1.0"
     },
     {
       "query_id": "q14",
       "query": "What safety-related finding was recorded for this patient on 2024-01-17?",
-      "relevant_chunk_ids": ["Elidia194_Freeda113_Towne435_1797a545-527e-cd94-fb72-9974beb54c0f54::CONDITIONS"],
+      "relevant_chunk_ids": [
+        "Elidia194_Freeda113_Towne435_1797a545-527e-cd94-fb72-9974beb54c0f54::CONDITIONS"
+      ],
       "reference_answer": "Victim of intimate partner abuse"
+    },
+    {
+      "query": "What report was generated for this patient on 2024-05-13?",
+      "relevant_chunk_ids": [
+        "Marilynn608_Ena816_Medhurst46_6e81e2d0-7e32-2684-9d55-2e940c517c3b58::REPORTS"
+      ],
+      "reference_answer": "Basic metabolic 2000 panel - Serum or Plasma",
+      "query_id": "q015"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2011-05-01?",
+      "relevant_chunk_ids": [
+        "Leon728_Hayes766_e80a4d44-0336-81ba-53b8-ce4eb72e3417338::PROCEDURES"
+      ],
+      "reference_answer": "Patient referral",
+      "query_id": "q016"
+    },
+    {
+      "query": "What report was generated for this patient on 1990-09-04?",
+      "relevant_chunk_ids": [
+        "Elois418_Leo278_Shanahan202_78dc0a62-23f7-1d07-49cd-9de05c13e7b4401::REPORTS"
+      ],
+      "reference_answer": "Basic metabolic 2000 panel - Serum or Plasma",
+      "query_id": "q017"
+    },
+    {
+      "query": "What was this patient's Tobacco smoking status recorded on 2017-03-14?",
+      "relevant_chunk_ids": [
+        "Simon598_Rau926_f25f8417-467a-d6f2-eb78-d3b29bba30eb31::OBSERVATIONS"
+      ],
+      "reference_answer": "Never smoked tobacco",
+      "query_id": "q018"
+    },
+    {
+      "query": "What report was generated for this patient on 2020-06-01?",
+      "relevant_chunk_ids": [
+        "Edris973_Osinski784_5620473f-0bad-a944-05a5-cb5371edb4ac15::REPORTS"
+      ],
+      "reference_answer": "Patient Health Questionnaire 2 item (PHQ-2) [Reported]",
+      "query_id": "q019"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2022-02-16?",
+      "relevant_chunk_ids": [
+        "Julio255_P\u00e9rez790_2d3b1f0a-c7e3-517e-0588-c96a61204ecc63::PROCEDURES"
+      ],
+      "reference_answer": "Rehabilitation therapy",
+      "query_id": "q020"
+    },
+    {
+      "query": "What report was generated for this patient on 2014-10-15?",
+      "relevant_chunk_ids": [
+        "Avelina400_Oralee226_Lehner980_a8670cc8-05a9-eb7d-63cd-9e7a2214f83716::REPORTS"
+      ],
+      "reference_answer": "CBC panel - Blood by Automated count",
+      "query_id": "q021"
+    },
+    {
+      "query": "What report was generated for this patient on 2018-06-29?",
+      "relevant_chunk_ids": [
+        "Anisha16_Rosario163_O'Reilly797_09541e4b-0231-b83b-f317-893954d31fb743::REPORTS"
+      ],
+      "reference_answer": "Basic metabolic panel - Blood",
+      "query_id": "q022"
+    },
+    {
+      "query": "What was this patient's Tobacco smoking status recorded on 2021-07-10?",
+      "relevant_chunk_ids": [
+        "Quinton758_Collins926_838cfd3f-d1bf-a9e5-e857-fcddcbdf4f3313::OBSERVATIONS"
+      ],
+      "reference_answer": "Never smoked tobacco",
+      "query_id": "q023"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2024-11-24?",
+      "relevant_chunk_ids": [
+        "Renato359_Gaylord332_b7f95748-a164-7c7b-6071-2e4a5542750a48::PROCEDURES"
+      ],
+      "reference_answer": "Screening",
+      "query_id": "q024"
+    },
+    {
+      "query": "What was this patient's Total score [AUDIT-C] recorded on 2008-12-03?",
+      "relevant_chunk_ids": [
+        "Kory651_Sauer652_8d39224c-6070-b185-81ac-51986e9a07fc32::OBSERVATIONS"
+      ],
+      "reference_answer": "1.0 {score}",
+      "query_id": "q025"
+    },
+    {
+      "query": "What was this patient's Total score [AUDIT-C] recorded on 2021-05-06?",
+      "relevant_chunk_ids": [
+        "Hung902_Senger904_c711186d-0c16-19cd-243e-defe209ec69f22::OBSERVATIONS"
+      ],
+      "reference_answer": "3.0 {score}",
+      "query_id": "q026"
+    },
+    {
+      "query": "What was this patient's Total score [HARK] recorded on 2022-11-01?",
+      "relevant_chunk_ids": [
+        "Hugo693_Navarrete760_adfd6636-9034-5b89-7847-9da6b895258821::OBSERVATIONS"
+      ],
+      "reference_answer": "0.0 {score}",
+      "query_id": "q027"
+    },
+    {
+      "query": "What report was generated for this patient on 2013-07-11?",
+      "relevant_chunk_ids": [
+        "Idella49_Steuber698_084b98ee-4a14-1573-3179-6733a2dd11a139::REPORTS"
+      ],
+      "reference_answer": "Basic metabolic panel - Blood",
+      "query_id": "q028"
+    },
+    {
+      "query": "What was this patient's Fall risk level [Morse Fall Scale] recorded on 2022-02-21?",
+      "relevant_chunk_ids": [
+        "Marilynn608_Ena816_Medhurst46_6e81e2d0-7e32-2684-9d55-2e940c517c3b44::OBSERVATIONS"
+      ],
+      "reference_answer": "Moderate Risk",
+      "query_id": "q029"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2017-07-19?",
+      "relevant_chunk_ids": [
+        "Margarita164_Navarrete760_32c51e29-d9c2-7c10-7f8f-d7c07e3beaab3::PROCEDURES"
+      ],
+      "reference_answer": "Patient referral",
+      "query_id": "q030"
+    },
+    {
+      "query": "What was this patient's Fall risk level [Morse Fall Scale] recorded on 2022-11-21?",
+      "relevant_chunk_ids": [
+        "Marilynn608_Ena816_Medhurst46_6e81e2d0-7e32-2684-9d55-2e940c517c3b48::OBSERVATIONS"
+      ],
+      "reference_answer": "Low Risk",
+      "query_id": "q031"
+    },
+    {
+      "query": "What procedure was performed on this patient on 1992-01-21?",
+      "relevant_chunk_ids": [
+        "Elois418_Leo278_Shanahan202_78dc0a62-23f7-1d07-49cd-9de05c13e7b4533::PROCEDURES"
+      ],
+      "reference_answer": "Patient referral",
+      "query_id": "q032"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2016-09-17?",
+      "relevant_chunk_ids": [
+        "Quinton758_Collins926_838cfd3f-d1bf-a9e5-e857-fcddcbdf4f335::PROCEDURES"
+      ],
+      "reference_answer": "Patient referral",
+      "query_id": "q033"
+    },
+    {
+      "query": "What was this patient's Total score [HARK] recorded on 2026-03-22?",
+      "relevant_chunk_ids": [
+        "Doyle959_Emard19_52fb8304-74a7-adc8-6881-9e0c310ef3da25::OBSERVATIONS"
+      ],
+      "reference_answer": "0.0 {score}",
+      "query_id": "q034"
+    },
+    {
+      "query": "What was this patient's Tobacco smoking status recorded on 2024-01-23?",
+      "relevant_chunk_ids": [
+        "Simon598_Rau926_f25f8417-467a-d6f2-eb78-d3b29bba30eb229::OBSERVATIONS"
+      ],
+      "reference_answer": "Never smoked tobacco",
+      "query_id": "q035"
+    },
+    {
+      "query": "What was this patient's Fall risk level [Morse Fall Scale] recorded on 2016-06-08?",
+      "relevant_chunk_ids": [
+        "Deandre599_Schaefer657_da4b4fc8-dfaf-8f6b-185d-09de4773d66e324::OBSERVATIONS"
+      ],
+      "reference_answer": "Low Risk",
+      "query_id": "q036"
+    },
+    {
+      "query": "What report was generated for this patient on 2018-03-09?",
+      "relevant_chunk_ids": [
+        "Chang901_Gulgowski816_2288baaa-996b-aa32-2b23-973809aba59d8::REPORTS"
+      ],
+      "reference_answer": "Lipid panel with direct LDL - Serum or Plasma",
+      "query_id": "q037"
+    },
+    {
+      "query": "What report was generated for this patient on 2024-01-03?",
+      "relevant_chunk_ids": [
+        "Cameron381_Sipes176_04b15508-1adf-a1f3-3b86-6eec8105fc73107::REPORTS"
+      ],
+      "reference_answer": "Generalized anxiety disorder 7 item",
+      "query_id": "q038"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2020-05-31?",
+      "relevant_chunk_ids": [
+        "Jamie386_Kenneth671_Dicki44_bcf4081b-67bf-84e7-3e6c-f507a728811840::PROCEDURES"
+      ],
+      "reference_answer": "Rehabilitation therapy",
+      "query_id": "q039"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2018-03-13?",
+      "relevant_chunk_ids": [
+        "Madlyn383_Tillman293_3da97d17-fa20-5da1-099a-34cbb55ca2489::PROCEDURES"
+      ],
+      "reference_answer": "Screening",
+      "query_id": "q040"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2015-01-16?",
+      "relevant_chunk_ids": [
+        "Ricki338_Candi549_Wisozk929_2d8a9b0c-e5fe-de08-e899-f5352471144962::PROCEDURES"
+      ],
+      "reference_answer": "Rehabilitation therapy",
+      "query_id": "q041"
+    },
+    {
+      "query": "What report was generated for this patient on 2019-10-06?",
+      "relevant_chunk_ids": [
+        "Marilynn608_Ola364_Prosacco716_c907ea12-54ff-56de-f95a-2dce6e8ac66121::REPORTS"
+      ],
+      "reference_answer": "Lipid panel with direct LDL - Serum or Plasma",
+      "query_id": "q042"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2024-07-29?",
+      "relevant_chunk_ids": [
+        "Nicholas495_Boehm581_9018f445-501b-c6ba-d6d9-cbee6095e8e624::PROCEDURES"
+      ],
+      "reference_answer": "Assessment using Alcohol Use Disorders Identification Test - Consumption",
+      "query_id": "q043"
+    },
+    {
+      "query": "What was this patient's Total score [HARK] recorded on 2026-01-29?",
+      "relevant_chunk_ids": [
+        "Kate239_Kshlerin58_5356cf20-dce7-2723-f5b8-ac6afaf1d442105::OBSERVATIONS"
+      ],
+      "reference_answer": "0.0 {score}",
+      "query_id": "q044"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2018-09-21?",
+      "relevant_chunk_ids": [
+        "Olevia458_Corey514_Zemlak964_42fe0714-7026-3512-66a5-1a26703cd65411::PROCEDURES"
+      ],
+      "reference_answer": "Screening",
+      "query_id": "q045"
+    },
+    {
+      "query": "What was this patient's Total score [AUDIT-C] recorded on 2020-11-01?",
+      "relevant_chunk_ids": [
+        "Renato359_Gaylord332_b7f95748-a164-7c7b-6071-2e4a5542750a28::OBSERVATIONS"
+      ],
+      "reference_answer": "1.0 {score}",
+      "query_id": "q046"
+    },
+    {
+      "query": "What report was generated for this patient on 2025-03-13?",
+      "relevant_chunk_ids": [
+        "Hung902_Senger904_c711186d-0c16-19cd-243e-defe209ec69f36::REPORTS"
+      ],
+      "reference_answer": "CBC panel - Blood by Automated count",
+      "query_id": "q047"
+    },
+    {
+      "query": "What procedure was performed on this patient on 1989-09-23?",
+      "relevant_chunk_ids": [
+        "Evan94_Gislason620_21239c4b-ca83-121c-6172-9d65242e9aa442::PROCEDURES"
+      ],
+      "reference_answer": "Patient referral",
+      "query_id": "q048"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2013-06-13?",
+      "relevant_chunk_ids": [
+        "Elliot577_Schamberger479_a4ddfb5c-b18f-ca63-4cda-9101e14b22b914::PROCEDURES"
+      ],
+      "reference_answer": "Screening",
+      "query_id": "q049"
+    },
+    {
+      "query": "What report was generated for this patient on 2023-03-22?",
+      "relevant_chunk_ids": [
+        "Sanford861_Cremin516_739b1d88-8f33-1d38-6f23-58cbac27c48e511::REPORTS"
+      ],
+      "reference_answer": "Basic metabolic 2000 panel - Serum or Plasma",
+      "query_id": "q050"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2026-02-28?",
+      "relevant_chunk_ids": [
+        "Sanford861_Cremin516_739b1d88-8f33-1d38-6f23-58cbac27c48e588::PROCEDURES"
+      ],
+      "reference_answer": "Rehabilitation therapy",
+      "query_id": "q051"
+    },
+    {
+      "query": "What was this patient's Total score [HARK] recorded on 2017-10-20?",
+      "relevant_chunk_ids": [
+        "Bryce11_Adams676_53b2e328-9b2c-c317-4530-606b23b8e4cd17::OBSERVATIONS"
+      ],
+      "reference_answer": "0.0 {score}",
+      "query_id": "q052"
+    },
+    {
+      "query": "What was this patient's Total score [DAST-10] recorded on 2021-04-19?",
+      "relevant_chunk_ids": [
+        "Eliz744_Stanton715_8f85402c-4f39-973a-8bdd-0e020ac1b2dc20::OBSERVATIONS"
+      ],
+      "reference_answer": "1.0 {score}",
+      "query_id": "q053"
+    },
+    {
+      "query": "What was this patient's Tobacco smoking status recorded on 2010-10-25?",
+      "relevant_chunk_ids": [
+        "Charley358_Schinner682_285cf115-cea6-5819-5364-5c7152d26c4f22::OBSERVATIONS"
+      ],
+      "reference_answer": "Ex-smoker",
+      "query_id": "q054"
+    },
+    {
+      "query": "What report was generated for this patient on 2021-05-07?",
+      "relevant_chunk_ids": [
+        "Luba688_Keisha459_Bogisich202_3a4acc8c-3c8d-2103-da94-f8b8312f00b348::REPORTS"
+      ],
+      "reference_answer": "CBC panel - Blood by Automated count",
+      "query_id": "q055"
+    },
+    {
+      "query": "What was this patient's pH of Urine by Test strip recorded on 2013-02-03?",
+      "relevant_chunk_ids": [
+        "Leon728_Hayes766_e80a4d44-0336-81ba-53b8-ce4eb72e3417483::OBSERVATIONS"
+      ],
+      "reference_answer": "6.8 pH",
+      "query_id": "q056"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2014-09-27?",
+      "relevant_chunk_ids": [
+        "Deandre599_Schaefer657_da4b4fc8-dfaf-8f6b-185d-09de4773d66e129::PROCEDURES"
+      ],
+      "reference_answer": "Renal dialysis",
+      "query_id": "q057"
+    },
+    {
+      "query": "What imaging study was performed on this patient on 2025-10-10?",
+      "relevant_chunk_ids": [
+        "Rhett759_Ortiz186_339266bf-2f47-d69b-d18f-65768f03693f28::IMAGING STUDIES"
+      ],
+      "reference_answer": "Digital Radiography, Structure of region of internal part of mouth",
+      "query_id": "q058"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Giuseppina753_Nilda678_Williamson769_5e221f78-cc47-8227-23b0-329b65717e5d45::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q059"
+    },
+    {
+      "query": "What medication was prescribed to this patient on 2021-10-15?",
+      "relevant_chunk_ids": [
+        "Teisha100_Miriam769_Medhurst46_9a7d5199-e80c-be1b-40bb-60a9e2a17c8325::MEDICATIONS"
+      ],
+      "reference_answer": "60 ACTUAT Fluticasone propionate 0.25 MG/ACTUAT / salmeterol 0.05 MG/ACTUAT Dry Powder Inhaler",
+      "query_id": "q060"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2020-04-21?",
+      "relevant_chunk_ids": [
+        "Deandre599_Schaefer657_da4b4fc8-dfaf-8f6b-185d-09de4773d66e658::PROCEDURES"
+      ],
+      "reference_answer": "Renal dialysis",
+      "query_id": "q061"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Ricki338_Candi549_Wisozk929_2d8a9b0c-e5fe-de08-e899-f5352471144964::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q062"
+    },
+    {
+      "query": "What was this patient's Tobacco smoking status recorded on 2022-08-27?",
+      "relevant_chunk_ids": [
+        "Colene948_Wisoky380_97aa01dd-4e9c-08b5-7fa1-766c153270d01::OBSERVATIONS"
+      ],
+      "reference_answer": "Never smoked tobacco",
+      "query_id": "q063"
+    },
+    {
+      "query": "What was this patient's Tobacco smoking status recorded on 2016-12-12?",
+      "relevant_chunk_ids": [
+        "Wilfredo622_Haley279_39a1a3e5-9dca-25f2-8d3c-ef66507576071::OBSERVATIONS"
+      ],
+      "reference_answer": "Never smoked tobacco",
+      "query_id": "q064"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Marilynn608_Ena816_Medhurst46_6e81e2d0-7e32-2684-9d55-2e940c517c3b100::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q065"
+    },
+    {
+      "query": "What report was generated for this patient on 2021-04-20?",
+      "relevant_chunk_ids": [
+        "Simon598_Rau926_f25f8417-467a-d6f2-eb78-d3b29bba30eb149::REPORTS"
+      ],
+      "reference_answer": "Basic metabolic 2000 panel - Serum or Plasma",
+      "query_id": "q066"
+    },
+    {
+      "query": "What procedure was performed on this patient on 1991-12-06?",
+      "relevant_chunk_ids": [
+        "Evan94_Gislason620_21239c4b-ca83-121c-6172-9d65242e9aa4234::PROCEDURES"
+      ],
+      "reference_answer": "Renal dialysis",
+      "query_id": "q067"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Logan497_Rutherford999_f1da9e89-c91c-80cf-4117-699530d555ba276::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q068"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Leigh689_Kerluke267_2aa6ef08-1efc-31ce-b132-7378c7adcff819::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q069"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2026-06-24?",
+      "relevant_chunk_ids": [
+        "Jamie386_Kenneth671_Dicki44_bcf4081b-67bf-84e7-3e6c-f507a728811881::PROCEDURES"
+      ],
+      "reference_answer": "Oral health education",
+      "query_id": "q070"
+    },
+    {
+      "query": "What medication was prescribed to this patient on 2018-03-07?",
+      "relevant_chunk_ids": [
+        "Thomasena108_Thiel172_7fa627d1-51bf-9bf8-bedf-74e3da7adf7e6::MEDICATIONS"
+      ],
+      "reference_answer": "{28 (norethindrone 0.35 MG Oral Tablet) } Pack [Jolivette 28 Day]",
+      "query_id": "q071"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Thomasena108_Thiel172_7fa627d1-51bf-9bf8-bedf-74e3da7adf7e5::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q072"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Nichelle912_Denice974_Morar593_0d95c9bd-4f5c-9c9a-4ed9-b62dee87be9b35::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q073"
+    },
+    {
+      "query": "What medication was prescribed to this patient on 2016-04-09?",
+      "relevant_chunk_ids": [
+        "Deandre599_Schaefer657_da4b4fc8-dfaf-8f6b-185d-09de4773d66e306::MEDICATIONS"
+      ],
+      "reference_answer": "1 ML Epoetin Alfa 4000 UNT/ML Injection [Epogen]",
+      "query_id": "q074"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Deandra603_Ledner144_d38aec93-fcd1-c3fb-ed0b-9c20845ecef09::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q075"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Jessi630_Botsford977_980e1886-3e94-20ec-4ac1-9a4ac1e3468131::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q076"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Elidia194_Freeda113_Towne435_1797a545-527e-cd94-fb72-9974beb54c0f61::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q077"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2017-11-29?",
+      "relevant_chunk_ids": [
+        "Emory494_Kutch271_a55d0489-9afb-6c44-2aa0-b215e856e39d7::PROCEDURES"
+      ],
+      "reference_answer": "Medication reconciliation",
+      "query_id": "q078"
+    },
+    {
+      "query": "What condition was diagnosed for this patient on 2021-07-18?",
+      "relevant_chunk_ids": [
+        "Kendrick479_Bode78_d1c89438-2643-430d-3195-7e2b87d406df19::CONDITIONS"
+      ],
+      "reference_answer": "Ischemic heart disease",
+      "query_id": "q079"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2021-07-04?",
+      "relevant_chunk_ids": [
+        "Lyman173_O'Conner199_4e5d90de-2a23-c2bc-1fa9-216afb8b792a9::PROCEDURES"
+      ],
+      "reference_answer": "Patient referral",
+      "query_id": "q080"
+    },
+    {
+      "query": "What medication was prescribed to this patient on 2022-07-26?",
+      "relevant_chunk_ids": [
+        "Simon598_Rau926_f25f8417-467a-d6f2-eb78-d3b29bba30eb195::MEDICATIONS"
+      ],
+      "reference_answer": "12 HR Hydrocodone Bitartrate 10 MG Extended Release Oral Capsule",
+      "query_id": "q081"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Valery629_Hyon784_McGlynn426_9faa3ebc-2573-8138-0a4b-62e3211f69f236::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q082"
+    },
+    {
+      "query": "What medication was prescribed to this patient on 2024-05-15?",
+      "relevant_chunk_ids": [
+        "Roberto515_Hoppe518_89021748-52ba-74b9-7f62-f7a11cec3c2152::MEDICATIONS"
+      ],
+      "reference_answer": "amLODIPine 2.5 MG Oral Tablet",
+      "query_id": "q083"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Deandre599_Schaefer657_da4b4fc8-dfaf-8f6b-185d-09de4773d66e230::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q084"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Nakita746_Emely698_Schowalter414_c712dca9-05c8-5b6b-9df5-08a742fdfecf345::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q085"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Deandre599_Schaefer657_da4b4fc8-dfaf-8f6b-185d-09de4773d66e449::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q086"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2022-07-21?",
+      "relevant_chunk_ids": [
+        "Brady998_Wiza601_6ac5ce25-7552-ebdd-fd93-4021806c52e29::PROCEDURES"
+      ],
+      "reference_answer": "Measurement of respiratory function",
+      "query_id": "q087"
+    },
+    {
+      "query": "What procedure was performed on this patient on 1991-09-13?",
+      "relevant_chunk_ids": [
+        "Evan94_Gislason620_21239c4b-ca83-121c-6172-9d65242e9aa4204::PROCEDURES"
+      ],
+      "reference_answer": "Renal dialysis",
+      "query_id": "q088"
+    },
+    {
+      "query": "What medication was prescribed to this patient on 2017-06-28?",
+      "relevant_chunk_ids": [
+        "Ricki338_Candi549_Wisozk929_2d8a9b0c-e5fe-de08-e899-f5352471144979::MEDICATIONS"
+      ],
+      "reference_answer": "sodium fluoride 0.0272 MG/MG Oral Gel",
+      "query_id": "q089"
+    },
+    {
+      "query": "What condition was diagnosed for this patient on 2020-07-09?",
+      "relevant_chunk_ids": [
+        "Elliot577_Schamberger479_a4ddfb5c-b18f-ca63-4cda-9101e14b22b943::CONDITIONS"
+      ],
+      "reference_answer": "Gingivitis",
+      "query_id": "q090"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Deandre599_Schaefer657_da4b4fc8-dfaf-8f6b-185d-09de4773d66e413::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q091"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2010-08-09?",
+      "relevant_chunk_ids": [
+        "Minh326_Erdman779_80b0c69f-01f8-d9ac-f678-49b19ab0dac7111::PROCEDURES"
+      ],
+      "reference_answer": "Renal dialysis",
+      "query_id": "q092"
+    },
+    {
+      "query": "What condition was diagnosed for this patient on 2025-06-06?",
+      "relevant_chunk_ids": [
+        "Leann224_Shavon903_Harris789_bd0cbefa-8be3-2c15-1d6e-d80901aa30aa41::CONDITIONS"
+      ],
+      "reference_answer": "Viral sinusitis",
+      "query_id": "q093"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Norma469_Caldera106_ecd1cdf6-ccfa-6ead-9ffb-8e31b6e0394e3::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q094"
+    },
+    {
+      "query": "What report was generated for this patient on 1990-06-19?",
+      "relevant_chunk_ids": [
+        "Evan94_Gislason620_21239c4b-ca83-121c-6172-9d65242e9aa450::REPORTS"
+      ],
+      "reference_answer": "Comprehensive metabolic 2000 panel - Serum or Plasma",
+      "query_id": "q095"
+    },
+    {
+      "query": "What medication was prescribed to this patient on 2018-04-21?",
+      "relevant_chunk_ids": [
+        "Logan497_Rutherford999_f1da9e89-c91c-80cf-4117-699530d555ba225::MEDICATIONS"
+      ],
+      "reference_answer": "1 ML Epoetin Alfa 4000 UNT/ML Injection [Epogen]",
+      "query_id": "q096"
+    },
+    {
+      "query": "What report was generated for this patient on 2026-07-25?",
+      "relevant_chunk_ids": [
+        "Nicholas495_Boehm581_9018f445-501b-c6ba-d6d9-cbee6095e8e631::REPORTS"
+      ],
+      "reference_answer": "Heart failure tracking panel",
+      "query_id": "q097"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Minh326_Erdman779_80b0c69f-01f8-d9ac-f678-49b19ab0dac7520::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q098"
+    },
+    {
+      "query": "What imaging study was performed on this patient on 2013-07-10?",
+      "relevant_chunk_ids": [
+        "Deandre599_Schaefer657_da4b4fc8-dfaf-8f6b-185d-09de4773d66e47::IMAGING STUDIES"
+      ],
+      "reference_answer": "Digital Radiography, Structure of region of internal part of mouth",
+      "query_id": "q099"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Alonzo487_Christiansen251_3e5b69d8-b0df-aeb0-4a5a-a02c508f953f50::ALLERGIES"
+      ],
+      "reference_answer": "2011-01-02 : Fish (substance)\n  2011-01-02 : Cow's milk (substance)\n  2011-01-02 : Lisinopril\n  2011-01-02 : Tree pollen (substance)\n  2011-01-02 : Grass pollen (substance)\n  2011-01-02 : Animal dander (substance)\n  2011-01-02 : House dust mite (organism)\n  2011-01-02 : Mold (organism)\n  2011-01-02 : Latex (substance)\n  2011-01-02 : Allergic disposition (finding)",
+      "query_id": "q100"
+    },
+    {
+      "query": "What medication was prescribed to this patient on 2016-11-21?",
+      "relevant_chunk_ids": [
+        "Gilberto712_Peralta301_4b0bc55b-a7e8-99d8-580d-5b4e526fe31a4::MEDICATIONS"
+      ],
+      "reference_answer": "Ibuprofen 200 MG Oral Tablet",
+      "query_id": "q101"
+    },
+    {
+      "query": "What condition was diagnosed for this patient on 2016-02-02?",
+      "relevant_chunk_ids": [
+        "Estrella224_Sporer811_658973ab-c7c0-3266-209a-f1bd077b922843::CONDITIONS"
+      ],
+      "reference_answer": "Viral sinusitis",
+      "query_id": "q102"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Elidia194_Freeda113_Towne435_1797a545-527e-cd94-fb72-9974beb54c0f32::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q103"
+    },
+    {
+      "query": "What was this patient's Body temperature recorded on 1992-10-27?",
+      "relevant_chunk_ids": [
+        "Ron353_Muller251_4a65cd4b-e216-db81-88e1-d58c8e6db3b87::OBSERVATIONS"
+      ],
+      "reference_answer": "38.3 Cel",
+      "query_id": "q104"
+    },
+    {
+      "query": "What medication was prescribed to this patient on 2023-12-26?",
+      "relevant_chunk_ids": [
+        "Irvin970_Effertz744_da754661-8aba-8b6d-dab5-c5f19949befd144::MEDICATIONS"
+      ],
+      "reference_answer": "1 ML Epoetin Alfa 4000 UNT/ML Injection [Epogen]",
+      "query_id": "q105"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2025-04-23?",
+      "relevant_chunk_ids": [
+        "Margarita164_Navarrete760_32c51e29-d9c2-7c10-7f8f-d7c07e3beaab34::PROCEDURES"
+      ],
+      "reference_answer": "Human parturition, function",
+      "query_id": "q106"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Ariadna374_Emilia403_Delvalle807_962bfe25-6a1a-72df-62a3-dfc29109fcd5140::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q107"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2016-07-27?",
+      "relevant_chunk_ids": [
+        "Deandre599_Schaefer657_da4b4fc8-dfaf-8f6b-185d-09de4773d66e336::PROCEDURES"
+      ],
+      "reference_answer": "Oral health education",
+      "query_id": "q108"
+    },
+    {
+      "query": "What medication was prescribed to this patient on 2017-02-23?",
+      "relevant_chunk_ids": [
+        "Irvin970_Effertz744_da754661-8aba-8b6d-dab5-c5f19949befd26::MEDICATIONS"
+      ],
+      "reference_answer": "amLODIPine 2.5 MG Oral Tablet",
+      "query_id": "q109"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Leon728_Hayes766_e80a4d44-0336-81ba-53b8-ce4eb72e3417309::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q110"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Leon728_Hayes766_e80a4d44-0336-81ba-53b8-ce4eb72e3417520::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q111"
+    },
+    {
+      "query": "What immunization did this patient receive on 2022-01-19?",
+      "relevant_chunk_ids": [
+        "Ahmad985_Boyer713_f8f269ab-c623-5e65-fbeb-f8004ddd10eb24::IMMUNIZATIONS"
+      ],
+      "reference_answer": "Influenza, split virus, trivalent, PF",
+      "query_id": "q112"
+    },
+    {
+      "query": "What medication was prescribed to this patient on 1990-08-08?",
+      "relevant_chunk_ids": [
+        "Evan94_Gislason620_21239c4b-ca83-121c-6172-9d65242e9aa467::MEDICATIONS"
+      ],
+      "reference_answer": "1 ML Epoetin Alfa 4000 UNT/ML Injection [Epogen]",
+      "query_id": "q113"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2026-04-11?",
+      "relevant_chunk_ids": [
+        "Irvin970_Effertz744_da754661-8aba-8b6d-dab5-c5f19949befd418::PROCEDURES"
+      ],
+      "reference_answer": "Renal dialysis",
+      "query_id": "q114"
+    },
+    {
+      "query": "What medication was prescribed to this patient on 2021-02-08?",
+      "relevant_chunk_ids": [
+        "Wilfredo622_Haley279_39a1a3e5-9dca-25f2-8d3c-ef665075760712::MEDICATIONS"
+      ],
+      "reference_answer": "Acetaminophen 21.7 MG/ML / Dextromethorphan Hydrobromide 1 MG/ML / doxylamine succinate 0.417 MG/ML Oral Solution",
+      "query_id": "q115"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Deandre599_Schaefer657_da4b4fc8-dfaf-8f6b-185d-09de4773d66e207::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q116"
+    },
+    {
+      "query": "What medication was prescribed to this patient on 2018-11-15?",
+      "relevant_chunk_ids": [
+        "Marlys304_Leffler128_a8497746-01eb-158a-d12b-884184df931c335::MEDICATIONS"
+      ],
+      "reference_answer": "1 ML Epoetin Alfa 4000 UNT/ML Injection [Epogen]",
+      "query_id": "q117"
+    },
+    {
+      "query": "What was this patient's Body temperature recorded on 2021-09-01?",
+      "relevant_chunk_ids": [
+        "Andrew29_Stiedemann542_bc40b26b-9e7a-cf1c-bd8f-eb12d429b10423::OBSERVATIONS"
+      ],
+      "reference_answer": "37.6 Cel",
+      "query_id": "q118"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Peg114_Treutel973_5dd5b185-a16f-c03b-94fe-82f38d7db3f335::ALLERGIES"
+      ],
+      "reference_answer": "2001-05-03 : Peanut (substance)\n  2001-05-03 : Allergic disposition (finding)",
+      "query_id": "q119"
+    },
+    {
+      "query": "What immunization did this patient receive on 2025-08-19?",
+      "relevant_chunk_ids": [
+        "Saul605_O'Keefe54_b4a7f00d-04f0-eb2f-fdeb-c7f356f96a7657::IMMUNIZATIONS"
+      ],
+      "reference_answer": "Influenza, split virus, trivalent, PF",
+      "query_id": "q120"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Harold594_Schmitt836_5086a3b6-302a-b48c-24ad-d99d73e0ba6723::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q121"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2021-09-06?",
+      "relevant_chunk_ids": [
+        "Mitchel812_Casper496_a08407d6-0af0-437c-b41a-25585a6e3d3420::PROCEDURES"
+      ],
+      "reference_answer": "Oral health education",
+      "query_id": "q122"
+    },
+    {
+      "query": "What immunization did this patient receive on 2019-02-04?",
+      "relevant_chunk_ids": [
+        "Mel236_McGlynn426_7ea86e31-5349-9939-5b3a-edbf9b33586430::IMMUNIZATIONS"
+      ],
+      "reference_answer": "Influenza, split virus, trivalent, PF",
+      "query_id": "q123"
+    },
+    {
+      "query": "What medication was prescribed to this patient on 2015-03-26?",
+      "relevant_chunk_ids": [
+        "Deandre599_Schaefer657_da4b4fc8-dfaf-8f6b-185d-09de4773d66e187::MEDICATIONS"
+      ],
+      "reference_answer": "1 ML Epoetin Alfa 4000 UNT/ML Injection [Epogen]",
+      "query_id": "q124"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2025-11-21?",
+      "relevant_chunk_ids": [
+        "Olevia458_Corey514_Zemlak964_42fe0714-7026-3512-66a5-1a26703cd65438::PROCEDURES"
+      ],
+      "reference_answer": "Oral health education",
+      "query_id": "q125"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Logan497_Rutherford999_f1da9e89-c91c-80cf-4117-699530d555ba281::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q126"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Elois418_Leo278_Shanahan202_78dc0a62-23f7-1d07-49cd-9de05c13e7b4136::ALLERGIES"
+      ],
+      "reference_answer": "1924-01-13 : Wheat (substance)\n  1924-01-13 : Aspirin\n  1924-01-13 : Allergic disposition (finding)",
+      "query_id": "q127"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Marlys304_Leffler128_a8497746-01eb-158a-d12b-884184df931c48::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q128"
+    },
+    {
+      "query": "What immunization did this patient receive on 2023-05-10?",
+      "relevant_chunk_ids": [
+        "Barry322_Donnelly343_413a6ad2-6137-b34d-46ac-fb9b8617170818::IMMUNIZATIONS"
+      ],
+      "reference_answer": "Influenza, split virus, trivalent, PF",
+      "query_id": "q129"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2025-12-06?",
+      "relevant_chunk_ids": [
+        "Reba58_Annmarie79_Lehner980_d444d6a9-814d-6ffd-09e0-157a1eaeaf1362::PROCEDURES"
+      ],
+      "reference_answer": "Oral health education",
+      "query_id": "q130"
+    },
+    {
+      "query": "What imaging study was performed on this patient on 2024-04-29?",
+      "relevant_chunk_ids": [
+        "Marilynn608_Ena816_Medhurst46_6e81e2d0-7e32-2684-9d55-2e940c517c3b57::IMAGING STUDIES"
+      ],
+      "reference_answer": "Digital Radiography, Structure of region of internal part of mouth",
+      "query_id": "q131"
+    },
+    {
+      "query": "What report was generated for this patient on 2017-02-20?",
+      "relevant_chunk_ids": [
+        "Nakita746_Emely698_Schowalter414_c712dca9-05c8-5b6b-9df5-08a742fdfecf644::REPORTS"
+      ],
+      "reference_answer": "Basic Metabolic Panel - Blood",
+      "query_id": "q132"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2020-01-22?",
+      "relevant_chunk_ids": [
+        "Sanford861_Cremin516_739b1d88-8f33-1d38-6f23-58cbac27c48e128::PROCEDURES"
+      ],
+      "reference_answer": "Renal dialysis",
+      "query_id": "q133"
+    },
+    {
+      "query": "What was this patient's pH of Urine by Test strip recorded on 2017-04-14?",
+      "relevant_chunk_ids": [
+        "Logan497_Rutherford999_f1da9e89-c91c-80cf-4117-699530d555ba102::OBSERVATIONS"
+      ],
+      "reference_answer": "5.7 pH",
+      "query_id": "q134"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Randa356_Grady603_3d819a86-1cec-3761-0785-b585a2e0b08440::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q135"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2014-05-05?",
+      "relevant_chunk_ids": [
+        "Deandre599_Schaefer657_da4b4fc8-dfaf-8f6b-185d-09de4773d66e84::PROCEDURES"
+      ],
+      "reference_answer": "Renal dialysis",
+      "query_id": "q136"
+    },
+    {
+      "query": "What condition was diagnosed for this patient on 2018-03-06?",
+      "relevant_chunk_ids": [
+        "Stephan15_Orn563_b7c3e343-acbf-b17a-f7e2-5981207b37a113::CONDITIONS"
+      ],
+      "reference_answer": "Gingivitis",
+      "query_id": "q137"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Nichelle912_Denice974_Morar593_0d95c9bd-4f5c-9c9a-4ed9-b62dee87be9b18::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q138"
+    },
+    {
+      "query": "What medication was prescribed to this patient on 2023-12-15?",
+      "relevant_chunk_ids": [
+        "Christa452_Schamberger479_4922127f-1c26-0c42-a3c9-ee3a67d5334769::MEDICATIONS"
+      ],
+      "reference_answer": "Amoxicillin 250 MG / Clavulanate 125 MG Oral Tablet",
+      "query_id": "q139"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2017-02-28?",
+      "relevant_chunk_ids": [
+        "Devin82_Stiedemann542_3ae7ff72-a505-c0f9-3a47-5391e0fc813b12::PROCEDURES"
+      ],
+      "reference_answer": "Oral health education",
+      "query_id": "q140"
+    },
+    {
+      "query": "What medication was prescribed to this patient on 2015-11-22?",
+      "relevant_chunk_ids": [
+        "Kazuko67_Cara845_Berge125_62857b98-8ab5-fa37-fee5-192654fef9aa8::MEDICATIONS"
+      ],
+      "reference_answer": "amLODIPine 2.5 MG Oral Tablet",
+      "query_id": "q141"
+    },
+    {
+      "query": "What medication was prescribed to this patient on 1989-03-19?",
+      "relevant_chunk_ids": [
+        "Elois418_Leo278_Shanahan202_78dc0a62-23f7-1d07-49cd-9de05c13e7b4218::MEDICATIONS"
+      ],
+      "reference_answer": "1 ML Epoetin Alfa 4000 UNT/ML Injection [Epogen]",
+      "query_id": "q142"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Sandy901_Schiller186_ad65e39e-84e6-00ce-bc91-c31a29debd0511::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q143"
+    },
+    {
+      "query": "What condition was diagnosed for this patient on 2017-09-05?",
+      "relevant_chunk_ids": [
+        "Alfred550_Veum823_b09a5b43-84f6-a395-35e2-e408c6a9b00336::CONDITIONS"
+      ],
+      "reference_answer": "Acute bronchitis",
+      "query_id": "q144"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2011-09-04?",
+      "relevant_chunk_ids": [
+        "Minh326_Erdman779_80b0c69f-01f8-d9ac-f678-49b19ab0dac7246::PROCEDURES"
+      ],
+      "reference_answer": "Renal dialysis",
+      "query_id": "q145"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Elidia194_Freeda113_Towne435_1797a545-527e-cd94-fb72-9974beb54c0f68::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q146"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2013-01-23?",
+      "relevant_chunk_ids": [
+        "Nakita746_Emely698_Schowalter414_c712dca9-05c8-5b6b-9df5-08a742fdfecf180::PROCEDURES"
+      ],
+      "reference_answer": "Renal dialysis",
+      "query_id": "q147"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Evelyn437_Darcel357_Parker433_df07a6c9-691a-9e1a-a031-417c473f63f810::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q148"
+    },
+    {
+      "query": "What report was generated for this patient on 2024-06-17?",
+      "relevant_chunk_ids": [
+        "Elinor7_Sporer811_9c09dcde-29d1-e471-1344-a3f546aa046617::REPORTS"
+      ],
+      "reference_answer": "Generalized anxiety disorder 7 item",
+      "query_id": "q149"
+    },
+    {
+      "query": "What medication was prescribed to this patient on 2017-01-10?",
+      "relevant_chunk_ids": [
+        "Simon598_Rau926_f25f8417-467a-d6f2-eb78-d3b29bba30eb25::MEDICATIONS"
+      ],
+      "reference_answer": "12 HR Hydrocodone Bitartrate 10 MG Extended Release Oral Capsule",
+      "query_id": "q150"
+    },
+    {
+      "query": "What report was generated for this patient on 2024-11-18?",
+      "relevant_chunk_ids": [
+        "Francesco636_Ratke343_95d957f1-b5c1-fac2-0590-95e42375431b36::REPORTS"
+      ],
+      "reference_answer": "Basic metabolic panel - Blood",
+      "query_id": "q151"
+    },
+    {
+      "query": "What report was generated for this patient on 2014-01-13?",
+      "relevant_chunk_ids": [
+        "Nakita746_Emely698_Schowalter414_c712dca9-05c8-5b6b-9df5-08a742fdfecf297::REPORTS"
+      ],
+      "reference_answer": "Basic metabolic 2000 panel - Serum or Plasma",
+      "query_id": "q152"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2022-06-01?",
+      "relevant_chunk_ids": [
+        "Thomasena108_Thiel172_7fa627d1-51bf-9bf8-bedf-74e3da7adf7e20::PROCEDURES"
+      ],
+      "reference_answer": "Patient referral",
+      "query_id": "q153"
+    },
+    {
+      "query": "What was this patient's Tobacco smoking status recorded on 2025-04-15?",
+      "relevant_chunk_ids": [
+        "Stephan15_Orn563_b7c3e343-acbf-b17a-f7e2-5981207b37a124::OBSERVATIONS"
+      ],
+      "reference_answer": "Never smoked tobacco",
+      "query_id": "q154"
+    },
+    {
+      "query": "What was this patient's Total score [DAST-10] recorded on 2024-06-26?",
+      "relevant_chunk_ids": [
+        "Graciela518_Guti\u00e9rrez115_b85308e1-fa3d-cfe9-1fa7-8760e5aa7c8725::OBSERVATIONS"
+      ],
+      "reference_answer": "2.0 {score}",
+      "query_id": "q155"
+    },
+    {
+      "query": "What was this patient's Tobacco smoking status recorded on 2021-02-23?",
+      "relevant_chunk_ids": [
+        "Marlys304_Leffler128_a8497746-01eb-158a-d12b-884184df931c509::OBSERVATIONS"
+      ],
+      "reference_answer": "Never smoked tobacco",
+      "query_id": "q156"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2017-02-10?",
+      "relevant_chunk_ids": [
+        "Keesha623_Lehner980_f758c5a7-9dd6-e89f-7f7f-eab7a4edc9147::PROCEDURES"
+      ],
+      "reference_answer": "Anticipatory guidance",
+      "query_id": "q157"
+    },
+    {
+      "query": "What was this patient's Total score [AUDIT-C] recorded on 2018-12-19?",
+      "relevant_chunk_ids": [
+        "Elidia194_Freeda113_Towne435_1797a545-527e-cd94-fb72-9974beb54c0f14::OBSERVATIONS"
+      ],
+      "reference_answer": "1.0 {score}",
+      "query_id": "q158"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2021-03-27?",
+      "relevant_chunk_ids": [
+        "Ginny287_Jessica140_Thiel172_bb35b717-48d5-bcb9-8eec-669d6f07230937::PROCEDURES"
+      ],
+      "reference_answer": "Screening",
+      "query_id": "q159"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2014-08-18?",
+      "relevant_chunk_ids": [
+        "Ricki338_Candi549_Wisozk929_2d8a9b0c-e5fe-de08-e899-f5352471144947::PROCEDURES"
+      ],
+      "reference_answer": "Rehabilitation therapy",
+      "query_id": "q160"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2020-03-05?",
+      "relevant_chunk_ids": [
+        "Honey275_Valerie954_Mayer370_8a951e70-8253-53da-8c8c-63acd8d5d64111::PROCEDURES"
+      ],
+      "reference_answer": "Patient referral",
+      "query_id": "q161"
+    },
+    {
+      "query": "What report was generated for this patient on 2025-05-07?",
+      "relevant_chunk_ids": [
+        "Karly825_Deirdre267_Leuschke194_edce58d2-ca20-6982-ce9d-d0f7efc07e4418::REPORTS"
+      ],
+      "reference_answer": "Basic metabolic panel - Blood",
+      "query_id": "q162"
+    },
+    {
+      "query": "What was this patient's Total score [DAST-10] recorded on 2022-09-12?",
+      "relevant_chunk_ids": [
+        "Marya246_Carlee848_Leannon79_ba216d7b-5883-e3ed-ca70-8a1022bead9a27::OBSERVATIONS"
+      ],
+      "reference_answer": "1.0 {score}",
+      "query_id": "q163"
+    },
+    {
+      "query": "What report was generated for this patient on 2003-02-10?",
+      "relevant_chunk_ids": [
+        "Ariel183_Denesik803_d95035b7-4bda-6d1d-5cab-9866afe96b1e40::REPORTS"
+      ],
+      "reference_answer": "Basic metabolic 2000 panel - Serum or Plasma",
+      "query_id": "q164"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2017-04-20?",
+      "relevant_chunk_ids": [
+        "Miquel905_Towne435_34096f00-efee-9c46-3aeb-612a3518100711::PROCEDURES"
+      ],
+      "reference_answer": "Screening",
+      "query_id": "q165"
+    },
+    {
+      "query": "What report was generated for this patient on 2023-10-02?",
+      "relevant_chunk_ids": [
+        "Micheal721_Kuhic920_ad7843f3-53ed-3bb3-6f30-a1ba4bcb241250::REPORTS"
+      ],
+      "reference_answer": "Basic metabolic 2000 panel - Serum or Plasma",
+      "query_id": "q166"
+    },
+    {
+      "query": "What report was generated for this patient on 2021-11-24?",
+      "relevant_chunk_ids": [
+        "Alissa315_Wiegand701_e3b60e6a-e0b1-6e9c-fea5-8623110d25c515::REPORTS"
+      ],
+      "reference_answer": "Basic metabolic panel - Blood",
+      "query_id": "q167"
+    },
+    {
+      "query": "What was this patient's Tobacco smoking status recorded on 2019-01-28?",
+      "relevant_chunk_ids": [
+        "Russell422_Moen819_d9343cb8-5568-a2d1-0fb0-402628fadf2c6::OBSERVATIONS"
+      ],
+      "reference_answer": "Never smoked tobacco",
+      "query_id": "q168"
+    },
+    {
+      "query": "What was this patient's Total score [AUDIT-C] recorded on 2014-01-01?",
+      "relevant_chunk_ids": [
+        "Modesto621_Wyman904_be1eff7a-af74-067d-f6ae-0580acb501b2396::OBSERVATIONS"
+      ],
+      "reference_answer": "0.0 {score}",
+      "query_id": "q169"
+    },
+    {
+      "query": "What report was generated for this patient on 2024-01-23?",
+      "relevant_chunk_ids": [
+        "Evelina828_Nicolas769_db0308d1-b9d6-a485-90ae-59c8da18052644::REPORTS"
+      ],
+      "reference_answer": "CBC panel - Blood by Automated count",
+      "query_id": "q170"
+    },
+    {
+      "query": "What condition was diagnosed for this patient on 2024-01-17?",
+      "relevant_chunk_ids": [
+        "Elidia194_Freeda113_Towne435_1797a545-527e-cd94-fb72-9974beb54c0f54::CONDITIONS"
+      ],
+      "reference_answer": "Gingivitis",
+      "query_id": "q171"
+    },
+    {
+      "query": "What was this patient's Tobacco smoking status recorded on 2012-07-15?",
+      "relevant_chunk_ids": [
+        "Leon728_Hayes766_e80a4d44-0336-81ba-53b8-ce4eb72e3417440::OBSERVATIONS"
+      ],
+      "reference_answer": "Never smoked tobacco",
+      "query_id": "q172"
+    },
+    {
+      "query": "What was this patient's Fall risk level [Morse Fall Scale] recorded on 2016-12-14?",
+      "relevant_chunk_ids": [
+        "Deandre599_Schaefer657_da4b4fc8-dfaf-8f6b-185d-09de4773d66e365::OBSERVATIONS"
+      ],
+      "reference_answer": "Moderate Risk",
+      "query_id": "q173"
+    },
+    {
+      "query": "What was this patient's Total score [AUDIT-C] recorded on 2023-06-01?",
+      "relevant_chunk_ids": [
+        "Miguel815_Garibay313_15853caf-0b76-e93e-3622-919b1db11afb19::OBSERVATIONS"
+      ],
+      "reference_answer": "2.0 {score}",
+      "query_id": "q174"
+    },
+    {
+      "query": "What report was generated for this patient on 2021-11-13?",
+      "relevant_chunk_ids": [
+        "Buck819_Hodkiewicz467_7da0aa81-deab-a6ed-4e26-a47d2bff97ee59::REPORTS"
+      ],
+      "reference_answer": "Basic metabolic panel - Blood",
+      "query_id": "q175"
+    },
+    {
+      "query": "What was this patient's Total score [AUDIT-C] recorded on 2018-04-03?",
+      "relevant_chunk_ids": [
+        "Evelina828_Nicolas769_db0308d1-b9d6-a485-90ae-59c8da1805269::OBSERVATIONS"
+      ],
+      "reference_answer": "1.0 {score}",
+      "query_id": "q176"
+    },
+    {
+      "query": "What was this patient's Tobacco smoking status recorded on 2026-05-07?",
+      "relevant_chunk_ids": [
+        "Bryce11_Fritsch593_0399a7b6-c4f5-a8d3-761e-dcd03bd6e24514::OBSERVATIONS"
+      ],
+      "reference_answer": "Ex-smoker",
+      "query_id": "q177"
+    },
+    {
+      "query": "What was this patient's Total score [DAST-10] recorded on 2020-04-10?",
+      "relevant_chunk_ids": [
+        "Tyron580_Nolan344_f356854f-e996-7b7b-e646-97f779aef4cc16::OBSERVATIONS"
+      ],
+      "reference_answer": "1.0 {score}",
+      "query_id": "q178"
+    },
+    {
+      "query": "What was this patient's Tobacco smoking status recorded on 2023-02-28?",
+      "relevant_chunk_ids": [
+        "Simon598_Rau926_f25f8417-467a-d6f2-eb78-d3b29bba30eb213::OBSERVATIONS"
+      ],
+      "reference_answer": "Never smoked tobacco",
+      "query_id": "q179"
+    },
+    {
+      "query": "What report was generated for this patient on 2026-06-21?",
+      "relevant_chunk_ids": [
+        "Octavio643_McCullough561_ccace179-bb32-03b7-247e-b86b76461bfd24::REPORTS"
+      ],
+      "reference_answer": "Basic metabolic panel - Blood",
+      "query_id": "q180"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2023-08-19?",
+      "relevant_chunk_ids": [
+        "Sanford861_Cremin516_739b1d88-8f33-1d38-6f23-58cbac27c48e552::PROCEDURES"
+      ],
+      "reference_answer": "Renal dialysis",
+      "query_id": "q181"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2020-03-20?",
+      "relevant_chunk_ids": [
+        "Lorenzo669_Russel238_b6fad660-ac02-578a-6b00-aad39e81eca613::PROCEDURES"
+      ],
+      "reference_answer": "Depression screening",
+      "query_id": "q182"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Evan94_Gislason620_21239c4b-ca83-121c-6172-9d65242e9aa4253::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q183"
+    },
+    {
+      "query": "What condition was diagnosed for this patient on 2024-04-20?",
+      "relevant_chunk_ids": [
+        "Werner409_O'Keefe54_777563aa-b7a9-b5ac-4d7e-817583038e6c28::CONDITIONS"
+      ],
+      "reference_answer": "Chronic sinusitis",
+      "query_id": "q184"
+    },
+    {
+      "query": "What medication was prescribed to this patient on 2022-07-24?",
+      "relevant_chunk_ids": [
+        "Kendrick479_Bode78_d1c89438-2643-430d-3195-7e2b87d406df23::MEDICATIONS"
+      ],
+      "reference_answer": "Acetaminophen 325 MG Oral Tablet [Tylenol]",
+      "query_id": "q185"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Modesto621_Wyman904_be1eff7a-af74-067d-f6ae-0580acb501b2372::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q186"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Logan497_Rutherford999_f1da9e89-c91c-80cf-4117-699530d555ba17::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q187"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Logan497_Rutherford999_f1da9e89-c91c-80cf-4117-699530d555ba50::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q188"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Sanford861_Cremin516_739b1d88-8f33-1d38-6f23-58cbac27c48e156::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q189"
+    },
+    {
+      "query": "What immunization did this patient receive on 2025-05-08?",
+      "relevant_chunk_ids": [
+        "Jone716_Hayes766_98f64d27-ce16-08fe-afb9-6b709dc903e914::IMMUNIZATIONS"
+      ],
+      "reference_answer": "Hep A, ped/adol, 2 dose",
+      "query_id": "q190"
+    },
+    {
+      "query": "What immunization did this patient receive on 2021-05-24?",
+      "relevant_chunk_ids": [
+        "Mira443_Veum823_064265d7-8b4b-6127-cc9c-9b6544ffd50f12::IMMUNIZATIONS"
+      ],
+      "reference_answer": "COVID-19, mRNA, LNP-S, PF, 100 mcg/0.5mL dose or 50 mcg/0.25mL dose",
+      "query_id": "q191"
+    },
+    {
+      "query": "What was this patient's Tobacco smoking status recorded on 2016-11-23?",
+      "relevant_chunk_ids": [
+        "Cameron381_Sipes176_04b15508-1adf-a1f3-3b86-6eec8105fc734::OBSERVATIONS"
+      ],
+      "reference_answer": "Never smoked tobacco",
+      "query_id": "q192"
+    },
+    {
+      "query": "What medication was prescribed to this patient on 2012-11-07?",
+      "relevant_chunk_ids": [
+        "Nakita746_Emely698_Schowalter414_c712dca9-05c8-5b6b-9df5-08a742fdfecf156::MEDICATIONS"
+      ],
+      "reference_answer": "1 ML Epoetin Alfa 4000 UNT/ML Injection [Epogen]",
+      "query_id": "q193"
+    },
+    {
+      "query": "What imaging study was performed on this patient on 2018-03-21?",
+      "relevant_chunk_ids": [
+        "Hassan290_Farrell962_b2e655b1-2870-5ab6-086a-0b75f8df4f3c15::IMAGING STUDIES"
+      ],
+      "reference_answer": "Digital Radiography, Structure of region of internal part of mouth",
+      "query_id": "q194"
+    },
+    {
+      "query": "What medication was prescribed to this patient on 2006-11-17?",
+      "relevant_chunk_ids": [
+        "Leigh689_Kerluke267_2aa6ef08-1efc-31ce-b132-7378c7adcff822::MEDICATIONS"
+      ],
+      "reference_answer": "Acetaminophen 325 MG / Oxycodone Hydrochloride 5 MG Oral Tablet",
+      "query_id": "q195"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Valery629_Hyon784_McGlynn426_9faa3ebc-2573-8138-0a4b-62e3211f69f25::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q196"
+    },
+    {
+      "query": "What report was generated for this patient on 2018-10-09?",
+      "relevant_chunk_ids": [
+        "Simon598_Rau926_f25f8417-467a-d6f2-eb78-d3b29bba30eb70::REPORTS"
+      ],
+      "reference_answer": "Basic metabolic 2000 panel - Serum or Plasma",
+      "query_id": "q197"
+    },
+    {
+      "query": "What report was generated for this patient on 2020-03-22?",
+      "relevant_chunk_ids": [
+        "Keshia89_Hermiston71_f599b3c2-be77-b466-895b-aee16a1794ae33::REPORTS"
+      ],
+      "reference_answer": "Basic metabolic panel - Blood",
+      "query_id": "q198"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Irvin970_Effertz744_da754661-8aba-8b6d-dab5-c5f19949befd239::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q199"
+    },
+    {
+      "query": "What report was generated for this patient on 2012-10-24?",
+      "relevant_chunk_ids": [
+        "Deandre599_Schaefer657_da4b4fc8-dfaf-8f6b-185d-09de4773d66e32::REPORTS"
+      ],
+      "reference_answer": "Basic metabolic 2000 panel - Serum or Plasma",
+      "query_id": "q200"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Gabriella773_Shannon293_Schaden604_98a51c8a-f036-ea87-3db1-37854d66af4d74::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q201"
+    },
+    {
+      "query": "What medication was prescribed to this patient on 2026-06-05?",
+      "relevant_chunk_ids": [
+        "Tracey100_Kirlin939_47d34f9a-1665-040f-d532-f44272bbe9a611::MEDICATIONS"
+      ],
+      "reference_answer": "NDA020800 0.3 ML Epinephrine 1 MG/ML Auto-Injector",
+      "query_id": "q202"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Elois418_Leo278_Shanahan202_78dc0a62-23f7-1d07-49cd-9de05c13e7b4126::ALLERGIES"
+      ],
+      "reference_answer": "1924-01-13 : Wheat (substance)\n  1924-01-13 : Aspirin\n  1924-01-13 : Allergic disposition (finding)",
+      "query_id": "q203"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Leon728_Hayes766_e80a4d44-0336-81ba-53b8-ce4eb72e3417113::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q204"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Irvin970_Effertz744_da754661-8aba-8b6d-dab5-c5f19949befd121::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q205"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2021-09-20?",
+      "relevant_chunk_ids": [
+        "Francesco636_Ratke343_95d957f1-b5c1-fac2-0590-95e42375431b28::PROCEDURES"
+      ],
+      "reference_answer": "Medication reconciliation",
+      "query_id": "q206"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2023-03-31?",
+      "relevant_chunk_ids": [
+        "Kiana854_Elma843_Metz686_a32b4078-39b6-8b55-451b-5eb0e2ae6f2f27::PROCEDURES"
+      ],
+      "reference_answer": "Oral health education",
+      "query_id": "q207"
+    },
+    {
+      "query": "What care plan was created for this patient on 2017-03-18?",
+      "relevant_chunk_ids": [
+        "Seymour882_Jacobson885_0e8ba9c6-1e03-cde8-91c1-ea9c67ec681e4::CARE PLANS"
+      ],
+      "reference_answer": "Respiratory therapy",
+      "query_id": "q208"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2020-03-30?",
+      "relevant_chunk_ids": [
+        "Sanford861_Cremin516_739b1d88-8f33-1d38-6f23-58cbac27c48e151::PROCEDURES"
+      ],
+      "reference_answer": "Renal dialysis",
+      "query_id": "q209"
+    },
+    {
+      "query": "What medication was prescribed to this patient on 1990-03-09?",
+      "relevant_chunk_ids": [
+        "Vasiliki884_Daniel959_85bc3774-320e-fd09-9467-0913be79754b5::MEDICATIONS"
+      ],
+      "reference_answer": "ferrous sulfate 325 MG Oral Tablet",
+      "query_id": "q210"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Andrew29_Stiedemann542_bc40b26b-9e7a-cf1c-bd8f-eb12d429b10422::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q211"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Minh326_Erdman779_80b0c69f-01f8-d9ac-f678-49b19ab0dac7483::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q212"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Jerrod232_Cartwright189_917feee2-c2e9-aa90-cb2d-9d183efc64cc9::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q213"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Frankie174_D'Amore443_09f5c9bf-8e64-3876-9076-2e945ce2a67320::ALLERGIES"
+      ],
+      "reference_answer": "2017-05-06 : Wheat (substance)\n  2017-05-06 : Glycine max (substance)\n  2017-05-06 : Cow's milk (substance)\n  2017-05-06 : Aspirin\n  2017-05-06 : Tree pollen (substance)\n  2017-05-06 : Grass pollen (substance)\n  2017-05-06 : Animal dander (substance)\n  2017-05-06 : House dust mite (organism)\n  2017-05-06 : Mold (organism)\n  2017-05-06 : Allergic disposition (finding)",
+      "query_id": "q214"
+    },
+    {
+      "query": "What medication was prescribed to this patient on 1991-11-14?",
+      "relevant_chunk_ids": [
+        "Evan94_Gislason620_21239c4b-ca83-121c-6172-9d65242e9aa4226::MEDICATIONS"
+      ],
+      "reference_answer": "1 ML Epoetin Alfa 4000 UNT/ML Injection [Epogen]",
+      "query_id": "q215"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Modesto621_Wyman904_be1eff7a-af74-067d-f6ae-0580acb501b2163::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q216"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2013-09-22?",
+      "relevant_chunk_ids": [
+        "Minh326_Erdman779_80b0c69f-01f8-d9ac-f678-49b19ab0dac7477::PROCEDURES"
+      ],
+      "reference_answer": "Renal dialysis",
+      "query_id": "q217"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Roberto515_Hoppe518_89021748-52ba-74b9-7f62-f7a11cec3c2138::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q218"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2019-03-06?",
+      "relevant_chunk_ids": [
+        "Deandre599_Schaefer657_da4b4fc8-dfaf-8f6b-185d-09de4773d66e555::PROCEDURES"
+      ],
+      "reference_answer": "Renal dialysis",
+      "query_id": "q219"
+    },
+    {
+      "query": "What report was generated for this patient on 2012-11-06?",
+      "relevant_chunk_ids": [
+        "Estrella224_Sporer811_658973ab-c7c0-3266-209a-f1bd077b922823::REPORTS"
+      ],
+      "reference_answer": "Lipid panel with direct LDL - Serum or Plasma",
+      "query_id": "q220"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Adam631_Schulist381_a62a7074-aa01-38c8-00d8-4bb7efd0fc6814::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q221"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Saul605_O'Keefe54_b4a7f00d-04f0-eb2f-fdeb-c7f356f96a7619::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q222"
+    },
+    {
+      "query": "What was this patient's Chloride [Moles/volume] in Blood recorded on 2026-07-29?",
+      "relevant_chunk_ids": [
+        "Kristy290_Penelope500_Daniel959_68a03a49-0952-737a-0179-88116821538851::OBSERVATIONS"
+      ],
+      "reference_answer": "108.8 mmol/L",
+      "query_id": "q223"
+    },
+    {
+      "query": "What medication was prescribed to this patient on 2015-01-02?",
+      "relevant_chunk_ids": [
+        "Nakita746_Emely698_Schowalter414_c712dca9-05c8-5b6b-9df5-08a742fdfecf421::MEDICATIONS"
+      ],
+      "reference_answer": "1 ML Epoetin Alfa 4000 UNT/ML Injection [Epogen]",
+      "query_id": "q224"
+    },
+    {
+      "query": "What immunization did this patient receive on 2017-12-27?",
+      "relevant_chunk_ids": [
+        "Ahmad985_Boyer713_f8f269ab-c623-5e65-fbeb-f8004ddd10eb11::IMMUNIZATIONS"
+      ],
+      "reference_answer": "Influenza, split virus, trivalent, PF",
+      "query_id": "q225"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Creola518_Arianne988_Ryan260_fe1a3a78-bc2b-5d89-c343-a475f6ccb4a728::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q226"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2019-06-22?",
+      "relevant_chunk_ids": [
+        "Logan497_Rutherford999_f1da9e89-c91c-80cf-4117-699530d555ba367::PROCEDURES"
+      ],
+      "reference_answer": "Renal dialysis",
+      "query_id": "q227"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Irvin970_Effertz744_da754661-8aba-8b6d-dab5-c5f19949befd106::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q228"
+    },
+    {
+      "query": "What immunization did this patient receive on 2025-05-13?",
+      "relevant_chunk_ids": [
+        "Harvey63_Gulgowski816_48bd8ec5-9b17-d4b7-5530-5d5de963d7f817::IMMUNIZATIONS"
+      ],
+      "reference_answer": "Influenza, split virus, trivalent, PF",
+      "query_id": "q229"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2018-01-27?",
+      "relevant_chunk_ids": [
+        "Marlys304_Leffler128_a8497746-01eb-158a-d12b-884184df931c262::PROCEDURES"
+      ],
+      "reference_answer": "Renal dialysis",
+      "query_id": "q230"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Sanford861_Cremin516_739b1d88-8f33-1d38-6f23-58cbac27c48e344::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q231"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2019-01-15?",
+      "relevant_chunk_ids": [
+        "Kate239_Kshlerin58_5356cf20-dce7-2723-f5b8-ac6afaf1d44212::PROCEDURES"
+      ],
+      "reference_answer": "Subcutaneous immunotherapy",
+      "query_id": "q232"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Giuseppina753_Nilda678_Williamson769_5e221f78-cc47-8227-23b0-329b65717e5d61::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q233"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Logan497_Rutherford999_f1da9e89-c91c-80cf-4117-699530d555ba102::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q234"
+    },
+    {
+      "query": "What imaging study was performed on this patient on 2020-05-05?",
+      "relevant_chunk_ids": [
+        "Simon598_Rau926_f25f8417-467a-d6f2-eb78-d3b29bba30eb126::IMAGING STUDIES"
+      ],
+      "reference_answer": "Digital Radiography, Structure of region of internal part of mouth",
+      "query_id": "q235"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Alfred550_Veum823_b09a5b43-84f6-a395-35e2-e408c6a9b00324::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q236"
+    },
+    {
+      "query": "What was this patient's pH of Urine by Test strip recorded on 1993-02-22?",
+      "relevant_chunk_ids": [
+        "Evan94_Gislason620_21239c4b-ca83-121c-6172-9d65242e9aa4358::OBSERVATIONS"
+      ],
+      "reference_answer": "5.9 pH",
+      "query_id": "q237"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Minh326_Erdman779_80b0c69f-01f8-d9ac-f678-49b19ab0dac7248::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q238"
+    },
+    {
+      "query": "What medication was prescribed to this patient on 1976-10-28?",
+      "relevant_chunk_ids": [
+        "Renato359_Kozey370_8f8608f7-b31a-8d80-32c9-1c95637e419616::MEDICATIONS"
+      ],
+      "reference_answer": "4 ML norepinephrine 1 MG/ML Injection",
+      "query_id": "q239"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Nakita746_Emely698_Schowalter414_c712dca9-05c8-5b6b-9df5-08a742fdfecf61::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q240"
+    },
+    {
+      "query": "What immunization did this patient receive on 2018-01-21?",
+      "relevant_chunk_ids": [
+        "Ria154_Jacqulyn231_Crist667_353d5265-5d03-6318-2249-23ca065e30c210::IMMUNIZATIONS"
+      ],
+      "reference_answer": "Influenza, split virus, trivalent, PF",
+      "query_id": "q241"
+    },
+    {
+      "query": "What procedure was performed on this patient on 1995-10-03?",
+      "relevant_chunk_ids": [
+        "Evan94_Gislason620_21239c4b-ca83-121c-6172-9d65242e9aa4595::PROCEDURES"
+      ],
+      "reference_answer": "Renal dialysis",
+      "query_id": "q242"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Tyron580_Nolan344_f356854f-e996-7b7b-e646-97f779aef4cc9::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q243"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Anisha16_Rosario163_O'Reilly797_09541e4b-0231-b83b-f317-893954d31fb714::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q244"
+    },
+    {
+      "query": "What medication was prescribed to this patient on 2020-08-21?",
+      "relevant_chunk_ids": [
+        "Mayte822_Delacr\u00faz637_8418e3b8-75bb-97ba-e9a7-ee8e8160512617::MEDICATIONS"
+      ],
+      "reference_answer": "Ibuprofen 200 MG Oral Tablet",
+      "query_id": "q245"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2014-08-31?",
+      "relevant_chunk_ids": [
+        "Estrella224_Sporer811_658973ab-c7c0-3266-209a-f1bd077b922831::PROCEDURES"
+      ],
+      "reference_answer": "Take oral or dental impression",
+      "query_id": "q246"
+    },
+    {
+      "query": "What medication was prescribed to this patient on 2021-02-20?",
+      "relevant_chunk_ids": [
+        "Andrew29_Stiedemann542_bc40b26b-9e7a-cf1c-bd8f-eb12d429b10419::MEDICATIONS"
+      ],
+      "reference_answer": "Acetaminophen 325 MG Oral Tablet [Tylenol]",
+      "query_id": "q247"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Modesto621_Wyman904_be1eff7a-af74-067d-f6ae-0580acb501b2157::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q248"
+    },
+    {
+      "query": "What imaging study was performed on this patient on 2019-10-08?",
+      "relevant_chunk_ids": [
+        "Harold594_Schmitt836_5086a3b6-302a-b48c-24ad-d99d73e0ba6720::IMAGING STUDIES"
+      ],
+      "reference_answer": "Ophthalmic Photography, Entire retina",
+      "query_id": "q249"
+    },
+    {
+      "query": "What condition was diagnosed for this patient on 1994-11-19?",
+      "relevant_chunk_ids": [
+        "Sanford861_Cremin516_739b1d88-8f33-1d38-6f23-58cbac27c48e4::CONDITIONS"
+      ],
+      "reference_answer": "Chronic sinusitis",
+      "query_id": "q250"
     }
   ]
 }
