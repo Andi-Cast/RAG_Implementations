@@ -77,7 +77,7 @@ graph TD
 - Security metrics: access-control leakage rate, injection-defense success rate, PII-redaction recall
 - A pluggable harness (`harness.py`) that scores any retrieval function against the gold set — the same harness runs unchanged for every rung of the retrieval ladder, you just swap the function passed in
 
-**Gold set** (`data/gold/gold_set.json`) — 14 hand-drafted queries against real corpus chunks, spanning both routine clinical facts and `restricted`-tier content (substance-use screening, an intimate-partner-abuse finding), including one multi-chunk query. This is a *pilot* set for getting the pipeline working end-to-end; the plan is to expand toward 50-100 verified queries before final benchmark numbers are reported.
+**Gold set** (`data/gold/gold_set.json`) — 250 queries against real corpus chunks: the original 14 hand-drafted (spanning routine clinical facts and `restricted`-tier content like substance-use screening and an intimate-partner-abuse finding, including one multi-chunk query), plus 236 generated deterministically by `scripts/generate_gold_set_candidates.py` — a template-based parser, **not an LLM**, that reads each sampled chunk's own structured `date : description (type)` text directly and builds a question/answer pair from it, so every answer is correct by construction rather than generated-then-hoped-to-be-right. Stratified ~70/30 internal/restricted (preserving the original set's deliberate restricted-tier emphasis against the real corpus's ~93/7 split) across 9 sections, excluding pure metadata sections (`DEMOGRAPHICS`, and `ENCOUNTER_META` for `internal`).
 
 **Retrieval** (`src/rag/retrieval/`)
 - Naive dense retrieval — rung 1: embeds the query with the same model used to embed the corpus (`BAAI/bge-small-en-v1.5`), then ranks chunks by cosine distance via pgvector's `<=>` operator directly in SQL (`dense.py`)
@@ -87,23 +87,23 @@ graph TD
 
 **Infrastructure**: Postgres + pgvector (metadata filtering inside the ANN query is the whole reason this vector store was chosen over alternatives that don't support it well), the full corpus embedded and loaded (91,969 chunks across 200 synthetic patients), `uv`-managed environment, `pytest` suite covering every module above.
 
-## Preliminary results
+## Results
 
-Scored against the 14-query pilot gold set:
+Scored against the full 250-query gold set:
 
 | Technique | Recall@10 | MRR | nDCG@10 |
 |---|---|---|---|
-| Naive dense (baseline) | 0.536 | 0.381 | 0.413 |
-| Hybrid (dense + keyword, RRF) | 0.607 | 0.534 | 0.532 |
-| + Cross-encoder rerank | **0.607** | **0.607** | **0.589** |
+| Naive dense (baseline) | 0.102 | 0.068 | 0.076 |
+| Hybrid (dense + keyword, RRF) | **0.330** | 0.177 | 0.213 |
+| + Cross-encoder rerank | 0.306 | **0.193** | **0.219** |
 
 ![Retrieval ladder benchmark chart](docs/images/retrieval_ladder.png)
 
-Hybrid improves on every metric over naive dense — MRR jumps the most (+40% relative), consistent with RRF's design: a chunk that ranks well in *either* method gets rewarded, which most directly helps "does the right answer land near the top" rather than just "does it appear somewhere in the top 10."
+These numbers look dramatically worse than this project's earlier 14-query pilot (naive dense was 0.536 recall there) — and that gap is itself the most interesting result here, not a regression. The pilot was hand-written with organically varied phrasing; the 236 generated queries are heavily templated around exact dates ("what procedure was performed on this patient on `{date}`?") across many patients who share near-identical recurring screenings. That combination is a direct stress test of a known, already-documented weakness: dense embeddings are good at topical similarity but bad at exact token matching like dates (proven concretely in the worked example below), so naive dense genuinely struggles at real scale in a way the small pilot didn't expose. Going from 150 to 250 queries moved naive dense's recall down slightly further still (0.130 → 0.102) — consistent with the pilot's number having been an outlier on the easy side, not the 150-query number being one on the hard side.
 
-Reranking's result is a clean, structurally-expected one: **Recall@10 doesn't move at all** between hybrid and reranking, because reranking only *reorders* the same 50-candidate pool hybrid already found — it can't surface a chunk hybrid missed entirely. What it *does* improve is MRR (+14% relative) and nDCG@10 (+11% relative), because it pushes already-found correct chunks higher within that pool. That's exactly the marginal effect reranking is supposed to have, and the benchmark table shows it directly rather than just asserting it.
+Hybrid's improvement over naive dense is now far larger and more convincing than the pilot ever showed — **recall@10 more than triples (+224% relative)**, because Postgres full-text search matches the literal date token directly where embedding similarity can't. This is the clearest evidence yet for why the retrieval ladder exists: a technique that looked like a modest, nice-to-have improvement at 14 queries turns out to be the difference between a retriever that mostly fails and one that mostly works, once tested at a scale large enough to stop being lucky or unlucky on a handful of easy queries.
 
-**Read these as early signal, not final numbers** — the gold set is a 14-query pilot (target is 50-100 hand-verified queries before this table is treated as authoritative). One concrete, expected failure mode already observed: patients with many repeat encounters produce several near-duplicate chunks (the same medication mentioned across multiple visits), so a query can retrieve the *right patient's* correct content from the *wrong specific encounter* rather than the exact chunk labeled in the gold set — a plausible source of some of the recall misses here.
+Reranking's result at this scale actually ticks recall *down* slightly from hybrid (0.330 → 0.306) while MRR/nDCG hold flat or improve marginally — a reminder that reranking optimizes ranking quality *within* the pool hybrid already found, not recall, and a cross-encoder trained on general relevance can occasionally reshuffle a correct-but-lower-confidence chunk out of the top-10 on this kind of short, template-generated factual question. Worth flagging honestly rather than rounding it up to "rerank always wins."
 
 Also worth naming honestly: "hybrid" here uses Postgres full-text search (`ts_rank`) rather than the literal BM25 formula, and required converting its default AND-matching into OR-matching to behave like a real ranked retriever rather than an all-or-nothing filter — a deliberate, documented deviation, not an oversight (see `PROGRESS.md`'s improvement log for details).
 
@@ -111,20 +111,22 @@ Contextual compression (rung 4) is built and verified but deliberately doesn't a
 
 ### RBAC pre-filter results
 
-Naive dense retrieval, same 14-query gold set, scored per role:
+Naive dense retrieval, same 250-query gold set, scored per role:
 
 | Clearance | Recall@10 | MRR | nDCG@10 |
 |---|---|---|---|
-| `restricted` (sees everything) | 0.536 | 0.381 | 0.413 |
-| `internal` (can't see `restricted`-tier chunks) | **0.429** | **0.310** | **0.340** |
+| `restricted` (sees everything) | 0.102 | 0.068 | 0.076 |
+| `internal` (can't see `restricted`-tier chunks) | **0.072** | **0.056** | **0.060** |
 
 ![RBAC pre-filter benchmark chart](docs/images/rbac_results.png)
 
-`restricted`'s numbers are identical to the very first unfiltered benchmark this project ever produced — expected, since filtering to "everything at or below the top tier" is filtering to nothing at all. `internal`'s numbers are meaningfully lower, because the 5 gold-set queries targeting `restricted`-tier content (substance-use screening, an intimate-partner-abuse finding) become unanswerable for that role — not because retrieval got worse, but because those chunks are now correctly invisible before ranking ever happens. That's the pre-filter design working exactly as intended, measured rather than just asserted.
+`restricted`'s numbers are identical to the unfiltered naive-dense benchmark above — expected, since filtering to "everything at or below the top tier" is filtering to nothing at all. `internal`'s numbers are meaningfully lower across all three metrics, because the ~76 gold-set queries targeting `restricted`-tier content become unanswerable for that role — not because retrieval got worse, but because those chunks are now correctly invisible before ranking ever happens. That's the pre-filter design working exactly as intended at real scale, not just on a lucky 14-query sample.
 
 ### Generation-model comparison
 
-Two Bedrock models (`generate_answer()`, Converse API) scored against the full 14-query gold set via hand-rolled LLM-as-judge metrics (`src/rag/eval/generation_metrics.py`) — no RAGAS/DeepEval dependency, same "implement from the concept" approach as the retrieval metrics. Retrieval context for this run came from `naive_dense_retrieve` (the baseline rung); Claude Haiku 4.5 acted as judge for both models.
+**Note: this table still reflects the original 14-query pilot, not yet re-run against the full 250-query gold set.** That re-run is a much larger, real-cost Bedrock operation (250 queries × 2 models × 3 metrics = 1,500 calls vs. this table's ~56), so it's deliberately not done automatically alongside the retrieval-ladder update above — it's a separate, explicit next step.
+
+Two Bedrock models (`generate_answer()`, Converse API) scored against the 14-query pilot gold set via hand-rolled LLM-as-judge metrics (`src/rag/eval/generation_metrics.py`) — no RAGAS/DeepEval dependency, same "implement from the concept" approach as the retrieval metrics. Retrieval context for this run came from `naive_dense_retrieve` (the baseline rung); Claude Haiku 4.5 acted as judge for both models.
 
 | Model | Faithfulness | Answer Relevance | Answer Correctness |
 |---|---|---|---|
