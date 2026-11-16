@@ -4,7 +4,7 @@ A Retrieval-Augmented Generation system built over a synthetic, access-controlle
 
 The project has two goals, deliberately paired: (1) benchmark a ladder of retrieval techniques (naive dense → hybrid → reranked → compressed) against a frozen, hand-verified gold set, and (2) build a real security layer — role-based access control enforced *inside* the retrieval query, hand-rolled PII detection, and prompt-injection defense — that a production healthcare RAG system would actually need before it could ship.
 
-**Status: core system complete.** The full retrieval ladder, the entire security layer, and a generation-model comparison are all built and benchmarked end-to-end against a real corpus with real queries — see the results below. Bedrock Guardrails/Knowledge Base comparisons, FastAPI serving, and a larger gold set are planned next (see [`PROGRESS.md`](PROGRESS.md) for the live build checklist).
+**Status: core system complete.** The full retrieval ladder, the entire security layer, person-level scoping, and a generation-model comparison are all built and benchmarked end-to-end against a real corpus with real queries and a 250-query gold set — see the results below. Bedrock Guardrails/Knowledge Base comparisons and FastAPI serving are planned next (see [`PROGRESS.md`](PROGRESS.md) for the live build checklist).
 
 ## Why this domain
 
@@ -200,7 +200,8 @@ Retrieval failed here even with the right person in scope: dense embeddings are 
 
 - AWS Bedrock integration: Guardrails benchmarked against the hand-rolled security layer, and a Bedrock Knowledge Base as one managed-RAG baseline row
 - FastAPI serving with role derived from authenticated identity, never from client input
-- Expand the gold set from 14 to 50-100 hand-verified queries for more statistically meaningful benchmark numbers
+- Re-run the generation-model comparison against the full 250-query gold set and person-scoped retrieval (currently still the original 14-query, unscoped pilot — see the Generation-model comparison section above)
+- Decide on and wire in `compress_chunk`/`redact_pii` where still outstanding from the v1 audit
 
 ## Deliberately not used (and why this matters for evaluating the project)
 
