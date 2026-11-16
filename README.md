@@ -54,6 +54,13 @@ graph TD
 **Security** (`src/rag/security/`)
 - A hand-rolled PII detector combining regex for structured PII (dates, SSNs, phone numbers) with a naive Title-Case heuristic for names — deliberately kept naive to demonstrate *why* regex-only PII detection fails on unstructured text: it misses Synthea's own digit-suffixed synthetic names entirely, while false-positively flagging facility names. Both failure modes are captured as explicit regression tests, not swept under the rug (`pii_redaction.py`)
 - RBAC pre-filter: `allowed_tiers()` computes every clearance tier at or below a user's own rank, which every retrieval function's SQL query then filters on directly (`WHERE clearance_tier = ANY(%s)`) *before* ranking happens — never a post-filter. `user_clearance` is a required parameter with no default on every retrieval function, deliberately: a security-critical parameter defaulting to "see everything" would be a fail-*open* bug waiting to happen (`access_filter.py`)
+- Person-level pre-filter: the realistic clinical workflow is a clinician with *one specific patient's* full chart open, not a search across every patient in the system — so every retrieval function also takes a required (no default) `person_id` parameter, filtered inside the same SQL `WHERE` clause alongside `clearance_tier`, `None` only to deliberately opt into cross-person/population-level search. Finding this mattered came from a real bug: the chunks table's own `patient_id` column turned out to be *encounter*-scoped, not person-scoped (Synthea exports one file per visit and the chunker used the filename as-is — see `scripts/backfill_person_id.py` for the fix and `PROGRESS.md` for the full story), which the benchmark numbers below expose directly
+
+  ```mermaid
+  graph LR
+      A[Query + user_clearance + person_id] --> B["WHERE clearance_tier = ANY(allowed_tiers)\nAND person_id = %s\nORDER BY embedding &lt;=&gt; query"]
+      B --> C[Only this person's allowed chunks are ever ranked, logged, or returned]
+  ```
 
   ```mermaid
   graph LR
@@ -85,11 +92,39 @@ graph TD
 - Cross-encoder reranking — rung 3: takes hybrid's top-50 candidate pool and scores each `(query, chunk_text)` pair directly with `cross-encoder/ms-marco-MiniLM-L-6-v2`, a slower but more accurate model than the bi-encoder used for dense retrieval, since it reasons about the query and candidate jointly rather than comparing precomputed vectors (`rerank.py`)
 - Contextual compression — rung 4: extracts (not summarizes) the most query-relevant lines out of an already-retrieved chunk by embedding each line and comparing it to the query, the same bi-encoder similarity math as dense retrieval, just applied at line-level instead of chunk-level. Doesn't change which chunks get retrieved, so it isn't a new row in the retrieval benchmark table below — its payoff is shorter, cleaner context for the eventual generation step (`compression.py`)
 
-**Infrastructure**: Postgres + pgvector (metadata filtering inside the ANN query is the whole reason this vector store was chosen over alternatives that don't support it well), the full corpus embedded and loaded (91,969 chunks across 200 synthetic patients), `uv`-managed environment, `pytest` suite covering every module above.
+**Infrastructure**: Postgres + pgvector (metadata filtering inside the ANN query is the whole reason this vector store was chosen over alternatives that don't support it well), the full corpus embedded and loaded (91,969 chunks across 234 synthetic people — not 200; Synthea's population generator runs extra attempts to reach a target of 200 *living* patients and leaves the rest behind as completed records), `uv`-managed environment, `pytest` suite covering every module above.
 
 ## Results
 
-Scored against the full 250-query gold set:
+### Retrieval ladder, person-scoped (the realistic scenario)
+
+This is the headline result, and it only exists because of a real bug found and fixed mid-project (see "A real bug, found honestly" below). Scored against the full 250-query gold set, retrieval scoped to the one real person each query is actually about — the realistic clinical workflow, where a clinician already has *this specific patient's* chart open rather than searching the whole system:
+
+| Technique | Recall@10 | MRR | nDCG@10 |
+|---|---|---|---|
+| Naive dense (baseline) | 0.430 | 0.260 | 0.300 |
+| Hybrid (dense + keyword, RRF) | 0.586 | 0.432 | 0.468 |
+| + Cross-encoder rerank | **0.710** | **0.588** | **0.617** |
+
+![Retrieval ladder benchmark chart, person-scoped](docs/images/person_scoped_ladder.png)
+
+Every single rung improves on every single metric — the cleanest, most textbook-shaped result this project has produced. Naive dense → hybrid is +36% relative recall; hybrid → rerank is another +21%; naive dense → rerank overall is +65%. Unlike the unscoped numbers below, nothing here hits a ceiling or moves backwards, because this is the problem the retrieval ladder is actually meant to solve: finding the right fact inside one person's real, multi-visit chart, not finding the right person out of 234.
+
+Also worth naming honestly: "hybrid" here uses Postgres full-text search (`ts_rank`) rather than the literal BM25 formula, and required converting its default AND-matching into OR-matching to behave like a real ranked retriever rather than an all-or-nothing filter — a deliberate, documented deviation, not an oversight (see `PROGRESS.md`'s improvement log for details).
+
+Contextual compression (rung 4) is built and verified but deliberately doesn't add a fifth row here — it doesn't change which chunks are retrieved, only trims their content, so its actual payoff (shorter context for generation) isn't visible until generation metrics exist.
+
+### A real bug, found honestly: "patient-scoped" retrieval was actually encounter-scoped
+
+Patient-scoping was added to this project specifically because unscoped cross-person search is a weird benchmark for a system whose own motivating scenario is "a clinician looking at one patient's chart" — searching everyone's records for every query isn't what that workflow needs. The first implementation added a `patient_id` filter using the chunks table's existing `patient_id` column — and the very first benchmark run came back with **recall@10 = 1.0 across every technique**, which was suspicious enough to investigate rather than celebrate.
+
+The cause: `patient_id` is `Path(file_path).stem` from `chunker.py` — and Synthea's `per_encounter_export` writes **one file per visit**, not one per person. So `patient_id` was actually an encounter identifier (`Georgie506_Batz141_7a327049-...-a1`, `...-a10`, `...-a11`, each a different visit of the same real person), and "patient-scoped" retrieval was really "scope to this one specific office visit's 3-10 chunks" — a search space small enough to make recall trivially perfect, independent of whether any retrieval technique was good.
+
+The fix, without re-chunking or re-embedding anything: a new `person_id` column, backfilled (`scripts/backfill_person_id.py`) by matching the standard UUID shape Synthea embeds in every filename and dropping the encounter-index digits appended after it. Re-running the benchmark against the real person-level scope produced the actually-interesting, non-degenerate numbers in the table above. This is also how the "234 people, not 200" correction elsewhere in this README was discovered — independently cross-checked by a second extraction method before trusting it.
+
+### Retrieval ladder, unscoped (population-level/research search)
+
+The other legitimate use case — cross-person search across the whole corpus, e.g. "find patients with condition X" for research or quality reporting — scored against the same 250-query gold set with no person filter at all:
 
 | Technique | Recall@10 | MRR | nDCG@10 |
 |---|---|---|---|
@@ -97,34 +132,28 @@ Scored against the full 250-query gold set:
 | Hybrid (dense + keyword, RRF) | **0.330** | 0.177 | 0.213 |
 | + Cross-encoder rerank | 0.306 | **0.193** | **0.219** |
 
-![Retrieval ladder benchmark chart](docs/images/retrieval_ladder.png)
+![Retrieval ladder benchmark chart, unscoped](docs/images/unscoped_ladder.png)
 
-These numbers look dramatically worse than this project's earlier 14-query pilot (naive dense was 0.536 recall there) — and that gap is itself the most interesting result here, not a regression. The pilot was hand-written with organically varied phrasing; the 236 generated queries are heavily templated around exact dates ("what procedure was performed on this patient on `{date}`?") across many patients who share near-identical recurring screenings. That combination is a direct stress test of a known, already-documented weakness: dense embeddings are good at topical similarity but bad at exact token matching like dates (proven concretely in the worked example below), so naive dense genuinely struggles at real scale in a way the small pilot didn't expose. Going from 150 to 250 queries moved naive dense's recall down slightly further still (0.130 → 0.102) — consistent with the pilot's number having been an outlier on the easy side, not the 150-query number being one on the hard side.
+These numbers are much worse, and much less clean (reranking's recall actually ticks down slightly from hybrid, 0.330 → 0.306), because this is a fundamentally harder problem: finding the right fact among 91,969 chunks across 234 people, many sharing near-identical recurring screenings and structurally templated questions ("what procedure was performed on `{date}`?"). Hybrid's relative improvement over naive dense is enormous here too (+224%) — for the same reason as the scoped table: Postgres full-text search matches a literal date token directly where dense embedding similarity can't (proven concretely in the worked example below). Read this table as "how hard is open-ended cross-patient search," not as "how good is this RAG system at its actual job" — that's what the table above is for.
 
-Hybrid's improvement over naive dense is now far larger and more convincing than the pilot ever showed — **recall@10 more than triples (+224% relative)**, because Postgres full-text search matches the literal date token directly where embedding similarity can't. This is the clearest evidence yet for why the retrieval ladder exists: a technique that looked like a modest, nice-to-have improvement at 14 queries turns out to be the difference between a retriever that mostly fails and one that mostly works, once tested at a scale large enough to stop being lucky or unlucky on a handful of easy queries.
+### RBAC pre-filter results, person-scoped
 
-Reranking's result at this scale actually ticks recall *down* slightly from hybrid (0.330 → 0.306) while MRR/nDCG hold flat or improve marginally — a reminder that reranking optimizes ranking quality *within* the pool hybrid already found, not recall, and a cross-encoder trained on general relevance can occasionally reshuffle a correct-but-lower-confidence chunk out of the top-10 on this kind of short, template-generated factual question. Worth flagging honestly rather than rounding it up to "rerank always wins."
-
-Also worth naming honestly: "hybrid" here uses Postgres full-text search (`ts_rank`) rather than the literal BM25 formula, and required converting its default AND-matching into OR-matching to behave like a real ranked retriever rather than an all-or-nothing filter — a deliberate, documented deviation, not an oversight (see `PROGRESS.md`'s improvement log for details).
-
-Contextual compression (rung 4) is built and verified but deliberately doesn't add a fifth row here — it doesn't change which chunks are retrieved, only trims their content, so its actual payoff (shorter context for generation) isn't visible until generation metrics exist.
-
-### RBAC pre-filter results
-
-Naive dense retrieval, same 250-query gold set, scored per role:
+Naive dense retrieval, same 250-query gold set, person-scoped, scored per role:
 
 | Clearance | Recall@10 | MRR | nDCG@10 |
 |---|---|---|---|
-| `restricted` (sees everything) | 0.102 | 0.068 | 0.076 |
-| `internal` (can't see `restricted`-tier chunks) | **0.072** | **0.056** | **0.060** |
+| `restricted` (sees everything) | 0.438 | 0.262 | 0.303 |
+| `internal` (can't see `restricted`-tier chunks) | **0.272** | **0.147** | **0.176** |
 
-![RBAC pre-filter benchmark chart](docs/images/rbac_results.png)
+![RBAC pre-filter benchmark chart, person-scoped](docs/images/rbac_results.png)
 
-`restricted`'s numbers are identical to the unfiltered naive-dense benchmark above — expected, since filtering to "everything at or below the top tier" is filtering to nothing at all. `internal`'s numbers are meaningfully lower across all three metrics, because the ~76 gold-set queries targeting `restricted`-tier content become unanswerable for that role — not because retrieval got worse, but because those chunks are now correctly invisible before ranking ever happens. That's the pre-filter design working exactly as intended at real scale, not just on a lucky 14-query sample.
+`restricted`'s numbers are identical to the person-scoped baseline above — expected, since filtering to "everything at or below the top tier" is filtering to nothing at all. `internal`'s numbers are meaningfully lower across all three metrics, because the gold-set queries targeting `restricted`-tier content become unanswerable for that role — not because retrieval got worse, but because those chunks are now correctly invisible before ranking ever happens. That's the pre-filter design working exactly as intended, on the realistic per-person scenario rather than the harder cross-person one.
+
+(The same comparison unscoped — `restricted`=0.102/0.068/0.076, `internal`=0.072/0.056/0.060 — shows the identical pattern at the harder scale; chart at `docs/images/rbac_results_unscoped.png`.)
 
 ### Generation-model comparison
 
-**Note: this table still reflects the original 14-query pilot, not yet re-run against the full 250-query gold set.** That re-run is a much larger, real-cost Bedrock operation (250 queries × 2 models × 3 metrics = 1,500 calls vs. this table's ~56), so it's deliberately not done automatically alongside the retrieval-ladder update above — it's a separate, explicit next step.
+**Note: this table still reflects the original 14-query pilot, unscoped, not yet re-run against the full 250-query gold set or the person-scoped retrieval above.** That re-run is a much larger, real-cost Bedrock operation (250 queries × 2 models × 3 metrics = 1,500 calls vs. this table's ~56), so it's deliberately not done automatically alongside the retrieval-ladder update above — it's a separate, explicit next step, and likely to show the same kind of improvement moving to person-scoped retrieval showed above.
 
 Two Bedrock models (`generate_answer()`, Converse API) scored against the 14-query pilot gold set via hand-rolled LLM-as-judge metrics (`src/rag/eval/generation_metrics.py`) — no RAGAS/DeepEval dependency, same "implement from the concept" approach as the retrieval metrics. Retrieval context for this run came from `naive_dense_retrieve` (the baseline rung); Claude Haiku 4.5 acted as judge for both models.
 
@@ -143,28 +172,29 @@ One limitation worth naming directly: Haiku judges both models' answers, includi
 
 ### Worked example: when good-looking metrics hide a real failure
 
-A real trace from the gold set, showing exactly why three generation metrics exist instead of two:
+A real trace from the gold set, correctly person-scoped (searching only this one real person's full chart, not a stranger's) — showing that even the realistic, easier version of this problem still has real failure cases, and exactly why three generation metrics exist instead of two:
 
 > **Query:** "What condition was diagnosed for this patient on 2024-04-20?"
 > **Gold-set reference answer:** "Acute viral pharyngitis"
+> **Scoped to:** this patient's own real `person_id` (not a different person — the chart genuinely belongs to them, across all their visits)
 >
-> **Retrieved context** (`naive_dense_retrieve`, k=3) — wrong patient entirely:
+> **Retrieved context** (`naive_dense_retrieve`, k=3) — the right person, the wrong visits:
 > ```
-> 2024-07-13 : Gingivitis (disorder)
-> 2024-07-13 : Ischemic heart disease (disorder)
-> 2024-07-13 : Alzheimer's disease (disorder)
-> ...
+> 2024-04-13 : Primary dental caries (disorder)
+> 2024-04-13 : Gingival disease (disorder)
+> 2022-02-19 : Viral sinusitis (disorder)
+> 2025-01-07 : Acute bronchitis (disorder)
 > ```
 >
-> **Generated answer** (Claude Haiku 4.5): *"Based on the provided medical records, there is no condition documented for this patient on 2024-04-20. The earliest documented date in the records is 2024-07-13... **Answer: No information available for 2024-04-20**"*
+> **Generated answer** (Claude Haiku 4.5): *"Based on the provided medical records, no condition was diagnosed on 2024-04-20. The closest diagnoses to that date are from 2024-04-13... There is no record of any diagnosis on the specific date of 2024-04-20."*
 >
 > | Metric | Score | What it saw |
 > |---|---|---|
-> | Faithfulness | **1.0** | The answer is 100% consistent with the (wrong) context it was shown — no hallucination |
-> | Answer Relevance | **0.85** | The answer directly addresses the question asked |
+> | Faithfulness | **1.0** | The answer is 100% consistent with the context it was shown — no hallucination |
+> | Answer Relevance | **0.9** | The answer directly addresses the question asked |
 > | Answer Correctness | **0.0** | The answer is simply wrong — the real diagnosis was pharyngitis |
 
-Retrieval failed silently here: dense embeddings are good at topical similarity ("pharyngitis" ≈ "throat infection") but bad at exact structured matching — a date string like `2024-04-20` isn't semantically meaningful to a bi-encoder the way a clinical concept is, so nothing stopped it from pulling a *different patient's* chunks entirely. The model then did the honest thing with what it was given. **Faithfulness and relevance both scored as if the system worked.** Only `answer_correctness` — the one metric that actually checks against ground truth — caught that it didn't. This is the concrete version of the aggregate gap in the table above, and the reason this project measures three things instead of two.
+Retrieval failed here even with the right person in scope: dense embeddings are good at topical similarity ("pharyngitis" ≈ "throat infection") but bad at exact structured matching — a date string like `2024-04-20` isn't semantically meaningful to a bi-encoder the way a clinical concept is, so among this one person's dozens of dated entries, the wrong visits still outranked the right one. The model then did the honest thing with what it was given. **Faithfulness and relevance both scored as if the system worked.** Only `answer_correctness` — the one metric that actually checks against ground truth — caught that it didn't. This is the concrete version of the aggregate ~57%-of-the-time gap in the person-scoped table above (naive dense's 0.430 recall@10), and the reason this project measures three generation metrics instead of two.
 
 ## What's next
 
