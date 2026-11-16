@@ -105,12 +105,33 @@ def main() -> None:
     grouped_bar_chart(
         metrics=["Recall@10", "MRR", "nDCG@10"],
         series={
+            "Naive dense": [0.430, 0.260, 0.300],
+            "Hybrid": [0.586, 0.432, 0.468],
+            "+ Cross-encoder rerank": [0.710, 0.588, 0.617],
+        },
+        title="Retrieval ladder, person-scoped (250-query gold set)",
+        output_filename="person_scoped_ladder.png",
+    )
+
+    grouped_bar_chart(
+        metrics=["Recall@10", "MRR", "nDCG@10"],
+        series={
             "Naive dense": [0.102, 0.068, 0.076],
             "Hybrid": [0.330, 0.177, 0.213],
             "+ Cross-encoder rerank": [0.306, 0.193, 0.219],
         },
-        title="Retrieval ladder (250-query gold set)",
-        output_filename="retrieval_ladder.png",
+        title="Retrieval ladder, unscoped (250-query gold set)",
+        output_filename="unscoped_ladder.png",
+    )
+
+    grouped_bar_chart(
+        metrics=["Recall@10", "MRR", "nDCG@10"],
+        series={
+            "restricted (sees everything)": [0.438, 0.262, 0.303],
+            "internal (RBAC-filtered)": [0.272, 0.147, 0.176],
+        },
+        title="RBAC pre-filter results, person-scoped (250-query gold set)",
+        output_filename="rbac_results.png",
     )
 
     grouped_bar_chart(
@@ -119,8 +140,8 @@ def main() -> None:
             "restricted (sees everything)": [0.102, 0.068, 0.076],
             "internal (RBAC-filtered)": [0.072, 0.056, 0.060],
         },
-        title="RBAC pre-filter results (250-query gold set)",
-        output_filename="rbac_results.png",
+        title="RBAC pre-filter results, unscoped (250-query gold set)",
+        output_filename="rbac_results_unscoped.png",
     )
 
     grouped_bar_chart(
