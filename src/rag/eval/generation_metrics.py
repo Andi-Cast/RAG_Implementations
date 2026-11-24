@@ -1,4 +1,4 @@
-from rag.generation.bedrock_client import get_bedrock_client
+from rag.generation.bedrock_client import converse_paced
 
 import re
 
@@ -8,16 +8,11 @@ def _ask_judge(prompt: str, judge_model_id: str) -> str:
     """Send a judge prompt to judge_model_id via the Converse API and
     return the raw text response. Shared by faithfulness/answer_relevance
     so they don't each duplicate the Converse call and content-block
-    parsing (same block-scanning logic as generate_answer)."""
-    client = get_bedrock_client()
-    response = client.converse(
-        modelId=judge_model_id,
-        messages=[{"role": "user", "content": [{"text": prompt}]}],
-    )
-    for message in response["output"]["message"]["content"]:
-        if "text" in message:
-            return message["text"]
-    raise ValueError(f"No text content block in judge Converse response: {response}")
+    parsing. Goes through converse_paced (not a raw client call) so judge
+    calls respect the same account-wide pacing as generate_answer's -- the
+    judge calls are 3/4 of every query's Bedrock traffic in a full eval
+    run, so pacing only generate_answer's calls would still throttle."""
+    return converse_paced(judge_model_id, prompt)
 
 
 
