@@ -151,24 +151,22 @@ Naive dense retrieval, same 250-query gold set, person-scoped, scored per role:
 
 (The same comparison unscoped — `restricted`=0.102/0.068/0.076, `internal`=0.072/0.056/0.060 — shows the identical pattern at the harder scale; chart at `docs/images/rbac_results_unscoped.png`.)
 
-### Generation-model comparison
+### Generation-model comparison, person-scoped
 
-**Note: this table still reflects the original 14-query pilot, unscoped, not yet re-run against the full 250-query gold set or the person-scoped retrieval above.** That re-run is a much larger, real-cost Bedrock operation (250 queries × 2 models × 3 metrics = 1,500 calls vs. this table's ~56), so it's deliberately not done automatically alongside the retrieval-ladder update above — it's a separate, explicit next step, and likely to show the same kind of improvement moving to person-scoped retrieval showed above.
-
-Two Bedrock models (`generate_answer()`, Converse API) scored against the 14-query pilot gold set via hand-rolled LLM-as-judge metrics (`src/rag/eval/generation_metrics.py`) — no RAGAS/DeepEval dependency, same "implement from the concept" approach as the retrieval metrics. Retrieval context for this run came from `naive_dense_retrieve` (the baseline rung); Claude Haiku 4.5 acted as judge for both models.
+Two Bedrock models (`generate_answer()`, Converse API) scored against a random, seeded 50-query sample of the 250-query gold set (`scripts/run_generation_benchmark.py`), person-scoped the same way as the retrieval ladder above, via hand-rolled LLM-as-judge metrics (`src/rag/eval/generation_metrics.py`) — no RAGAS/DeepEval dependency, same "implement from the concept" approach as the retrieval metrics. Retrieval context for this run came from `naive_dense_retrieve` (the baseline rung); Claude Haiku 4.5 acted as judge for both models.
 
 | Model | Faithfulness | Answer Relevance | Answer Correctness |
 |---|---|---|---|
-| Claude Haiku 4.5 | 0.95 | 0.85 | 0.50 |
-| gpt-oss-120b | 0.91 | 0.91 | 0.59 |
+| Claude Haiku 4.5 | 0.973 | 0.910 | 0.607 |
+| gpt-oss-120b | 0.933 | 0.931 | 0.641 |
 
 ![Generation-model comparison benchmark chart](docs/images/generation_comparison.png)
 
 Three distinct metrics, deliberately: **faithfulness** (is the answer grounded in the context it was actually given, i.e. no hallucination) and **answer relevance** (does the answer address the question asked) are both *reference-free* — they never look at the gold set's hand-written `reference_answer`. **Answer correctness** is the one metric that does, checking whether the generated answer actually conveys the same information as the known-correct answer.
 
-That distinction is the whole story in this table: faithfulness and relevance both look strong for both models (~0.85-0.95), which on its own would read as "the system works well." Answer correctness tells a different, more honest story — both models land around 0.5-0.6, because `naive_dense_retrieve` itself fails to surface the right chunk on a meaningful fraction of queries (see the retrieval ladder's own recall numbers above). A model can be perfectly faithful to the *wrong* retrieved context and still be flatly incorrect — faithfulness/relevance alone would have hidden that failure completely; answer correctness is what surfaces it. Re-running this same generation benchmark against the better retrieval rungs (hybrid, cross-encoder rerank) rather than the naive baseline is the natural next measurement, since the retrieval ladder's own numbers suggest those rungs should close much of this gap.
+That distinction is still the whole story in this table, just with better numbers now that retrieval is person-scoped: faithfulness and relevance are both strong for both models (~0.91-0.97), and answer correctness — while clearly the laggard of the three, same as before — rose from the original 14-query/unscoped pilot's ~0.50-0.59 to ~0.61-0.64 here. That improvement lines up directly with `naive_dense_retrieve`'s own person-scoped recall gain (0.430 vs. 0.102 unscoped, see the retrieval ladder above): better retrieval context gives the model more correct material to work with, and answer correctness is the metric that actually reflects it. A model can still be perfectly faithful to the *wrong* retrieved context and flatly incorrect — faithfulness/relevance alone would hide that; answer correctness is what surfaces it, which is exactly what the worked example below shows happening on one specific query even with person-scoping in place. Re-running this same generation benchmark against the better retrieval rungs (hybrid, cross-encoder rerank) instead of the naive baseline is the natural next measurement, since the retrieval ladder's own numbers suggest those rungs should close much of the remaining gap.
 
-One limitation worth naming directly: Haiku judges both models' answers, including its own — a single fixed judge keeps the comparison internally consistent, but a model judging its own output is a known potential source of self-favoring bias.
+One limitation worth naming directly: Haiku judges both models' answers, including its own — a single fixed judge keeps the comparison internally consistent, but a model judging its own output is a known potential source of self-favoring bias. A second, smaller one: this table is a 50-query random sample (seeded for reproducibility) of the 250-query gold set, not the full set — the account's Bedrock on-demand rate limit throttles a full 1,000-call run (250 queries × 2 models × 1 generate + 3 judge calls) badly enough that even paced, serialized calls would take hours; 50 queries (200 calls per model) was the practical tradeoff that still finishes in well under two hours.
 
 ### Worked example: when good-looking metrics hide a real failure
 
@@ -200,7 +198,7 @@ Retrieval failed here even with the right person in scope: dense embeddings are 
 
 - AWS Bedrock integration: Guardrails benchmarked against the hand-rolled security layer, and a Bedrock Knowledge Base as one managed-RAG baseline row
 - FastAPI serving with role derived from authenticated identity, never from client input
-- Re-run the generation-model comparison against the full 250-query gold set and person-scoped retrieval (currently still the original 14-query, unscoped pilot — see the Generation-model comparison section above)
+- Re-run the generation-model comparison against the better retrieval rungs (hybrid, cross-encoder rerank) instead of just the naive baseline, and against the full 250-query gold set if/when Bedrock rate limits allow it
 - Decide on and wire in `compress_chunk`/`redact_pii` where still outstanding from the v1 audit
 
 ## Deliberately not used (and why this matters for evaluating the project)
