@@ -33,7 +33,11 @@ def _assert_no_leak(chunk_ids, user_clearance, person_id, conn):
 
 def test_dense_retrieve_never_leaks_for_one_fixed_case():
     user_clearance = "internal"
-    person_id = "Georgie506_Batz141_7a327049-af29-91b0-4774-a81024f8526a"
+
+    conn = get_connection()
+    person_id = conn.execute(
+        "SELECT person_id FROM chunks WHERE person_id IS NOT NULL LIMIT 1"
+    ).fetchone()[0]
 
     chunk_ids = naive_dense_retrieve(
         query="What is the person's name?",
@@ -43,7 +47,6 @@ def test_dense_retrieve_never_leaks_for_one_fixed_case():
 
     assert len(chunk_ids) > 0
 
-    conn = get_connection()
     _assert_no_leak(chunk_ids, user_clearance, person_id, conn)
     conn.close()
 
