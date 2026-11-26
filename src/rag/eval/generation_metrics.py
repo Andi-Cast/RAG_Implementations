@@ -11,8 +11,12 @@ def _ask_judge(prompt: str, judge_model_id: str) -> str:
     parsing. Goes through converse_paced (not a raw client call) so judge
     calls respect the same account-wide pacing as generate_answer's -- the
     judge calls are 3/4 of every query's Bedrock traffic in a full eval
-    run, so pacing only generate_answer's calls would still throttle."""
-    return converse_paced(judge_model_id, prompt)
+    run, so pacing only generate_answer's calls would still throttle.
+    Pinned to temperature=0.0 -- unlike generate_answer, where some
+    variation in the model's actual answer is realistic, a judge's score
+    for the same (context, answer) pair shouldn't wobble between reruns
+    of the same eval."""
+    return converse_paced(judge_model_id, prompt, temperature=0.0)
 
 
 

@@ -43,12 +43,17 @@ def get_bedrock_client():
     return _client
 
 
-def converse_paced(model_id: str, prompt: str) -> str:
+def converse_paced(model_id: str, prompt: str, temperature: float | None = None) -> str:
     """Shared Converse call used by both generate_answer and the judge
     metrics in generation_metrics.py, so every Bedrock call anywhere in
     an eval run -- not just generate_answer's -- respects the same
     account-wide pacing and retries on a lingering ThrottlingException
-    with a long sleep rather than failing the whole run."""
+    with a long sleep rather than failing the whole run.
+
+    temperature is None by default (Bedrock's own default applies) since
+    generate_answer's actual answer varying slightly between runs is
+    realistic; _ask_judge passes temperature=0.0 explicitly, since a
+    judge's score shouldn't wobble between reruns of the same eval."""
     global _last_call_time
     client = get_bedrock_client()
 
@@ -56,12 +61,16 @@ def converse_paced(model_id: str, prompt: str) -> str:
     if elapsed < MIN_SECONDS_BETWEEN_CALLS:
         time.sleep(MIN_SECONDS_BETWEEN_CALLS - elapsed)
 
+    converse_kwargs = {
+        "modelId": model_id,
+        "messages": [{"role": "user", "content": [{"text": prompt}]}],
+    }
+    if temperature is not None:
+        converse_kwargs["inferenceConfig"] = {"temperature": temperature}
+
     while True:
         try:
-            response = client.converse(
-                modelId=model_id,
-                messages=[{"role": "user", "content": [{"text": prompt}]}],
-            )
+            response = client.converse(**converse_kwargs)
             break
         except ClientError as e:
             if e.response["Error"]["Code"] != "ThrottlingException":
