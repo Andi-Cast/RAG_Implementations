@@ -5,6 +5,7 @@ description = "Secure multi-technique RAG over an access-controlled medical corp
 requires-python = ">=3.12"
 dependencies = [
     "boto3>=1.43.98",
+    "langfuse>=5.2.0",
     "numpy>=2.1",
     "pgvector>=0.5.0",
     "psycopg[binary]>=3.3.5",

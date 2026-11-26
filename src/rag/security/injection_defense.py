@@ -1,9 +1,8 @@
 import re
 
-# Naive, regex/keyword-based patterns -- same deliberate tradeoff as
-# pii_redaction.py: easy to bypass with rephrasing, but illustrates what a
-# hand-rolled defense catches (and sets up a comparison point against
-# Bedrock Guardrails later).
+from langfuse import observe
+from rag.observability.tracing import get_langfuse
+
 IGNORE_INSTRUCTIONS_PATTERN = re.compile(
     r"\b(ignore|disregard|forget)\s+(all\s+)?(the\s+)?(previous|prior|above)\s+instructions\b",
     re.IGNORECASE,
@@ -25,24 +24,24 @@ INJECTION_PATTERNS = [
 
 
 def detect_injection_patterns(text: str) -> list[str]:
-    """Scan chunk/query text for known prompt-injection patterns
-    (e.g. "ignore previous instructions", role-play override attempts,
-    fake system/assistant turn markers) and return the list of matched
-    pattern names/strings found. Deliberately naive/heuristic, same as
-    pii_redaction.py's approach -- documents what a regex/keyword-based
-    defense catches and misses."""
     return [label for pattern, label in INJECTION_PATTERNS if pattern.search(text)]
 
 
+@observe(name="sanitize-context", as_type="tool", capture_input=False, capture_output=False)
 def sanitize_retrieved_context(chunks: list[str]) -> list[str]:
-    """Given retrieved chunk texts that will be inserted into the LLM
-    prompt, strip or neutralize any detected injection patterns before
-    they reach the model -- the actual defense step, separate from
-    detection."""
     sanitized = []
+    all_labels = set()
     for chunk in chunks:
         cleaned = chunk
         for pattern, label in INJECTION_PATTERNS:
+            if pattern.search(cleaned):
+                all_labels.add(label)
             cleaned = pattern.sub(f"[REDACTED-{label.upper()}]", cleaned)
         sanitized.append(cleaned)
+
+    get_langfuse().update_current_span(
+        input={"num_chunks": len(chunks)},
+        output={"num_chunks": len(sanitized), "patterns_found": sorted(all_labels)},
+    )
+
     return sanitized

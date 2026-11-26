@@ -1,23 +1,13 @@
+from langfuse import observe
 from rag.db.client import get_connection
+from rag.observability.tracing import get_langfuse, mask_chunk_ids, mask_text
 from rag.security.access_filter import allowed_tiers
 
 
+@observe(name="retrieve-sparse", as_type="retriever", capture_input=False, capture_output=False)
 def sparse_retrieve(
     query: str, user_clearance: str, person_id: str | None, k: int = 10
 ) -> list[str]:
-    """Keyword-based retrieval using Postgres full-text search.
-
-    person_id has no default -- pass None to deliberately search across
-    all people, or a specific person_id to scope to one person's full
-    chart across all their encounters. Distinct from the chunks table's
-    own patient_id column, which is actually encounter-scoped -- see
-    schema.sql and scripts/backfill_person_id.py.
-
-    Uses `to_tsvector('english', text)` to turn chunk text into a
-    searchable document, `to_tsquery('english', ...)` to turn the query
-    into a search term, and `ts_rank(...)` to score how well each chunk
-    matches, ordering by that rank descending.
-    """
     tiers = allowed_tiers(user_clearance)
     conn = get_connection()
 
@@ -48,4 +38,16 @@ def sparse_retrieve(
     with conn.cursor() as cur:
         cur.execute(sql, params)
         results = cur.fetchall()
-    return [row[0] for row in results]
+    chunk_ids = [row[0] for row in results]
+
+    get_langfuse().update_current_span(
+        input={
+            "query": mask_text(query),
+            "user_clearance": user_clearance,
+            "person_scoped": person_id is not None,
+            "k": k,
+        },
+        output=mask_chunk_ids(chunk_ids),
+    )
+
+    return chunk_ids

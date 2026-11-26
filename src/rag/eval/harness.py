@@ -3,33 +3,26 @@ import re
 from pathlib import Path
 from typing import Callable
 
+from langfuse import propagate_attributes
+
 from rag.eval.generation_metrics import answer_correctness, answer_relevance, faithfulness
 from rag.eval.retrieval_metrics import ndcg_at_k, reciprocal_rank, recall_at_k
+from rag.observability.tracing import get_langfuse, mask_text
 from rag.retrieval.rerank import get_chunk_texts
 from rag.security.injection_defense import sanitize_retrieved_context
 
-# Same pattern as scripts/backfill_person_id.py -- a chunk_id's patient_id
-# segment is encounter-scoped (Synthea appends an encounter-index number
-# directly onto the end of the per-person UUID), so deriving the real
-# person_id means matching the standard 8-4-4-4-12 hex UUID shape and
-# dropping whatever digits were appended after it.
 PERSON_ID_PATTERN = re.compile(
     r"^(.+?_[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})"
 )
 
 
 def load_gold_set(path: str) -> list[dict]:
-    """Load the gold set query entries from a JSON file."""
     with open(path) as f:
         data = json.load(f)
     return data["queries"]
 
 
 def _derive_person_id(chunk_id: str) -> str:
-    """Extract the real, stable person_id out of a chunk_id's
-    patient_id::section prefix -- used to scope an eval to one person's
-    full chart, a faithful simulation of a clinician already having that
-    person's chart open before asking (not cheating with ground truth)."""
     patient_id = chunk_id.split("::")[0]
     match = PERSON_ID_PATTERN.match(patient_id)
     if match is None:
@@ -44,27 +37,38 @@ def run_retrieval_eval(
     scope_to_person: bool = False,
     k: int = 10,
 ) -> dict[str, float]:
-    """Run retrieve_fn against every query in the gold set, score each
-    result against its relevant_chunk_ids, and return the averaged
-    retrieval metrics across the whole gold set."""
-
     recall_scores = []
     rr_scores = []
     ndcg_scores = []
+    langfuse = get_langfuse()
 
     for entry in gold_set:
-        relevant = set(entry["relevant_chunk_ids"])
-        if scope_to_person:
-            person_id = _derive_person_id(entry["relevant_chunk_ids"][0])
-        else:
-            person_id = None
-        retrieved = retrieve_fn(entry["query"], user_clearance=user_clearance, person_id=person_id, k=k)
+        with langfuse.start_as_current_observation(
+            as_type="span",
+            name="evaluate-retrieval-query",
+            input={"query_id": entry.get("query_id"), "query": mask_text(entry["query"])},
+        ) as root, propagate_attributes(
+            environment="development",
+            tags=["retrieval-eval"],
+            metadata={"user_clearance": user_clearance, "scope_to_person": scope_to_person},
+        ):
+            relevant = set(entry["relevant_chunk_ids"])
+            if scope_to_person:
+                person_id = _derive_person_id(entry["relevant_chunk_ids"][0])
+            else:
+                person_id = None
+            retrieved = retrieve_fn(entry["query"], user_clearance=user_clearance, person_id=person_id, k=k)
 
-        relevance = {chunk_id: 1.0 for chunk_id in relevant}
+            relevance = {chunk_id: 1.0 for chunk_id in relevant}
 
-        recall_scores.append(recall_at_k(retrieved, relevant, k))
-        rr_scores.append(reciprocal_rank(retrieved, relevant))
-        ndcg_scores.append(ndcg_at_k(retrieved, relevance, k))
+            recall = recall_at_k(retrieved, relevant, k)
+            rr = reciprocal_rank(retrieved, relevant)
+            ndcg = ndcg_at_k(retrieved, relevance, k)
+            recall_scores.append(recall)
+            rr_scores.append(rr)
+            ndcg_scores.append(ndcg)
+
+            root.update(output={f"recall_at_{k}": recall, "mrr": rr, f"ndcg_at_{k}": ndcg})
 
     n = len(gold_set)
     return {
@@ -84,48 +88,52 @@ def run_generation_eval(
     scope_to_person: bool = False,
     k: int = 10,
 ) -> dict[str, float]:
-    """For each gold-set query: retrieve context chunks via retrieve_fn
-    (scoped to the query's own person when scope_to_person is True,
-    same derivation as run_retrieval_eval -- a faithful simulation of a
-    clinician already having that person's chart open before asking),
-    sanitize each chunk's text via sanitize_retrieved_context (strips
-    prompt-injection patterns before anything reaches the model), join
-    the sanitized text into a single context string, generate an answer
-    via generate_fn(query, context, model_id), score the answer with
-    faithfulness(context, answer, judge_model_id),
-    answer_relevance(query, answer, judge_model_id), and
-    answer_correctness(entry["reference_answer"], answer, judge_model_id),
-    and return the averaged scores across the whole gold set. Scores
-    faithfulness against the context actually retrieved and fed to the
-    model (not the gold set's ground-truth relevant_chunk_ids), since
-    faithfulness measures whether the model stuck to what it was actually
-    given -- which means this convolves retrieval quality with generation
-    quality by design. answer_correctness is the one metric here that
-    isn't reference-free -- it's what catches a retrieval failure that
-    faithfulness/relevance alone would miss."""
     faithfulness_scores = []
     relevance_scores = []
     correctness_scores = []
+    langfuse = get_langfuse()
 
     for entry in gold_set:
         query = entry["query"]
-        if scope_to_person:
-            person_id = _derive_person_id(entry["relevant_chunk_ids"][0])
-        else:
-            person_id = None
-        retrieved_ids = retrieve_fn(query, user_clearance=user_clearance, person_id=person_id, k=k)
-        texts = get_chunk_texts(retrieved_ids)
-        chunk_texts = [texts[chunk_id] for chunk_id in retrieved_ids]
-        sanitized_texts = sanitize_retrieved_context(chunk_texts)
-        context = "\n\n".join(sanitized_texts)
+        with langfuse.start_as_current_observation(
+            as_type="span",
+            name="evaluate-generation-query",
+            input={"query_id": entry.get("query_id"), "query": mask_text(query)},
+        ) as root, propagate_attributes(
+            environment="development",
+            tags=["generation-eval"],
+            metadata={
+                "user_clearance": user_clearance,
+                "scope_to_person": scope_to_person,
+                "model_id": model_id,
+                "judge_model_id": judge_model_id,
+            },
+        ):
+            if scope_to_person:
+                person_id = _derive_person_id(entry["relevant_chunk_ids"][0])
+            else:
+                person_id = None
+            retrieved_ids = retrieve_fn(query, user_clearance=user_clearance, person_id=person_id, k=k)
+            texts = get_chunk_texts(retrieved_ids)
+            chunk_texts = [texts[chunk_id] for chunk_id in retrieved_ids]
+            sanitized_texts = sanitize_retrieved_context(chunk_texts)
+            context = "\n\n".join(sanitized_texts)
 
-        answer = generate_fn(query, context, model_id)
+            answer = generate_fn(query, context, model_id)
 
-        faithfulness_scores.append(faithfulness(context, answer, judge_model_id))
-        relevance_scores.append(answer_relevance(query, answer, judge_model_id))
-        correctness_scores.append(
-            answer_correctness(entry["reference_answer"], answer, judge_model_id)
-        )
+            faithfulness_score = faithfulness(context, answer, judge_model_id)
+            relevance_score = answer_relevance(query, answer, judge_model_id)
+            correctness_score = answer_correctness(entry["reference_answer"], answer, judge_model_id)
+            faithfulness_scores.append(faithfulness_score)
+            relevance_scores.append(relevance_score)
+            correctness_scores.append(correctness_score)
+
+            root.update(output={
+                "answer": mask_text(answer, 200),
+                "faithfulness": faithfulness_score,
+                "answer_relevance": relevance_score,
+                "answer_correctness": correctness_score,
+            })
 
     n = len(gold_set)
     return {
