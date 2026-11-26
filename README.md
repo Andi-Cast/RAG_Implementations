@@ -77,7 +77,7 @@ graph TD
       end
   ```
 - Prompt-injection defense: a hand-rolled detector (`detect_injection_patterns`) flags instruction-override phrasing ("ignore previous instructions"), role-play override attempts ("you are now..."), and fake system/assistant turn markers planted inside retrieved text, plus a sanitizer (`sanitize_retrieved_context`) that redacts matched spans before they reach the prompt. Deliberately naive, same tradeoff as the PII detector — a documented test shows a simple rephrasing evades it entirely (`injection_defense.py`)
-- PII redaction: `redact_pii` turns `detect_pii`'s spans into actually-masked output text, replacing right-to-left (sorted by start index, descending) so masking one span never corrupts the character indices of spans still waiting to be replaced (`pii_redaction.py`)
+- PII redaction: `redact_pii` turns `detect_pii`'s spans into actually-masked output text, replacing right-to-left (sorted by start index, descending) so masking one span never corrupts the character indices of spans still waiting to be replaced (`pii_redaction.py`). Wired into `run_generation_eval` on the generated answer — but only on what's *returned and traced*, not on what the judge metrics score, since scoring the redacted version would conflate generation quality with this detector's own known false-positive risk (its naive name heuristic can match a real diagnosis name and mask it, making a correct answer look wrong for the wrong reason)
 - Observability: [Langfuse](https://langfuse.com) tracing on every retrieval/security/generation function (`src/rag/observability/tracing.py`) — one connected trace per gold-set query (retrieve → sanitize → generate → judge), correct observation types (`retriever`/`tool`/`generation`), real Bedrock token usage mapped into Langfuse so cost is auto-computed, and clinical chunk text truncated before it's sent to a third-party SaaS even though the corpus is synthetic, matching this project's own security stance
 
 **Evaluation harness** (`src/rag/eval/`) — built *before* any retrieval technique, so every technique that follows is measured on identical ground:
@@ -91,7 +91,7 @@ graph TD
 - Naive dense retrieval — rung 1: embeds the query with the same model used to embed the corpus (`BAAI/bge-small-en-v1.5`), then ranks chunks by cosine distance via pgvector's `<=>` operator directly in SQL (`dense.py`)
 - Hybrid retrieval — rung 2: combines dense retrieval with keyword-based search via Postgres full-text search (`sparse_bm25.py`), merged with Reciprocal Rank Fusion (`fusion_rrf.py`). Each sub-retriever pulls a wider candidate pool (50) before fusion narrows to the final top-k, so a chunk ranked outside one method's top-10 can still surface if the other method ranks it highly (`hybrid.py`)
 - Cross-encoder reranking — rung 3: takes hybrid's top-50 candidate pool and scores each `(query, chunk_text)` pair directly with `cross-encoder/ms-marco-MiniLM-L-6-v2`, a slower but more accurate model than the bi-encoder used for dense retrieval, since it reasons about the query and candidate jointly rather than comparing precomputed vectors (`rerank.py`)
-- Contextual compression — rung 4: extracts (not summarizes) the most query-relevant lines out of an already-retrieved chunk by embedding each line and comparing it to the query, the same bi-encoder similarity math as dense retrieval, just applied at line-level instead of chunk-level. Doesn't change which chunks get retrieved, so it isn't a new row in the retrieval benchmark table below — its payoff is shorter, cleaner context for the eventual generation step (`compression.py`)
+- Contextual compression — rung 4: extracts (not summarizes) the most query-relevant lines out of an already-retrieved chunk by embedding each line and comparing it to the query, the same bi-encoder similarity math as dense retrieval, just applied at line-level instead of chunk-level. Doesn't change which chunks get retrieved, so it isn't a new row in the retrieval benchmark table below — its payoff is shorter, cleaner context for generation. Wired into `run_generation_eval` as an opt-in `compress=True` flag (`compression.py`); not yet re-benchmarked with it on
 
 **Infrastructure**: Postgres + pgvector (metadata filtering inside the ANN query is the whole reason this vector store was chosen over alternatives that don't support it well), the full corpus embedded and loaded (91,969 chunks across 234 synthetic people — not 200; Synthea's population generator runs extra attempts to reach a target of 200 *living* patients and leaves the rest behind as completed records), `uv`-managed environment, `pytest` suite covering every module above.
 
@@ -113,7 +113,7 @@ Every single rung improves on every single metric — the cleanest, most textboo
 
 Also worth naming honestly: "hybrid" here uses Postgres full-text search (`ts_rank`) rather than the literal BM25 formula, and required converting its default AND-matching into OR-matching to behave like a real ranked retriever rather than an all-or-nothing filter — a deliberate, documented deviation, not an oversight (see `PROGRESS.md`'s improvement log for details).
 
-Contextual compression (rung 4) is built and verified but deliberately doesn't add a fifth row here — it doesn't change which chunks are retrieved, only trims their content, so its actual payoff (shorter context for generation) isn't visible until generation metrics exist.
+Contextual compression (rung 4) is built, verified, and now wired into the generation harness, but deliberately doesn't add a fifth row here — it doesn't change which chunks are retrieved, only trims their content, so its payoff (shorter context for generation) shows up in a generation-metrics re-run with `compress=True`, not in this retrieval-only table.
 
 ### A real bug, found honestly: "patient-scoped" retrieval was actually encounter-scoped
 
@@ -200,7 +200,7 @@ Retrieval failed here even with the right person in scope: dense embeddings are 
 - AWS Bedrock integration: Guardrails benchmarked against the hand-rolled security layer, and a Bedrock Knowledge Base as one managed-RAG baseline row
 - FastAPI serving with role derived from authenticated identity, never from client input
 - Re-run the generation-model comparison against the better retrieval rungs (hybrid, cross-encoder rerank) instead of just the naive baseline, and against the full 250-query gold set if/when Bedrock rate limits allow it
-- Decide on and wire in `compress_chunk`/`redact_pii` where still outstanding from the v1 audit
+- Re-run the generation benchmark with `compress=True` to measure contextual compression's actual payoff (shorter context, cost/latency), now that it's wired in
 
 ## Deliberately not used (and why this matters for evaluating the project)
 
