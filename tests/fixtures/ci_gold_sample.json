@@ -1,0 +1,164 @@
+{
+  "queries": [
+    {
+      "query_id": "q04",
+      "query": "What heart-related condition does this patient have, recorded on 2015-07-20?",
+      "relevant_chunk_ids": [
+        "Charley358_Schinner682_285cf115-cea6-5819-5364-5c7152d26c4f33::CONDITIONS"
+      ],
+      "reference_answer": "Ischemic heart disease"
+    },
+    {
+      "query_id": "q06",
+      "query": "What medication is used to treat this patient's chronic congestive heart failure, prescribed on 2026-07-25?",
+      "relevant_chunk_ids": [
+        "Nicholas495_Boehm581_9018f445-501b-c6ba-d6d9-cbee6095e8e631::MEDICATIONS"
+      ],
+      "reference_answer": "Furosemide 40 MG Oral Tablet"
+    },
+    {
+      "query_id": "q07",
+      "query": "What diagnostic imaging procedure was performed as part of this patient's heart failure evaluation on 2026-07-25?",
+      "relevant_chunk_ids": [
+        "Nicholas495_Boehm581_9018f445-501b-c6ba-d6d9-cbee6095e8e631::PROCEDURES"
+      ],
+      "reference_answer": "Echocardiography"
+    },
+    {
+      "query_id": "q10",
+      "query": "What behavioral health and substance use screenings were performed for this patient on 2015-07-20?",
+      "relevant_chunk_ids": [
+        "Charley358_Schinner682_285cf115-cea6-5819-5364-5c7152d26c4f33::PROCEDURES"
+      ],
+      "reference_answer": "Alcohol Use Disorders Identification Test - Consumption, assessment of substance use, depression screening (performed twice), and assessment of anxiety"
+    },
+    {
+      "query_id": "q14",
+      "query": "What safety-related finding was recorded for this patient on 2024-01-17?",
+      "relevant_chunk_ids": [
+        "Elidia194_Freeda113_Towne435_1797a545-527e-cd94-fb72-9974beb54c0f54::CONDITIONS"
+      ],
+      "reference_answer": "Victim of intimate partner abuse"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2015-01-16?",
+      "relevant_chunk_ids": [
+        "Ricki338_Candi549_Wisozk929_2d8a9b0c-e5fe-de08-e899-f5352471144962::PROCEDURES"
+      ],
+      "reference_answer": "Rehabilitation therapy",
+      "query_id": "q041"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2024-07-29?",
+      "relevant_chunk_ids": [
+        "Nicholas495_Boehm581_9018f445-501b-c6ba-d6d9-cbee6095e8e624::PROCEDURES"
+      ],
+      "reference_answer": "Assessment using Alcohol Use Disorders Identification Test - Consumption",
+      "query_id": "q043"
+    },
+    {
+      "query": "What was this patient's Tobacco smoking status recorded on 2010-10-25?",
+      "relevant_chunk_ids": [
+        "Charley358_Schinner682_285cf115-cea6-5819-5364-5c7152d26c4f22::OBSERVATIONS"
+      ],
+      "reference_answer": "Ex-smoker",
+      "query_id": "q054"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Ricki338_Candi549_Wisozk929_2d8a9b0c-e5fe-de08-e899-f5352471144964::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q062"
+    },
+    {
+      "query": "What medication was prescribed to this patient on 2018-03-07?",
+      "relevant_chunk_ids": [
+        "Thomasena108_Thiel172_7fa627d1-51bf-9bf8-bedf-74e3da7adf7e6::MEDICATIONS"
+      ],
+      "reference_answer": "{28 (norethindrone 0.35 MG Oral Tablet) } Pack [Jolivette 28 Day]",
+      "query_id": "q071"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Thomasena108_Thiel172_7fa627d1-51bf-9bf8-bedf-74e3da7adf7e5::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q072"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Elidia194_Freeda113_Towne435_1797a545-527e-cd94-fb72-9974beb54c0f61::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q077"
+    },
+    {
+      "query": "What medication was prescribed to this patient on 2017-06-28?",
+      "relevant_chunk_ids": [
+        "Ricki338_Candi549_Wisozk929_2d8a9b0c-e5fe-de08-e899-f5352471144979::MEDICATIONS"
+      ],
+      "reference_answer": "sodium fluoride 0.0272 MG/MG Oral Gel",
+      "query_id": "q089"
+    },
+    {
+      "query": "What report was generated for this patient on 2026-07-25?",
+      "relevant_chunk_ids": [
+        "Nicholas495_Boehm581_9018f445-501b-c6ba-d6d9-cbee6095e8e631::REPORTS"
+      ],
+      "reference_answer": "Heart failure tracking panel",
+      "query_id": "q097"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Elidia194_Freeda113_Towne435_1797a545-527e-cd94-fb72-9974beb54c0f32::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q103"
+    },
+    {
+      "query": "Does this patient have any known allergies?",
+      "relevant_chunk_ids": [
+        "Elidia194_Freeda113_Towne435_1797a545-527e-cd94-fb72-9974beb54c0f68::ALLERGIES"
+      ],
+      "reference_answer": "No Known Allergies",
+      "query_id": "q146"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2022-06-01?",
+      "relevant_chunk_ids": [
+        "Thomasena108_Thiel172_7fa627d1-51bf-9bf8-bedf-74e3da7adf7e20::PROCEDURES"
+      ],
+      "reference_answer": "Patient referral",
+      "query_id": "q153"
+    },
+    {
+      "query": "What was this patient's Total score [AUDIT-C] recorded on 2018-12-19?",
+      "relevant_chunk_ids": [
+        "Elidia194_Freeda113_Towne435_1797a545-527e-cd94-fb72-9974beb54c0f14::OBSERVATIONS"
+      ],
+      "reference_answer": "1.0 {score}",
+      "query_id": "q158"
+    },
+    {
+      "query": "What procedure was performed on this patient on 2014-08-18?",
+      "relevant_chunk_ids": [
+        "Ricki338_Candi549_Wisozk929_2d8a9b0c-e5fe-de08-e899-f5352471144947::PROCEDURES"
+      ],
+      "reference_answer": "Rehabilitation therapy",
+      "query_id": "q160"
+    },
+    {
+      "query": "What condition was diagnosed for this patient on 2024-01-17?",
+      "relevant_chunk_ids": [
+        "Elidia194_Freeda113_Towne435_1797a545-527e-cd94-fb72-9974beb54c0f54::CONDITIONS"
+      ],
+      "reference_answer": "Gingivitis",
+      "query_id": "q171"
+    }
+  ]
+}

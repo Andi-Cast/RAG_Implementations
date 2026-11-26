@@ -105,10 +105,14 @@ def build_ci_gold_sample(gold_set: list[dict], person_ids: list[str]) -> list[di
     """Return the subset of gold_set entries whose derived person_id (via
     _derive_person_id, same as pick_fixture_person_ids) is in person_ids --
     the matching slice of real, meaningful queries for the people actually
-    included in the committed fixture dump.
-    TODO: implement.
-    """
-    raise NotImplementedError
+    included in the committed fixture dump."""
+    person_id_set = set(person_ids)
+    return [
+        entry
+        for entry in gold_set
+        if entry.get("relevant_chunk_ids")
+        and _derive_person_id(entry["relevant_chunk_ids"][0]) in person_id_set
+    ]
 
 
 def main() -> None:
@@ -123,6 +127,12 @@ def main() -> None:
     output_path = "tests/fixtures/ci_corpus.sql.gz"
     export_fixture_dump(person_ids, output_path)
     print(f"Wrote fixture dump to {output_path}")
+
+    gold_sample = build_ci_gold_sample(gold_set, person_ids)
+    gold_sample_path = "tests/fixtures/ci_gold_sample.json"
+    with open(gold_sample_path, "w") as f:
+        json.dump({"queries": gold_sample}, f, indent=2)
+    print(f"Wrote {len(gold_sample)} gold-set queries to {gold_sample_path}")
 
 
 if __name__ == "__main__":
