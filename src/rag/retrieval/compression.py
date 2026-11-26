@@ -1,14 +1,12 @@
 import numpy as np
+from langfuse import observe
 
+from rag.observability.tracing import get_langfuse, mask_chunk_ids
 from rag.retrieval.dense import get_model
 from rag.retrieval.rerank import get_chunk_texts
 
 
 def compress_chunk(query: str, chunk_text: str, top_n: int = 2) -> str:
-    """Keep only the top_n most query-relevant lines from chunk_text, in
-    their original order, dropping the rest. Splits on lines rather than
-    sentences since this corpus's chunks are line-structured facts
-    ("date : finding") rather than prose."""
     lines = [line for line in chunk_text.splitlines() if line.strip()]
     if len(lines) <= top_n:
         return chunk_text
@@ -24,11 +22,17 @@ def compress_chunk(query: str, chunk_text: str, top_n: int = 2) -> str:
     return "\n".join(lines[i] for i in kept_in_order)
 
 
+@observe(name="compress-chunks", as_type="tool", capture_input=False, capture_output=False)
 def compress_chunks(query: str, chunk_ids: list[str], top_n: int = 2) -> dict[str, str]:
-    """Fetch each chunk's text and compress it against the query. Returns
-    {chunk_id: compressed_text}, ready to hand to a generation step."""
     texts = get_chunk_texts(chunk_ids)
-    return {
+    compressed = {
         chunk_id: compress_chunk(query, text, top_n)
         for chunk_id, text in texts.items()
     }
+
+    get_langfuse().update_current_span(
+        input={"chunk_ids": mask_chunk_ids(chunk_ids), "top_n": top_n},
+        output={"chunk_ids": mask_chunk_ids(list(compressed.keys()))},
+    )
+
+    return compressed

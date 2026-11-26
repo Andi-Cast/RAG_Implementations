@@ -9,6 +9,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from rag.observability.tracing import get_langfuse, mask_text
+from rag.security.pii_redaction import redact_pii
 
 AWS_REGION = os.environ.get("AWS_REGION", "us-east-1")
 
@@ -34,7 +35,7 @@ def get_bedrock_client():
     return _client
 
 
-def converse_paced(model_id: str, prompt: str, name: str, temperature: float | None = None) -> str:
+def converse_paced(model_id: str, prompt: str, name: str, temperature: float | None = None, trace_redact_fn=None) -> str:
     global _last_call_time
     client = get_bedrock_client()
 
@@ -76,8 +77,9 @@ def converse_paced(model_id: str, prompt: str, name: str, temperature: float | N
             raise ValueError(f"No text content block in Converse response: {response}")
 
         usage = response.get("usage", {})
+        traced_answer = trace_redact_fn(answer) if trace_redact_fn else answer
         gen.update(
-            output={"role": "assistant", "content": mask_text(answer, 200)},
+            output={"role": "assistant", "content": mask_text(traced_answer, 200)},
             usage_details={
                 "input": usage.get("inputTokens"),
                 "output": usage.get("outputTokens"),
@@ -90,4 +92,4 @@ def converse_paced(model_id: str, prompt: str, name: str, temperature: float | N
 
 def generate_answer(query: str, context: str, model_id: str) -> str:
     prompt = f"Context: {context}\n\nQuestion: {query}\n\nAnswer:"
-    return converse_paced(model_id, prompt, name="generate-answer")
+    return converse_paced(model_id, prompt, name="generate-answer", trace_redact_fn=redact_pii)

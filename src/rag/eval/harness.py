@@ -8,8 +8,10 @@ from langfuse import propagate_attributes
 from rag.eval.generation_metrics import answer_correctness, answer_relevance, faithfulness
 from rag.eval.retrieval_metrics import ndcg_at_k, reciprocal_rank, recall_at_k
 from rag.observability.tracing import get_langfuse, mask_text
+from rag.retrieval.compression import compress_chunks
 from rag.retrieval.rerank import get_chunk_texts
 from rag.security.injection_defense import sanitize_retrieved_context
+from rag.security.pii_redaction import redact_pii
 
 PERSON_ID_PATTERN = re.compile(
     r"^(.+?_[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})"
@@ -86,6 +88,7 @@ def run_generation_eval(
     judge_model_id: str,
     user_clearance: str,
     scope_to_person: bool = False,
+    compress: bool = False,
     k: int = 10,
 ) -> dict[str, float]:
     faithfulness_scores = []
@@ -114,7 +117,10 @@ def run_generation_eval(
             else:
                 person_id = None
             retrieved_ids = retrieve_fn(query, user_clearance=user_clearance, person_id=person_id, k=k)
-            texts = get_chunk_texts(retrieved_ids)
+            if compress:
+                texts = compress_chunks(query, retrieved_ids)
+            else:
+                texts = get_chunk_texts(retrieved_ids)
             chunk_texts = [texts[chunk_id] for chunk_id in retrieved_ids]
             sanitized_texts = sanitize_retrieved_context(chunk_texts)
             context = "\n\n".join(sanitized_texts)
@@ -128,8 +134,9 @@ def run_generation_eval(
             relevance_scores.append(relevance_score)
             correctness_scores.append(correctness_score)
 
+            redacted_answer = redact_pii(answer)
             root.update(output={
-                "answer": mask_text(answer, 200),
+                "answer": mask_text(redacted_answer, 200),
                 "faithfulness": faithfulness_score,
                 "answer_relevance": relevance_score,
                 "answer_correctness": correctness_score,
