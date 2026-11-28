@@ -147,8 +147,8 @@ def main() -> None:
     grouped_bar_chart(
         metrics=["Faithfulness", "Answer Relevance", "Answer Correctness"],
         series={
-            "Claude Haiku 4.5": [0.973, 0.910, 0.607],
-            "gpt-oss-120b": [0.933, 0.931, 0.641],
+            "Claude Haiku 4.5": [0.980, 0.906, 0.599],
+            "gpt-oss-120b": [0.919, 0.940, 0.639],
         },
         title="Generation-model comparison, person-scoped (50-query sample)",
         output_filename="generation_comparison.png",
